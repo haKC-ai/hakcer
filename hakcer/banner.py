@@ -361,14 +361,17 @@ def _center_text(text: str) -> str:
     terminal_width = shutil.get_terminal_size().columns
     lines = text.split('\n')
 
-    # Find the maximum line length
-    max_line_length = max(len(line) for line in lines) if lines else 0
+    # Strip leading/trailing whitespace from each line to normalize
+    stripped_lines = [line.rstrip() for line in lines]
 
-    # Calculate padding needed
+    # Find the maximum line length after stripping
+    max_line_length = max(len(line) for line in stripped_lines) if stripped_lines else 0
+
+    # Calculate padding needed to center the widest line
     padding = max(0, (terminal_width - max_line_length) // 2)
 
     # Add padding to each line
-    centered_lines = [' ' * padding + line for line in lines]
+    centered_lines = [' ' * padding + line for line in stripped_lines]
 
     return '\n'.join(centered_lines)
 
