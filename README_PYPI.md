@@ -8,7 +8,9 @@
 
 ## [DEMO VIDEO]
 
-![haKCer Demo](https://github.com/haKC-ai/hakcer/raw/main/media/hakcer_demo.gif)
+<p align="center">
+  <img src="https://github.com/haKC-ai/hakcer/raw/main/media/hakcer_demo.gif" alt="haKCer Demo" width="800">
+</p>
 
 > **Watch haKCer in action!** Animated ASCII banners with 29 terminal effects and 9 color themes
 
@@ -135,7 +137,9 @@ show_banner()
 
 ### Theme Showcase
 
-![Theme Showcase](https://github.com/haKC-ai/hakcer/raw/main/media/hakcer_demo_0a.gif)
+<p align="center">
+  <img src="https://github.com/haKC-ai/hakcer/raw/main/media/hakcer_demo_0a.gif" alt="Theme Showcase" width="800">
+</p>
 
 > **All 9 themes in action** - See how each color palette transforms your ASCII art
 
@@ -165,7 +169,9 @@ show_banner(effect_name="synthgrid")
 
 ### Effects in Action
 
-![Effects Demo](https://github.com/haKC-ai/hakcer/raw/main/media/hakcer_demo_1a.gif)
+<p align="center">
+  <img src="https://github.com/haKC-ai/hakcer/raw/main/media/hakcer_demo_1a.gif" alt="Effects Demo" width="800">
+</p>
 
 > **29 Terminal Effects** - From subtle animations to maximum visual impact
 
@@ -256,7 +262,9 @@ if show_banner_enabled and is_interactive:
 
 ### Custom Art Demo
 
-![Custom Art Demo](https://github.com/haKC-ai/hakcer/raw/main/media/hakcer_demo_2a.gif)
+<p align="center">
+  <img src="https://github.com/haKC-ai/hakcer/raw/main/media/hakcer_demo_2a.gif" alt="Custom Art Demo" width="800">
+</p>
 
 > **Bring Your Own Designs** - Any ASCII art works with all effects and themes
 
