@@ -111,7 +111,7 @@ def showcase_all_effects(hold_time: float = 1.5, clear_between: bool = True):
     ))
 
     themes = list_themes()
-    all_effects = list_effects()
+    all_effects = get_effects_by_speed("fast")  # Use only fast effects
 
     total_combos = len(themes) * len(all_effects) * len(banners)
     console.print(f"\n[yellow]Total combinations: {total_combos}[/yellow]")

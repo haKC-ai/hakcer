@@ -287,7 +287,6 @@ def _get_effect_config(effect_name: str, theme: dict) -> dict:
             "module": effect_spray,
             "class_name": "Spray",
             "args": [
-                "--spray-colors"] + colors["primary"] + [colors["accent"][0]] + [
                 "--final-gradient-stops"] + colors["primary"][:2],
         },
         "swarm": {

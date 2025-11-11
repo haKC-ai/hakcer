@@ -9,7 +9,7 @@ long_description = (this_directory / "README_PYPI.md").read_text(encoding="utf-8
 
 setup(
     name="hakcer",
-    version="1.1.5",
+    version="1.1.6",
     author="haKCer",
     author_email="cory@haKC.ai",
     description="Animated ASCII banner with terminal effects and customizable themes for CLI tools",
