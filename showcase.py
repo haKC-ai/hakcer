@@ -10,6 +10,8 @@ haKCer animations. Perfect for recording demos!
 
 import sys
 import time
+import os
+from pathlib import Path
 from typing import Optional
 
 from rich.console import Console
@@ -88,11 +90,22 @@ def create_menu_table() -> Table:
 def showcase_all_effects(hold_time: float = 1.5, clear_between: bool = True):
     """Showcase ALL effects with ALL themes - perfect for video recording."""
     console.print("\n")
+
+    # Find custom banner files
+    custom_banners = []
+    custom_banners_dir = Path("custom_banners")
+    if custom_banners_dir.exists() and custom_banners_dir.is_dir():
+        custom_banners = [f for f in custom_banners_dir.glob("*.txt")]
+
+    # Prepare banner list (default + custom)
+    banners = [None] + custom_banners  # None = default haKCer banner
+
     console.print(Panel(
         "[bold cyan]SHOWCASE MODE ACTIVATED[/bold cyan]\n\n"
         "Recording-optimized demo of all effects across all themes!\n"
         "Perfect for creating promotional videos.\n\n"
-        f"Hold time: {hold_time}s | Clear between: {clear_between}",
+        f"Hold time: {hold_time}s | Clear between: {clear_between}\n"
+        f"Banners: Default + {len(custom_banners)} custom",
         border_style="bright_magenta",
         box=box.DOUBLE
     ))
@@ -100,7 +113,7 @@ def showcase_all_effects(hold_time: float = 1.5, clear_between: bool = True):
     themes = list_themes()
     all_effects = list_effects()
 
-    total_combos = len(themes) * len(all_effects)
+    total_combos = len(themes) * len(all_effects) * len(banners)
     console.print(f"\n[yellow]Total combinations: {total_combos}[/yellow]")
     console.print(f"[yellow]Estimated time: {total_combos * (hold_time + 0.5):.0f}s[/yellow]\n")
 
@@ -115,31 +128,45 @@ def showcase_all_effects(hold_time: float = 1.5, clear_between: bool = True):
     time.sleep(1)
 
     count = 0
-    for theme in themes:
-        for effect in all_effects:
-            count += 1
+    for banner_file in banners:
+        banner_name = "Default haKCer" if banner_file is None else banner_file.name
 
-            # Show progress
-            console.print(f"\n[bold cyan]━━━ {count}/{total_combos} ━━━[/bold cyan]")
-            console.print(f"[magenta]Theme:[/magenta] {theme}")
-            console.print(f"[cyan]Effect:[/cyan] {effect}")
-            time.sleep(0.5)
+        for theme in themes:
+            for effect in all_effects:
+                count += 1
 
-            # Show the effect
-            set_theme(theme)
-            try:
-                show_banner(effect_name=effect, hold_time=hold_time)
-            except Exception as e:
-                console.print(f"[red]Error with {effect}: {e}[/red]")
-                continue
+                # Show progress
+                console.print(f"\n[bold cyan]━━━ {count}/{total_combos} ━━━[/bold cyan]")
+                console.print(f"[yellow]Banner:[/yellow] {banner_name}")
+                console.print(f"[magenta]Theme:[/magenta] {theme}")
+                console.print(f"[cyan]Effect:[/cyan] {effect}")
+                time.sleep(0.5)
 
-            if clear_between and count < total_combos:
-                console.clear()
+                # Show the effect
+                set_theme(theme)
+                try:
+                    if banner_file is None:
+                        # Use default banner
+                        show_banner(effect_name=effect, hold_time=hold_time)
+                    else:
+                        # Use custom banner
+                        show_banner(
+                            custom_file=str(banner_file),
+                            effect_name=effect,
+                            hold_time=hold_time
+                        )
+                except Exception as e:
+                    console.print(f"[red]Error with {effect}: {e}[/red]")
+                    continue
+
+                if clear_between and count < total_combos:
+                    console.clear()
 
     console.print("\n")
     console.print(Panel(
         "[bold green]SHOWCASE COMPLETE![/bold green]\n\n"
-        f"Displayed {total_combos} effect combinations!",
+        f"Displayed {total_combos} effect combinations!\n"
+        f"Banners: Default + {len(custom_banners)} custom",
         border_style="bright_green",
         box=box.DOUBLE
     ))
