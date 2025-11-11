@@ -46,19 +46,24 @@ console = Console()
 
 
 def print_synthwave_header():
-    """Print a sick synthwave header."""
-    header = Text()
-    header.append("                     ████████████████████████ \n", style=f"bold {SYNTHWAVE_COLORS['primary']}")
-    header.append("                     █   ███   ███████   ████\n", style=f"bold {SYNTHWAVE_COLORS['primary']}")
-    header.append("                     █   ██   █████   ███   █\n", style=f"bold {SYNTHWAVE_COLORS['secondary']}")
-    header.append(" ███                 █   █   █████   ████████\n", style=f"bold {SYNTHWAVE_COLORS['secondary']}")
-    header.append(" ███         ███     █  █  ███████   ████████    ███     ██ ████ \n", style=f"bold {SYNTHWAVE_COLORS['accent']}")
-    header.append(" █████     ███  ███  █   ██   ████   ████████  ██   ███   ███ \n", style=f"bold {SYNTHWAVE_COLORS['accent']}")
-    header.append(" ███  ██  ███   ███  █   ███   ████   ███   █ █████████   ███ \n", style=f"bold {SYNTHWAVE_COLORS['neon']}")
-    header.append(" ██   ███ ███   ███  █   █████   ████     ███ ██          ███\n", style=f"bold {SYNTHWAVE_COLORS['neon']}")
-    header.append(" ██   ███   ███ ████ ████ S H O W C A S E ███   █████    ████", style=f"bold {SYNTHWAVE_COLORS['accent']}")
+    """Print a sick synthwave header with random animation."""
+    header_art = """                     ████████████████████████
+                     █   ███   ███████   ████
+                     █   ██   █████   ███   █
+ ███                 █   █   █████   ████████
+ ███         ███     █  █  ███████   ████████    ███     ██ ████
+ █████     ███  ███  █   ██   ████   ████████  ██   ███   ███
+ ███  ██  ███   ███  █   ███   ████   ███   █ █████████   ███
+ ██   ███ ███   ███  █   █████   ████     ███ ██          ███
+ ██   ███   ███ ████ ████ S H O W C A S E ███   █████    ████"""
 
-    console.print(Align.center(header))
+    # Pick random fast effect for quick load
+    fast_effects = get_effects_by_speed("fast")
+    random_effect = random.choice(fast_effects)
+
+    # Show animated banner with current menu theme
+    set_theme(MENU_THEME)
+    show_banner(custom_text=header_art, effect_name=random_effect, hold_time=0.5)
 
 
 def create_menu_table() -> Table:
