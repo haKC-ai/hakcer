@@ -1,19 +1,19 @@
-# 🎮 haKCer Example Demo
+# haKCer Example Demo
 
 An ultra-cool synthwave-themed interactive demo showcasing all haKCer features!
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
-python example.py
+python showcase.py
 ```
 
-## 🎬 Perfect for Recording Videos
+## Perfect for Recording Videos
 
 The showcase mode (Option 1) is **optimized for video recording**:
 
 ```bash
-python example.py
+python showcase.py
 # Choose option "1" - Showcase All Effects
 # Configure hold time (1.5s recommended for videos)
 # Choose whether to clear screen between effects
@@ -26,41 +26,41 @@ This will cycle through:
 
 Perfect for creating promotional videos or demos.
 
-## 🎨 Features
+## Features
 
 ### Main Menu Options:
 
-1. **🎬 Showcase All Effects** - Record-ready demo of ALL animations
+1. **Showcase All Effects** - Record-ready demo of ALL animations
    - Cycles through every theme × effect combination
    - Configurable hold time and screen clearing
    - Shows progress counter
    - **Perfect for video recording!**
 
-2. **🎨 Theme Gallery** - Browse all available themes
+2. **Theme Gallery** - Browse all available themes
    - See descriptions of each theme
    - Preview any theme interactively
 
-3. **⚡ Quick Demo** - Single random fast effect
+3. **Quick Demo** - Single random fast effect
    - Great for quick tests
    - Uses synthwave theme
 
-4. **🎯 Custom Effect** - Choose specific effect + theme
+4. **Custom Effect** - Choose specific effect + theme
    - Full control over configuration
    - Set custom hold times
 
-5. **📊 Effect Browser** - Interactive effect selector
+5. **Effect Browser** - Interactive effect selector
    - Browse effects by speed category
    - Try any effect instantly
 
-6. **🔥 Speed Test** - Compare fast/medium/slow effects
+6. **Speed Test** - Compare fast/medium/slow effects
    - See the difference between speed categories
    - Uses cyberpunk theme
 
-7. **ℹ️ Info** - List all themes & effects
+7. **Info** - List all themes & effects
    - Complete reference guide
    - Organized by speed
 
-8. **🚀 Synthwave Mode** - Ultimate synthwave experience
+8. **Synthwave Mode** - Ultimate synthwave experience
    - Handpicked best combinations
    - Epic retro-futuristic vibes
 
@@ -79,7 +79,7 @@ Clear between: Yes (for clean transitions)
 # Features only the best 5 combinations
 ```
 
-## 💡 Requirements
+## Requirements
 
 The demo uses Rich for beautiful terminal UI:
 
@@ -93,22 +93,22 @@ pip install rich
 
 The entire UI is styled with:
 - 🎀 Hot pink and cyan neon colors
-- ⚡ Retro ASCII art headers
+- Retro ASCII art headers
 - 📦 Double-line bordered panels
-- 🎨 Color-coded speed categories
-- ✨ Smooth animations
+- Color-coded speed categories
+- Smooth animations
 
-## 🎯 Usage Examples
+## Usage Examples
 
 ### Quick test:
 ```bash
-python example.py
+python showcase.py
 # Choose option 3 (Quick Demo)
 ```
 
 ### Record showcase video:
 ```bash
-python example.py
+python showcase.py
 # Choose option 1 (Showcase All Effects)
 # Set hold_time to 1.5
 # Enable clear_between for clean cuts
@@ -117,7 +117,7 @@ python example.py
 
 ### Try specific combo:
 ```bash
-python example.py
+python showcase.py
 # Choose option 4 (Custom Effect)
 # Pick: synthwave theme + synthgrid effect
 ```
@@ -131,4 +131,4 @@ python example.py
 
 ---
 
-Made with 💜 by haKCer - The Ultimate Terminal Banner Library
+Made with by haKCer - The Ultimate Terminal Banner Library

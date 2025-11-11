@@ -55,7 +55,7 @@ def print_synthwave_header():
 def create_menu_table() -> Table:
     """Create a synthwave-styled menu table."""
     table = Table(
-        title=Text("🎮 MAIN MENU", style=f"bold {SYNTHWAVE_COLORS['primary']}"),
+        title=Text("MAIN MENU", style=f"bold {SYNTHWAVE_COLORS['primary']}"),
         box=box.DOUBLE_EDGE,
         border_style=SYNTHWAVE_COLORS['secondary'],
         show_header=True,
@@ -68,15 +68,15 @@ def create_menu_table() -> Table:
     table.add_column("Description", style="white", width=40)
 
     menu_items = [
-        ("1", "🎬 Showcase All Effects", "Record-ready demo of all animations"),
-        ("2", "🎨 Theme Gallery", "Browse all available themes"),
-        ("3", "⚡ Quick Demo", "Single random effect (fast)"),
-        ("4", "🎯 Custom Effect", "Choose specific effect + theme"),
-        ("5", "📊 Effect Browser", "Interactive effect selector"),
-        ("6", "🔥 Speed Test", "Compare fast/medium/slow effects"),
-        ("7", "ℹ️  Info", "List all themes & effects"),
-        ("8", "🚀 Synthwave Mode", "Ultimate synthwave experience"),
-        ("q", "❌ Exit", "Quit the demo"),
+        ("1", "Showcase All Effects", "Record-ready demo of all animations"),
+        ("2", "Theme Gallery", "Browse all available themes"),
+        ("3", "Quick Demo", "Single random effect (fast)"),
+        ("4", "Custom Effect", "Choose specific effect + theme"),
+        ("5", "Effect Browser", "Interactive effect selector"),
+        ("6", "Speed Test", "Compare fast/medium/slow effects"),
+        ("7", "Info", "List all themes & effects"),
+        ("8", "Synthwave Mode", "Ultimate synthwave experience"),
+        ("q", "Exit", "Quit the demo"),
     ]
 
     for option, action, desc in menu_items:
@@ -89,7 +89,7 @@ def showcase_all_effects(hold_time: float = 1.5, clear_between: bool = True):
     """Showcase ALL effects with ALL themes - perfect for video recording."""
     console.print("\n")
     console.print(Panel(
-        "[bold cyan]🎬 SHOWCASE MODE ACTIVATED[/bold cyan]\n\n"
+        "[bold cyan]SHOWCASE MODE ACTIVATED[/bold cyan]\n\n"
         "Recording-optimized demo of all effects across all themes!\n"
         "Perfect for creating promotional videos.\n\n"
         f"Hold time: {hold_time}s | Clear between: {clear_between}",
@@ -138,7 +138,7 @@ def showcase_all_effects(hold_time: float = 1.5, clear_between: bool = True):
 
     console.print("\n")
     console.print(Panel(
-        "[bold green]✓ SHOWCASE COMPLETE![/bold green]\n\n"
+        "[bold green]SHOWCASE COMPLETE![/bold green]\n\n"
         f"Displayed {total_combos} effect combinations!",
         border_style="bright_green",
         box=box.DOUBLE
@@ -151,7 +151,7 @@ def theme_gallery():
 
     console.print("\n")
     themes_table = Table(
-        title=Text("🎨 THEME GALLERY", style=f"bold {SYNTHWAVE_COLORS['primary']}"),
+        title=Text("THEME GALLERY", style=f"bold {SYNTHWAVE_COLORS['primary']}"),
         box=box.DOUBLE_EDGE,
         border_style=SYNTHWAVE_COLORS['secondary'],
         show_header=True,
@@ -183,7 +183,7 @@ def theme_gallery():
 def quick_demo():
     """Quick random effect demo."""
     console.print(Panel(
-        "[bold]⚡ QUICK DEMO[/bold]\n\nShowing random fast effect...",
+        "[bold]QUICK DEMO[/bold]\n\nShowing random fast effect...",
         border_style="yellow"
     ))
 
@@ -196,7 +196,7 @@ def custom_effect():
     """Choose custom effect and theme."""
     from hakcer.themes import THEMES
 
-    console.print("\n[bold cyan]🎯 CUSTOM EFFECT CREATOR[/bold cyan]\n")
+    console.print("\n[bold cyan]CUSTOM EFFECT CREATOR[/bold cyan]\n")
 
     # Choose theme
     theme = Prompt.ask(
@@ -218,7 +218,7 @@ def custom_effect():
         default="2.0"
     ))
 
-    console.print(f"\n[bold green]✓ Configuration set![/bold green]")
+    console.print(f"\n[bold green]Configuration set![/bold green]")
     console.print(f"Theme: {theme} | Effect: {effect} | Hold: {hold_time}s\n")
     time.sleep(1)
 
@@ -258,7 +258,7 @@ def effect_browser():
 def speed_test():
     """Compare different speed categories."""
     console.print(Panel(
-        "[bold]🔥 SPEED TEST[/bold]\n\nComparing Fast → Medium → Slow effects",
+        "[bold]SPEED TEST[/bold]\n\nComparing Fast → Medium → Slow effects",
         border_style="red"
     ))
 
@@ -299,7 +299,7 @@ def synthwave_mode():
     """Ultimate synthwave experience!"""
     console.print("\n")
     console.print(Panel(
-        "[bold magenta]🚀 SYNTHWAVE MODE ACTIVATED 🚀[/bold magenta]\n\n"
+        "[bold magenta]SYNTHWAVE MODE ACTIVATED[/bold magenta]\n\n"
         "Buckle up for the ultimate retro-futuristic experience!\n"
         "Featuring the best synthwave effects with epic themes.",
         border_style="bright_magenta",
@@ -331,8 +331,8 @@ def synthwave_mode():
 
     console.print("\n")
     console.print(Panel(
-        "[bold green]✓ SYNTHWAVE MODE COMPLETE![/bold green]\n\n"
-        "Hope you enjoyed the ride! 🌆✨",
+        "[bold green]SYNTHWAVE MODE COMPLETE![/bold green]\n\n"
+        "Hope you enjoyed the ride!",
         border_style="bright_green"
     ))
 
@@ -354,11 +354,11 @@ def main():
         ).lower()
 
         if choice == "q":
-            console.print("\n[bold magenta]Thanks for using haKCer! See you in the grid... 🌆[/bold magenta]\n")
+            console.print("\n[bold magenta]Thanks for using haKCer! See you in the grid...[/bold magenta]\n")
             break
         elif choice == "1":
             # Showcase mode - ask for preferences
-            console.print("\n[bold]🎬 Showcase Configuration:[/bold]")
+            console.print("\n[bold]Showcase Configuration:[/bold]")
             hold = float(Prompt.ask("[yellow]Hold time per effect (seconds)[/yellow]", default="1.5"))
             clear = Confirm.ask("[yellow]Clear screen between effects?[/yellow]", default=True)
             showcase_all_effects(hold_time=hold, clear_between=clear)

@@ -107,7 +107,7 @@ THEMES = {
 }
 
 # Default theme
-_current_theme = "synthwave"
+_current_theme = "neon"
 
 
 def get_theme(theme_name: str = None) -> dict:

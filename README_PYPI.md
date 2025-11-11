@@ -10,9 +10,9 @@
 
 Transform your CLI tools with stunning animated ASCII banners featuring 29 terminal effects and 9 beautiful themes!
 
-## ✨ What's New in v1.1.0
+## What's New in v1.1.0
 
-### 🎨 Custom ASCII Art Support
+### Custom ASCII Art Support
 Use **ANY ASCII art** you want with haKCer's amazing effects!
 
 ```python
@@ -30,13 +30,13 @@ banner = """
 show_banner(custom_text=banner, effect_name="decrypt")
 ```
 
-### 🎮 Interactive Synthwave Demo
+### Interactive Synthwave Demo
 Run the included demo for an interactive showcase:
 ```bash
-python example.py
+python showcase.py
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -75,7 +75,7 @@ set_theme("neon")
 show_banner(custom_text=my_logo, effect_name="synthgrid")
 ```
 
-## 🎨 Features
+## Features
 
 - **29 Terminal Effects** - From subtle to spectacular animations
 - **9 Beautiful Themes** - Tokyo Night, Cyberpunk, Neon, Matrix, Dracula, Nord, Gruvbox, and more
@@ -84,7 +84,7 @@ show_banner(custom_text=my_logo, effect_name="synthgrid")
 - **Zero Config** - Works out of the box with sensible defaults
 - **Simple API** - Just 2 lines of code to get started
 
-## 🌈 Available Themes
+## Available Themes
 
 ```python
 from hakcer import list_themes, set_theme
@@ -110,7 +110,7 @@ show_banner()
 | **nord** | Arctic bluish colors | Professional |
 | **gruvbox** | Warm retro colors | Cozy feeling |
 
-## ⚡ Terminal Effects
+## Terminal Effects
 
 ### Speed Categories
 
@@ -134,7 +134,7 @@ show_banner(effect_name="synthgrid")
 
 **Slow Effects (9)**: `blackhole`, `bouncyballs`, `fireworks`, `matrix`, `orbittingvolley`, `rings`, `spotlights`, `swarm`, `synthgrid`
 
-## 📖 API Reference
+## API Reference
 
 ### `show_banner()`
 
@@ -161,7 +161,7 @@ Get list of all available theme names.
 
 Get list of all available effect names.
 
-## 💡 Usage Examples
+## Usage Examples
 
 ### CLI Tool Integration
 
@@ -232,7 +232,7 @@ if show_banner_enabled and is_interactive:
     show_banner(speed_preference="fast", hold_time=0.5)
 ```
 
-## 🎨 Creating Custom ASCII Art
+## Creating Custom ASCII Art
 
 ### Online Generators
 
@@ -256,9 +256,9 @@ For best results with patorjk.com:
 2. Use box drawing characters: `╔═══╗`, `║`, `╚═══╝`
 3. Test with different effects
 4. Consider color themes when designing
-5. UTF-8 support - you can use emoji! 🚀
+5. UTF-8 support - full Unicode character support
 
-## 🎯 Real-World Use Cases
+## Real-World Use Cases
 
 - **CLI tool splash screens** - Welcome users with style
 - **Loading screens** - Make waits more interesting
@@ -315,31 +315,31 @@ hakcer/
 └── themes.py            # Theme definitions
 ```
 
-## 🎮 Interactive Demo
+## Interactive Demo
 
 The package includes a synthwave-themed interactive demo:
 
 ```bash
 # Run the demo
-python example.py
+python showcase.py
 ```
 
 Features:
-- 🎬 Showcase Mode - All 261 effect combinations
-- 🎨 Theme Gallery - Browse themes
-- 🎯 Custom Effect - Pick combinations
-- 📊 Effect Browser - Explore by speed
-- 🚀 Synthwave Mode - Ultimate experience
+- Showcase Mode - All 261 effect combinations
+- Theme Gallery - Browse themes
+- Custom Effect - Pick combinations
+- Effect Browser - Explore by speed
+- Synthwave Mode - Ultimate experience
 
 Perfect for recording promotional videos!
 
-## 📋 Requirements
+## Requirements
 
 - Python 3.8+
 - terminaltexteffects >= 0.11.0
 - rich >= 13.0.0
 
-## 🏆 Best Practices
+## Best Practices
 
 1. **Provide `--no-banner` flag** for automation
 2. **Use fast effects** for frequently-run tools
@@ -347,7 +347,7 @@ Perfect for recording promotional videos!
 4. **Match themes** to your tool's aesthetic
 5. **Keep custom art** reasonably sized
 
-## 🔗 Links
+## Links
 
 - **GitHub**: https://github.com/haKC-ai/hakcer
 - **PyPI**: https://pypi.org/project/hakcer/
@@ -366,6 +366,6 @@ Built with:
 
 ---
 
-**Made with 💜 by haKCer**
+**Made by haKCer**
 
-*Transform your CLI tools from boring to legendary!* ✨
+*Transform your CLI tools from boring to legendary!*

@@ -1,8 +1,8 @@
 # haKCer Features Summary
 
-## 🎉 What's New
+## What's New
 
-### ✨ Custom ASCII Art Support (NEW!)
+### Custom ASCII Art Support (NEW!)
 
 **Use your own ASCII art with all haKCer effects!**
 
@@ -21,28 +21,28 @@ banner = """
 show_banner(custom_text=banner, effect_name="decrypt")
 ```
 
-📖 **Full Guide**: See [CUSTOM_BANNERS.md](CUSTOM_BANNERS.md)
+**Full Guide**: See [CUSTOM_BANNERS.md](CUSTOM_BANNERS.md)
 
-### 🎮 Interactive Demo (NEW!)
+### Interactive Demo (NEW!)
 
 **Synthwave-themed Rich UI demo for showcasing and recording!**
 
 ```bash
-python example.py
+python showcase.py
 ```
 
 Features:
-- 🎬 **Showcase Mode** - Record all 261 effect combinations
-- 🎨 **Theme Gallery** - Browse all 9 themes
-- 🎯 **Custom Effect** - Pick specific combinations
-- 📊 **Effect Browser** - Interactive selector
-- 🚀 **Synthwave Mode** - Ultimate experience
+- **Showcase Mode** - Record all 261 effect combinations
+- **Theme Gallery** - Browse all 9 themes
+- **Custom Effect** - Pick specific combinations
+- **Effect Browser** - Interactive selector
+- **Synthwave Mode** - Ultimate experience
 
-📖 **Full Guide**: See [EXAMPLE_README.md](EXAMPLE_README.md)
+**Full Guide**: See [EXAMPLE_README.md](EXAMPLE_README.md)
 
-## 🎨 Core Features
+## Core Features
 
-### 🌈 Themes (9 Available)
+### Themes (9 Available)
 
 ```python
 from hakcer import set_theme, list_themes
@@ -55,7 +55,7 @@ print(list_themes())
 set_theme("cyberpunk")
 ```
 
-### ⚡ Effects (29 Available)
+### Effects (29 Available)
 
 **Fast Effects (10)**: decrypt, expand, print, slide, wipe, colorshift, scattered, random_sequence, pour, errorcorrect
 
@@ -100,7 +100,7 @@ show_banner(
 - **[examples.py](examples.py)** - Original 10 usage examples
 - **[test_custom_banner.py](test_custom_banner.py)** - Test custom banners
 
-## 🎬 Quick Examples
+## Quick Examples
 
 ### Basic Usage
 ```python
@@ -139,12 +139,12 @@ def main():
 show_banner(speed_preference="fast", hold_time=0.5)
 ```
 
-## 🎮 Interactive Demo
+## Interactive Demo
 
 Run the synthwave-themed demo:
 
 ```bash
-python example.py
+python showcase.py
 ```
 
 Features:
@@ -157,7 +157,7 @@ Features:
 7. **Info** - List everything
 8. **Synthwave Mode** - Ultimate experience
 
-## 🚀 Advanced Features
+## Advanced Features
 
 ### Environment Variables
 ```bash
@@ -190,7 +190,7 @@ except ValueError:
 pip install hakcer
 ```
 
-## 🎨 Create Custom Art
+## Create Custom Art
 
 Use [patorjk.com/software/taag](http://patorjk.com/software/taag/) to generate ASCII art, then:
 
@@ -205,15 +205,15 @@ YOUR ASCII ART HERE
 show_banner(custom_text=my_art)
 ```
 
-## 💡 Pro Tips
+## Pro Tips
 
 1. **Fast startup**: Use `speed_preference="fast"` and `hold_time=0.5`
-2. **Video recording**: Use showcase mode in `example.py`
+2. **Video recording**: Use showcase mode in `showcase.py`
 3. **Custom branding**: Create your own ASCII art file
 4. **Theme matching**: Choose themes that complement your art
 5. **Production ready**: Combine with terminal detection and env vars
 
-## 🎯 Use Cases
+## Use Cases
 
 - CLI tool splash screens
 - Welcome messages
@@ -224,7 +224,7 @@ show_banner(custom_text=my_art)
 - Seasonal greetings
 - Personal projects
 
-## 🔗 Resources
+## Resources
 
 - **PyPI**: https://pypi.org/project/hakcer/
 - **GitHub**: https://github.com/haKC-ai/hakcer
@@ -233,4 +233,4 @@ show_banner(custom_text=my_art)
 
 ---
 
-Made with 💜 by haKCer - The Ultimate Terminal Banner Library
+Made with by haKCer - The Ultimate Terminal Banner Library

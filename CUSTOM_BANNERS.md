@@ -1,8 +1,8 @@
-# 🎨 Custom ASCII Art Banners
+# Custom ASCII Art Banners
 
 Use your own ASCII art with haKCer's amazing terminal effects!
 
-## 🚀 Quick Start
+## Quick Start
 
 ```python
 from hakcer import show_banner, set_theme
@@ -55,7 +55,7 @@ show_banner(
 )
 ```
 
-## 🎨 Creating ASCII Art
+## Creating ASCII Art
 
 ### ASCII Art Generators
 
@@ -99,7 +99,7 @@ your_project/
 └── your_script.py
 ```
 
-## 🎯 Examples
+## Examples
 
 ### Example 1: Simple Text Banner
 
@@ -195,7 +195,7 @@ show_status("startup")
 show_status("success")  # or "error"
 ```
 
-## 🎬 Pro Tips
+## Pro Tips
 
 ### 1. Match Effects to Art Style
 
@@ -275,7 +275,7 @@ Try them:
 python test_custom_banner.py
 ```
 
-## 🎨 ASCII Art Collections
+## ASCII Art Collections
 
 Download pre-made ASCII art:
 
@@ -291,7 +291,7 @@ Download pre-made ASCII art:
 - Empty lines are preserved
 - Trailing whitespace is kept (useful for alignment)
 
-## 🚀 Get Creative!
+## Get Creative!
 
 The sky's the limit! Use custom banners for:
 - CLI tool splash screens
@@ -302,8 +302,8 @@ The sky's the limit! Use custom banners for:
 - Corporate logos
 - Personal branding
 
-Make your terminal applications **LEGENDARY**! 💜✨
+Make your terminal applications **LEGENDARY**! 
 
 ---
 
-Made with 💜 by haKCer - The Ultimate Terminal Banner Library
+Made with by haKCer - The Ultimate Terminal Banner Library

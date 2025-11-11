@@ -34,9 +34,9 @@ _ __ \/ /\____________________██_____________ ███________ _________ __
      \/
 ```
 
-## ✨ What's New in v1.1.0
+## What's New in v1.1.0
 
-### 🎨 Custom ASCII Art Support
+### Custom ASCII Art Support
 Use **ANY ASCII art** with haKCer's effects!
 
 ```python
@@ -52,9 +52,9 @@ banner = """
 show_banner(custom_text=banner, effect_name="decrypt")
 ```
 
-### 🎮 Interactive Demo
+### Interactive Demo
 ```bash
-python example.py  # Synthwave-themed interactive showcase
+python showcase.py  # Synthwave-themed interactive showcase
 ```
 
 ## Features
