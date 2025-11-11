@@ -47,21 +47,21 @@ console = Console()
 
 def print_synthwave_header():
     """Print a sick synthwave header with random animation."""
-    header_art = """                                                  ████████████████████████
-                                                  █   ███   ███████   ████
-                                                  █   ██   █████   ███   █
-                              ███                 █   █   █████   ████████
-                              ███         ███     █  █  ███████   ████████    ███     ██ ████
-                              █████     ███  ███  █   ██   ████   ████████  ██   ███   ███
-                              ███  ██  ███   ███  █   ███   ████   ███   █ █████████   ███
-                              ██   ███ ███   ███  █   █████   ████     ███ ██          ███
-                              ██   ███   ███ ████ ████ S H O W C A S E ███   █████    ████"""
+    header_art = """████████████████████████
+█   ███   ███████   ████
+█   ██   █████   ███   █
+███                 █   █   █████   ████████
+███         ███     █  █  ███████   ████████    ███     ██ ████
+█████     ███  ███  █   ██   ████   ████████  ██   ███   ███
+███  ██  ███   ███  █   ███   ████   ███   █ █████████   ███
+██   ███ ███   ███  █   █████   ████     ███ ██          ███
+██   ███   ███ ████ ████ S H O W C A S E ███   █████    ████"""
 
     # Pick random fast effect for quick load
     fast_effects = get_effects_by_speed("fast")
     random_effect = random.choice(fast_effects)
 
-    # Show animated banner with current menu theme
+    # Show animated banner with current menu theme (centering handled by module)
     set_theme(MENU_THEME)
     show_banner(custom_text=header_art, effect_name=random_effect, hold_time=0.5)
 

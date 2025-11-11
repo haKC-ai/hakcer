@@ -15,6 +15,7 @@ Usage:
 
 import random
 import time
+import shutil
 from typing import Optional
 
 from terminaltexteffects.effects import (
@@ -355,6 +356,23 @@ SLOW_EFFECTS = [
 ALL_EFFECTS = FAST_EFFECTS + MEDIUM_EFFECTS + SLOW_EFFECTS
 
 
+def _center_text(text: str) -> str:
+    """Center text based on terminal width."""
+    terminal_width = shutil.get_terminal_size().columns
+    lines = text.split('\n')
+
+    # Find the maximum line length
+    max_line_length = max(len(line) for line in lines) if lines else 0
+
+    # Calculate padding needed
+    padding = max(0, (terminal_width - max_line_length) // 2)
+
+    # Add padding to each line
+    centered_lines = [' ' * padding + line for line in lines]
+
+    return '\n'.join(centered_lines)
+
+
 def show_banner(
     effect_name: Optional[str] = None,
     speed_preference: str = "fast",
@@ -391,6 +409,9 @@ def show_banner(
         ascii_art = custom_text
     else:
         ascii_art = HAKCER_ASCII
+
+    # Center the ASCII art based on terminal width
+    ascii_art = _center_text(ascii_art)
 
     # Get theme configuration
     theme_config = get_theme(theme)
