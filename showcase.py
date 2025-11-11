@@ -127,18 +127,36 @@ def showcase_all_effects(hold_time: float = 1.5, clear_between: bool = True):
                 custom_banners = available_banners
                 banners = custom_banners
                 # Skip adding None later
+
+                # Ask for speed preference
+                console.print("\n[cyan]Effect Speed Options:[/cyan]")
+                console.print("  [white]'fast'[/white] - 10 effects, quick animations (~15 min for all combos)")
+                console.print("  [white]'medium'[/white] - 10 effects, moderate speed (~25 min for all combos)")
+                console.print("  [white]'slow'[/white] - 9 effects, longer animations (~40 min for all combos)")
+                console.print("  [white]'all'[/white] - All 29 effects (~90 min for all combos)\n")
+
+                speed_choice = Prompt.ask(
+                    "[yellow]Which speed preference?[/yellow]",
+                    choices=["fast", "medium", "slow", "all"],
+                    default="fast"
+                ).strip().lower()
+
                 console.print(Panel(
                     "[bold cyan]SHOWCASE MODE ACTIVATED[/bold cyan]\n\n"
                     "Recording-optimized demo of all effects across all themes!\n"
                     "Perfect for creating promotional videos.\n\n"
                     f"Hold time: {hold_time}s | Clear between: {clear_between}\n"
-                    f"Banners: {len(custom_banners)} custom (no default)",
+                    f"Banners: {len(custom_banners)} custom (no default)\n"
+                    f"Speed: {speed_choice}",
                     border_style="bright_magenta",
                     box=box.DOUBLE
                 ))
 
                 themes = list_themes()
-                all_effects = get_effects_by_speed("fast")
+                if speed_choice == "all":
+                    all_effects = list_effects()
+                else:
+                    all_effects = get_effects_by_speed(speed_choice)
                 total_combos = len(themes) * len(all_effects) * len(banners)
                 console.print(f"\n[yellow]Total combinations: {total_combos}[/yellow]")
                 console.print(f"[yellow]Estimated time: {total_combos * (hold_time + 0.5):.0f}s[/yellow]\n")
@@ -201,18 +219,35 @@ def showcase_all_effects(hold_time: float = 1.5, clear_between: bool = True):
     # Prepare banner list (default + custom)
     banners = [None] + custom_banners  # None = default haKCer banner
 
+    # Ask for speed preference
+    console.print("\n[cyan]Effect Speed Options:[/cyan]")
+    console.print("  [white]'fast'[/white] - 10 effects, quick animations (~15 min for all combos)")
+    console.print("  [white]'medium'[/white] - 10 effects, moderate speed (~25 min for all combos)")
+    console.print("  [white]'slow'[/white] - 9 effects, longer animations (~40 min for all combos)")
+    console.print("  [white]'all'[/white] - All 29 effects (~90 min for all combos)\n")
+
+    speed_choice = Prompt.ask(
+        "[yellow]Which speed preference?[/yellow]",
+        choices=["fast", "medium", "slow", "all"],
+        default="fast"
+    ).strip().lower()
+
     console.print(Panel(
         "[bold cyan]SHOWCASE MODE ACTIVATED[/bold cyan]\n\n"
         "Recording-optimized demo of all effects across all themes!\n"
         "Perfect for creating promotional videos.\n\n"
         f"Hold time: {hold_time}s | Clear between: {clear_between}\n"
-        f"Banners: Default + {len(custom_banners)} custom",
+        f"Banners: Default + {len(custom_banners)} custom\n"
+        f"Speed: {speed_choice}",
         border_style="bright_magenta",
         box=box.DOUBLE
     ))
 
     themes = list_themes()
-    all_effects = get_effects_by_speed("fast")  # Use only fast effects
+    if speed_choice == "all":
+        all_effects = list_effects()
+    else:
+        all_effects = get_effects_by_speed(speed_choice)
 
     total_combos = len(themes) * len(all_effects) * len(banners)
     console.print(f"\n[yellow]Total combinations: {total_combos}[/yellow]")
