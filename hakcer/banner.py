@@ -210,7 +210,6 @@ def _get_effect_config(effect_name: str, theme: dict) -> dict:
             "module": effect_matrix,
             "class_name": "Matrix",
             "args": [
-                "--matrix-symbols", "ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍ",
                 "--final-gradient-stops"] + colors["primary"][:2],
         },
         "orbittingvolley": {
