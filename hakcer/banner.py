@@ -363,6 +363,8 @@ def show_banner(
     hold_time: float = 1.5,
     clear_after: bool = False,
     theme: Optional[str] = None,
+    custom_text: Optional[str] = None,
+    custom_file: Optional[str] = None,
 ) -> None:
     """
     Display the haKCer ASCII banner with a randomized terminal effect.
@@ -373,10 +375,25 @@ def show_banner(
         hold_time: Seconds to hold the final frame before returning.
         clear_after: Whether to clear the terminal after the effect completes.
         theme: Theme name to use. If None, uses current global theme.
+        custom_text: Custom ASCII art text to display instead of default banner.
+        custom_file: Path to file containing custom ASCII art. Overrides custom_text.
 
     Raises:
         ValueError: If effect_name or theme is not recognized.
+        FileNotFoundError: If custom_file is specified but not found.
     """
+    # Determine which ASCII art to use
+    if custom_file:
+        try:
+            with open(custom_file, 'r', encoding='utf-8') as f:
+                ascii_art = f.read()
+        except FileNotFoundError:
+            raise FileNotFoundError(f"Custom ASCII art file not found: {custom_file}")
+    elif custom_text:
+        ascii_art = custom_text
+    else:
+        ascii_art = HAKCER_ASCII
+
     # Get theme configuration
     theme_config = get_theme(theme)
 
@@ -410,8 +427,8 @@ def show_banner(
     kwargs = _parse_args_to_kwargs(config["args"])
     effect_config = config_class(**kwargs)
 
-    # Create effect instance and set config
-    effect = effect_class(HAKCER_ASCII)
+    # Create effect instance with custom or default ASCII art and set config
+    effect = effect_class(ascii_art)
     effect.effect_config = effect_config
 
     with effect.terminal_output() as terminal:

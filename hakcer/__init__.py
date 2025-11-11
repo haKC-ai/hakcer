@@ -8,7 +8,7 @@ Features 23+ different effects with customizable themes including Tokyo Night, N
 from .banner import show_banner, list_effects, get_effects_by_speed, set_theme, list_themes, get_current_theme
 from .themes import THEMES
 
-__version__ = "1.0.4"
+__version__ = "1.1.0"
 __author__ = "haKCer"
 __all__ = [
     "show_banner",
