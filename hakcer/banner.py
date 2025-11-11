@@ -48,6 +48,7 @@ from terminaltexteffects.effects import (
     effect_waves,
     effect_wipe,
 )
+from terminaltexteffects.utils.graphics import Color
 
 from .themes import get_theme, set_current_theme, get_current_theme_name, list_available_themes
 
@@ -77,6 +78,55 @@ _ __ \\/ /\\____________________██_____________ ███________ _________ 
 """
 
 
+def _is_hex_color(s: str) -> bool:
+    """Check if string is a valid hex color code."""
+    return bool(len(s) == 6 and all(c in '0123456789abcdefABCDEF' for c in s))
+
+
+def _convert_value(val: str):
+    """Convert string value to appropriate type."""
+    # Try hex color first
+    if _is_hex_color(val):
+        return Color(val)
+    # Try integer
+    try:
+        return int(val)
+    except ValueError:
+        pass
+    # Try float
+    try:
+        return float(val)
+    except ValueError:
+        pass
+    # Return as string
+    return val
+
+
+def _parse_args_to_kwargs(args: list[str]) -> dict:
+    """Convert command-line style args list to kwargs dict."""
+    kwargs = {}
+    i = 0
+    while i < len(args):
+        if args[i].startswith("--"):
+            key = args[i][2:].replace("-", "_")
+            # Check if next item is a value or another flag
+            if i + 1 < len(args) and not args[i + 1].startswith("--"):
+                # Collect all values until next flag
+                values = []
+                i += 1
+                while i < len(args) and not args[i].startswith("--"):
+                    values.append(_convert_value(args[i]))
+                    i += 1
+                # Store as single value or list
+                kwargs[key] = values if len(values) > 1 else values[0]
+            else:
+                kwargs[key] = True
+                i += 1
+        else:
+            i += 1
+    return kwargs
+
+
 def _get_effect_config(effect_name: str, theme: dict) -> dict:
     """Generate effect configuration with theme colors."""
     colors = theme["colors"]
@@ -84,6 +134,7 @@ def _get_effect_config(effect_name: str, theme: dict) -> dict:
     configs = {
         "beams": {
             "module": effect_beams,
+            "class_name": "Beams",
             "args": [
                 "--beam-row-symbols", "▂ ▁ _ ⎽",
                 "--beam-column-symbols", "▌ ▍ ▎ ▏",
@@ -92,36 +143,43 @@ def _get_effect_config(effect_name: str, theme: dict) -> dict:
         },
         "binarypath": {
             "module": effect_binarypath,
+            "class_name": "BinaryPath",
             "args": [
                 "--final-gradient-stops"] + colors["primary"] + [
                 "--binary-colors"] + colors["accent"],
         },
         "blackhole": {
             "module": effect_blackhole,
+            "class_name": "Blackhole",
             "args": ["--star-colors"] + colors["primary"] + colors["accent"],
         },
         "bouncyballs": {
             "module": effect_bouncyballs,
+            "class_name": "BouncyBalls",
             "args": ["--ball-colors"] + colors["primary"] + colors["accent"],
         },
         "burn": {
             "module": effect_burn,
+            "class_name": "Burn",
             "args": [
                 "--starting-color", colors["accent"][0],
                 "--burn-colors"] + colors["accent"] + [colors["primary"][2]],
         },
         "colorshift": {
             "module": effect_colorshift,
+            "class_name": "ColorShift",
             "args": [
                 "--travel-direction", "diagonal",
                 "--gradient-stops"] + colors["gradient_stops"] + [colors["accent"][0]],
         },
         "crumble": {
             "module": effect_crumble,
+            "class_name": "Crumble",
             "args": ["--final-gradient-stops"] + colors["primary"],
         },
         "decrypt": {
             "module": effect_decrypt,
+            "class_name": "Decrypt",
             "args": [
                 "--typing-speed", "2",
                 "--ciphertext-colors"] + colors["accent"] + [
@@ -129,6 +187,7 @@ def _get_effect_config(effect_name: str, theme: dict) -> dict:
         },
         "errorcorrect": {
             "module": effect_errorcorrect,
+            "class_name": "ErrorCorrect",
             "args": [
                 "--error-pairs", "20",
                 "--error-color", colors["error"][0],
@@ -136,24 +195,28 @@ def _get_effect_config(effect_name: str, theme: dict) -> dict:
         },
         "expand": {
             "module": effect_expand,
+            "class_name": "Expand",
             "args": [
                 "--final-gradient-stops"] + colors["primary"] + [
                 "--movement-speed", "0.5"],
         },
         "fireworks": {
             "module": effect_fireworks,
+            "class_name": "Fireworks",
             "args": [
                 "--firework-colors"] + colors["primary"] + colors["accent"] + [
                 "--firework-symbol", "●"],
         },
         "matrix": {
             "module": effect_matrix,
+            "class_name": "Matrix",
             "args": [
                 "--matrix-symbols", "ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍ",
                 "--final-gradient-stops"] + colors["primary"][:2],
         },
         "orbittingvolley": {
             "module": effect_orbittingvolley,
+            "class_name": "OrbittingVolley",
             "args": [
                 "--top-launcher-symbol", "▲",
                 "--right-launcher-symbol", "▶",
@@ -163,12 +226,14 @@ def _get_effect_config(effect_name: str, theme: dict) -> dict:
         },
         "overflow": {
             "module": effect_overflow,
+            "class_name": "Overflow",
             "args": [
                 "--overflow-gradient-stops"] + colors["accent"] + [
                 "--final-gradient-stops", colors["primary"][0], colors["primary"][2]],
         },
         "pour": {
             "module": effect_pour,
+            "class_name": "Pour",
             "args": [
                 "--pour-direction", "down",
                 "--pour-speed", "2",
@@ -177,38 +242,45 @@ def _get_effect_config(effect_name: str, theme: dict) -> dict:
         },
         "print": {
             "module": effect_print,
+            "class_name": "Print",
             "args": [
                 "--final-gradient-stops"] + colors["primary"] + [
                 "--print-head-return-speed", "1.5"],
         },
         "rain": {
             "module": effect_rain,
+            "class_name": "Rain",
             "args": ["--rain-colors"] + colors["primary"] + [colors["accent"][0]],
         },
         "random_sequence": {
             "module": effect_random_sequence,
+            "class_name": "RandomSequence",
             "args": [
                 "--starting-color", colors["primary"][1],
                 "--final-gradient-stops", colors["primary"][0], colors["primary"][2]],
         },
         "rings": {
             "module": effect_rings,
+            "class_name": "Rings",
             "args": ["--ring-colors"] + colors["primary"] + [colors["accent"][0]],
         },
         "scattered": {
             "module": effect_scattered,
+            "class_name": "Scattered",
             "args": [
                 "--final-gradient-stops"] + colors["primary"] + [
                 "--movement-speed", "0.5"],
         },
         "slide": {
             "module": effect_slide,
+            "class_name": "Slide",
             "args": [
                 "--slider-symbol", "▓",
                 "--final-gradient-stops"] + colors["primary"],
         },
         "spotlights": {
             "module": effect_spotlights,
+            "class_name": "Spotlights",
             "args": [
                 "--beam-width-ratio", "2.0",
                 "--search-duration", "750",
@@ -217,36 +289,42 @@ def _get_effect_config(effect_name: str, theme: dict) -> dict:
         },
         "spray": {
             "module": effect_spray,
+            "class_name": "Spray",
             "args": [
                 "--spray-colors"] + colors["primary"] + [colors["accent"][0]] + [
                 "--final-gradient-stops"] + colors["primary"][:2],
         },
         "swarm": {
             "module": effect_swarm,
+            "class_name": "Swarm",
             "args": [
                 "--swarm-colors"] + colors["primary"] + [colors["accent"][0]] + [
                 "--final-gradient-stops", colors["primary"][0], colors["primary"][2]],
         },
         "synthgrid": {
             "module": effect_synthgrid,
+            "class_name": "SynthGrid",
             "args": [
                 "--grid-gradient-stops", colors["primary"][1], colors["primary"][0],
                 "--text-gradient-stops"] + colors["gradient_stops"],
         },
         "unstable": {
             "module": effect_unstable,
+            "class_name": "Unstable",
             "args": [
                 "--unstable-color", colors["error"][0],
                 "--final-gradient-stops"] + colors["primary"],
         },
         "vhstape": {
             "module": effect_vhstape,
+            "class_name": "VHSTape",
             "args": [
                 "--final-gradient-stops"] + colors["primary"] + [
                 "--glitch-line-colors"] + colors["accent"],
         },
         "waves": {
             "module": effect_waves,
+            "class_name": "Waves",
             "args": [
                 "--wave-symbols", "▁ ▂ ▃ ▄ ▅ ▆ ▇ █ ▇ ▆ ▅ ▄ ▃ ▂ ▁",
                 "--wave-gradient-stops"] + colors["primary"] + [
@@ -254,6 +332,7 @@ def _get_effect_config(effect_name: str, theme: dict) -> dict:
         },
         "wipe": {
             "module": effect_wipe,
+            "class_name": "Wipe",
             "args": [
                 "--wipe-direction", "diagonal",
                 "--final-gradient-stops"] + colors["primary"],
@@ -327,8 +406,16 @@ def show_banner(
     if not config:
         raise ValueError(f"Effect {selected_effect} not properly configured")
 
-    effect = config["module"].Effect(HAKCER_ASCII)
-    effect.effect_config.merge_args(config["args"])
+    # Get the effect class and config class
+    effect_class, config_class = config["module"].get_effect_and_args()
+
+    # Parse args to kwargs and create config
+    kwargs = _parse_args_to_kwargs(config["args"])
+    effect_config = config_class(**kwargs)
+
+    # Create effect instance and set config
+    effect = effect_class(HAKCER_ASCII)
+    effect.effect_config = effect_config
 
     with effect.terminal_output() as terminal:
         for frame in effect:
