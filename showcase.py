@@ -229,39 +229,43 @@ def showcase_all_effects(hold_time: float = 1.5, clear_between: bool = True):
     time.sleep(1)
 
     count = 0
-    for banner_file in banners:
-        banner_name = "Default haKCer" if banner_file is None else banner_file.name
+    banner_index = 0
 
-        for theme in themes:
-            for effect in all_effects:
-                count += 1
+    for theme in themes:
+        for effect in all_effects:
+            count += 1
 
-                # Show progress
-                console.print(f"\n[bold cyan]━━━ {count}/{total_combos} ━━━[/bold cyan]")
-                console.print(f"[yellow]Banner:[/yellow] {banner_name}")
-                console.print(f"[magenta]Theme:[/magenta] {theme}")
-                console.print(f"[cyan]Effect:[/cyan] {effect}")
-                time.sleep(0.5)
+            # Rotate through banners
+            banner_file = banners[banner_index % len(banners)]
+            banner_name = "Default haKCer" if banner_file is None else banner_file.name
+            banner_index += 1
 
-                # Show the effect
-                set_theme(theme)
-                try:
-                    if banner_file is None:
-                        # Use default banner
-                        show_banner(effect_name=effect, hold_time=hold_time)
-                    else:
-                        # Use custom banner
-                        show_banner(
-                            custom_file=str(banner_file),
-                            effect_name=effect,
-                            hold_time=hold_time
-                        )
-                except Exception as e:
-                    console.print(f"[red]Error with {effect}: {e}[/red]")
-                    continue
+            # Show progress
+            console.print(f"\n[bold cyan]━━━ {count}/{total_combos} ━━━[/bold cyan]")
+            console.print(f"[yellow]Banner:[/yellow] {banner_name}")
+            console.print(f"[magenta]Theme:[/magenta] {theme}")
+            console.print(f"[cyan]Effect:[/cyan] {effect}")
+            time.sleep(0.5)
 
-                if clear_between and count < total_combos:
-                    console.clear()
+            # Show the effect
+            set_theme(theme)
+            try:
+                if banner_file is None:
+                    # Use default banner
+                    show_banner(effect_name=effect, hold_time=hold_time)
+                else:
+                    # Use custom banner
+                    show_banner(
+                        custom_file=str(banner_file),
+                        effect_name=effect,
+                        hold_time=hold_time
+                    )
+            except Exception as e:
+                console.print(f"[red]Error with {effect}: {e}[/red]")
+                continue
+
+            if clear_between and count < total_combos:
+                console.clear()
 
     console.print("\n")
     console.print(Panel(
