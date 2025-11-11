@@ -34,10 +34,34 @@ _ __ \/ /\____________________██_____________ ███________ _________ __
      \/
 ```
 
+## ✨ What's New in v1.1.0
+
+### 🎨 Custom ASCII Art Support
+Use **ANY ASCII art** with haKCer's effects!
+
+```python
+# Use your own ASCII art from file
+show_banner(custom_file="my_logo.txt", theme="cyberpunk")
+
+# Or inline
+banner = """
+╔═══════════════╗
+║  MY COOL APP  ║
+╚═══════════════╝
+"""
+show_banner(custom_text=banner, effect_name="decrypt")
+```
+
+### 🎮 Interactive Demo
+```bash
+python example.py  # Synthwave-themed interactive showcase
+```
+
 ## Features
 
-- **23+ Terminal Effects** - From subtle to spectacular animations
+- **29 Terminal Effects** - From subtle to spectacular animations
 - **9 Beautiful Themes** - Tokyo Night, Cyberpunk, Neon, Dracula, Nord, Gruvbox, Matrix, and more
+- **Custom ASCII Art** - Use your own logos and designs with `custom_text` or `custom_file`
 - **Speed Categories** - Fast (<2s), Medium (2-4s), Slow (4s+)
 - **Zero Config** - Works out of the box with sensible defaults
 - **Pip Installable** - `pip install hakcer`
