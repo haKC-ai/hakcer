@@ -35,7 +35,7 @@ from terminaltexteffects.effects import (
     effect_pour,
     effect_print,
     effect_rain,
-    effect_randomsequence,
+    effect_random_sequence,
     effect_rings,
     effect_scattered,
     effect_slide,
@@ -185,8 +185,8 @@ def _get_effect_config(effect_name: str, theme: dict) -> dict:
             "module": effect_rain,
             "args": ["--rain-colors"] + colors["primary"] + [colors["accent"][0]],
         },
-        "randomsequence": {
-            "module": effect_randomsequence,
+        "random_sequence": {
+            "module": effect_random_sequence,
             "args": [
                 "--starting-color", colors["primary"][1],
                 "--final-gradient-stops", colors["primary"][0], colors["primary"][2]],
@@ -265,7 +265,7 @@ def _get_effect_config(effect_name: str, theme: dict) -> dict:
 
 FAST_EFFECTS = [
     "decrypt", "expand", "print", "slide", "wipe", "colorshift",
-    "scattered", "randomsequence", "pour", "errorcorrect"
+    "scattered", "random_sequence", "pour", "errorcorrect"
 ]
 
 MEDIUM_EFFECTS = [
