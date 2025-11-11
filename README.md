@@ -30,7 +30,7 @@ _ __ \/ /\____________________██_____________ ███________ _________ __
 
 ## [DEMO VIDEO]
 
-https://github.com/haKC-ai/hakcer/assets/hakcer_demo.mp4
+![haKCer Demo](media/hakcer_demo.mp4)
 
 > **Watch haKCer in action!** Animated ASCII banners with 29 terminal effects and 9 color themes.
 
@@ -125,7 +125,7 @@ show_banner(custom_text=banner, effect_name="decrypt")
 
 ### Theme Showcase
 
-https://github.com/haKC-ai/hakcer/assets/hakcer_demo_0a.mp4
+![Theme Showcase](media/hakcer_demo_0a.mp4)
 
 > **All 9 themes** - See how each color palette transforms your ASCII art
 
@@ -151,7 +151,7 @@ orbittingvolley, rings, spotlights, swarm, synthgrid
 
 ### Effects in Action
 
-https://github.com/haKC-ai/hakcer/assets/hakcer_demo_1a.mp4
+![Effects Demo](media/hakcer_demo_1a.mp4)
 
 > **29 Terminal Effects** - From subtle animations to maximum visual impact
 
@@ -276,7 +276,7 @@ Get list of available effect names.
 
 ### Custom Art Demo
 
-https://github.com/haKC-ai/hakcer/assets/hakcer_demo_2a.mp4
+![Custom Art](media/hakcer_demo_2a.mp4)
 
 > **Bring Your Own Designs** - Any ASCII art works with all effects and themes
 
