@@ -42,9 +42,15 @@ console = Console()
 def print_synthwave_header():
     """Print a sick synthwave header."""
     header = Text()
-    header.append("█▀▀█ █░█ █▀▀█ █░█ █▀▀ █▀▀ █▀▀█\n", style=f"bold {SYNTHWAVE_COLORS['primary']}")
-    header.append("█▀▀▄ █▀█ █▀▀▄ █▀█ █░░ █▀▀ █▄▄▀\n", style=f"bold {SYNTHWAVE_COLORS['secondary']}")
-    header.append("▀░░▀ ▀░▀ ▀▀▀▀ ▀░▀ ▀▀▀ ▀▀▀ ▀░▀▀", style=f"bold {SYNTHWAVE_COLORS['accent']}")
+    header.append("                     ████████████████████████ \n", style=f"bold {SYNTHWAVE_COLORS['primary']}")
+    header.append("                     █   ███   ███████   ████\n", style=f"bold {SYNTHWAVE_COLORS['primary']}")
+    header.append("                     █   ██   █████   ███   █\n", style=f"bold {SYNTHWAVE_COLORS['secondary']}")
+    header.append(" ███                 █   █   █████   ████████\n", style=f"bold {SYNTHWAVE_COLORS['secondary']}")
+    header.append(" ███         ███     █  █  ███████   ████████    ███     ██ ████ \n", style=f"bold {SYNTHWAVE_COLORS['accent']}")
+    header.append(" █████     ███  ███  █   ██   ████   ████████  ██   ███   ███ \n", style=f"bold {SYNTHWAVE_COLORS['accent']}")
+    header.append(" ███  ██  ███   ███  █   ███   ████   ███   █ █████████   ███ \n", style=f"bold {SYNTHWAVE_COLORS['neon']}")
+    header.append(" ██   ███ ███   ███  █   █████   ████     ███ ██          ███\n", style=f"bold {SYNTHWAVE_COLORS['neon']}")
+    header.append(" ██   ███   ███ ████ ████ S H O W C A S E ███   █████    ████", style=f"bold {SYNTHWAVE_COLORS['accent']}")
 
     console.print(Panel(
         Align.center(header),
