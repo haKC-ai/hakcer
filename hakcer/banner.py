@@ -169,7 +169,6 @@ def _get_effect_config(effect_name: str, theme: dict) -> dict:
             "module": effect_colorshift,
             "class_name": "ColorShift",
             "args": [
-                "--travel-direction", "diagonal",
                 "--gradient-stops"] + colors["gradient_stops"] + [colors["accent"][0]],
         },
         "crumble": {
@@ -275,7 +274,6 @@ def _get_effect_config(effect_name: str, theme: dict) -> dict:
             "module": effect_slide,
             "class_name": "Slide",
             "args": [
-                "--slider-symbol", "▓",
                 "--final-gradient-stops"] + colors["primary"],
         },
         "spotlights": {
@@ -284,7 +282,6 @@ def _get_effect_config(effect_name: str, theme: dict) -> dict:
             "args": [
                 "--beam-width-ratio", "2.0",
                 "--search-duration", "750",
-                "--search-speed", "0.25",
                 "--final-gradient-stops"] + colors["primary"][:2],
         },
         "spray": {
@@ -334,7 +331,7 @@ def _get_effect_config(effect_name: str, theme: dict) -> dict:
             "module": effect_wipe,
             "class_name": "Wipe",
             "args": [
-                "--wipe-direction", "diagonal",
+                "--wipe-direction", "diagonal_top_left_to_bottom_right",
                 "--final-gradient-stops"] + colors["primary"],
         },
     }
