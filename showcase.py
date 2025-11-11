@@ -35,11 +35,11 @@ MENU_COLORS = THEMES[MENU_THEME]["colors"]
 # Map theme colors to menu display
 SYNTHWAVE_COLORS = {
     "primary": f"#{MENU_COLORS['primary'][0]}",
-    "secondary": f"#{MENU_COLORS['secondary'][0]}",
+    "secondary": f"#{MENU_COLORS['primary'][1] if len(MENU_COLORS['primary']) > 1 else MENU_COLORS['primary'][0]}",
     "accent": f"#{MENU_COLORS['accent'][0]}",
     "bg": f"#{MENU_COLORS['primary'][0]}",
     "text": "#ffffff",
-    "neon": f"#{MENU_COLORS['accent'][0]}",
+    "neon": f"#{MENU_COLORS['accent'][1] if len(MENU_COLORS['accent']) > 1 else MENU_COLORS['accent'][0]}",
 }
 
 console = Console()
