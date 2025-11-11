@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(./build_package.sh)"
-    ],
-    "deny": [],
-    "ask": []
-  }
-}
