@@ -95,7 +95,38 @@ def showcase_all_effects(hold_time: float = 1.5, clear_between: bool = True):
     custom_banners = []
     custom_banners_dir = Path("custom_banners")
     if custom_banners_dir.exists() and custom_banners_dir.is_dir():
-        custom_banners = [f for f in custom_banners_dir.glob("*.txt")]
+        available_banners = sorted([f for f in custom_banners_dir.glob("*.txt")])
+
+        if available_banners:
+            console.print(Panel(
+                "[bold]Custom Banners Found[/bold]\n\n" +
+                "\n".join([f"  [{idx}] {f.name}" for idx, f in enumerate(available_banners, 1)]),
+                border_style="cyan",
+                title="Available Custom Banners"
+            ))
+
+            use_custom = Confirm.ask("\n[yellow]Include custom banners in showcase?[/yellow]", default=True)
+
+            if use_custom:
+                console.print("\n[cyan]Options:[/cyan]")
+                console.print("  [white]'all'[/white] - Use all custom banners")
+                console.print("  [white]'1,3'[/white] - Use specific banners by number")
+                console.print("  [white]'none'[/white] - Skip custom banners\n")
+
+                selection = Prompt.ask(
+                    "[yellow]Which custom banners?[/yellow]",
+                    default="all"
+                ).strip().lower()
+
+                if selection == "all":
+                    custom_banners = available_banners
+                elif selection != "none":
+                    try:
+                        indices = [int(x.strip()) - 1 for x in selection.split(",")]
+                        custom_banners = [available_banners[i] for i in indices if 0 <= i < len(available_banners)]
+                    except (ValueError, IndexError):
+                        console.print("[red]Invalid selection, using all banners[/red]")
+                        custom_banners = available_banners
 
     # Prepare banner list (default + custom)
     banners = [None] + custom_banners  # None = default haKCer banner
