@@ -11,6 +11,7 @@ haKCer animations. Perfect for recording demos!
 import sys
 import time
 import os
+import random
 from pathlib import Path
 from typing import Optional
 
@@ -25,15 +26,20 @@ from rich.align import Align
 from rich import box
 
 from hakcer import show_banner, set_theme, list_themes, list_effects, get_effects_by_speed
+from hakcer.themes import THEMES
 
-# Synthwave color scheme
+# Pick random theme for menu colors
+MENU_THEME = random.choice(list(THEMES.keys()))
+MENU_COLORS = THEMES[MENU_THEME]["colors"]
+
+# Map theme colors to menu display
 SYNTHWAVE_COLORS = {
-    "primary": "#ff00ff",      # Hot pink
-    "secondary": "#00ffff",    # Cyan
-    "accent": "#ffff00",       # Yellow
-    "bg": "#1a0033",          # Deep purple
-    "text": "#ffffff",        # White
-    "neon": "#ff006e",        # Neon pink
+    "primary": f"#{MENU_COLORS['primary'][0]}",
+    "secondary": f"#{MENU_COLORS['secondary'][0]}",
+    "accent": f"#{MENU_COLORS['accent'][0]}",
+    "bg": f"#{MENU_COLORS['primary'][0]}",
+    "text": "#ffffff",
+    "neon": f"#{MENU_COLORS['accent'][0]}",
 }
 
 console = Console()
@@ -52,12 +58,7 @@ def print_synthwave_header():
     header.append(" ██   ███ ███   ███  █   █████   ████     ███ ██          ███\n", style=f"bold {SYNTHWAVE_COLORS['neon']}")
     header.append(" ██   ███   ███ ████ ████ S H O W C A S E ███   █████    ████", style=f"bold {SYNTHWAVE_COLORS['accent']}")
 
-    console.print(Panel(
-        Align.center(header),
-        border_style=SYNTHWAVE_COLORS['neon'],
-        box=box.DOUBLE_EDGE,
-        padding=(1, 2)
-    ))
+    console.print(Align.center(header))
 
 
 def create_menu_table() -> Table:
