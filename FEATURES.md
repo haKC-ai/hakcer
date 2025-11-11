@@ -1,15 +1,26 @@
-# haKCer Features Summary
+```
+╔══════════════════════════════════════════════════════════════╗
+║                  haKCer - Features Summary                   ║
+╚══════════════════════════════════════════════════════════════╝
 
-## What's New
+  NAME.........................................haKCer
+  Type...........................Terminal Banner Library
+  Release......................................v1.1.3
+  Effects..........................................29x
+  Themes............................................9x
+  Status..............................[SCENE APPROVED]
 
-### Custom ASCII Art Support (NEW!)
+  NFO: Stash of animated ASCII banners for Python CLI tools.
+       Custom art support. Terminal effects library.
+```
 
-**Use your own ASCII art with all haKCer effects!**
+## [WHAT'S NEW]
 
+**Custom ASCII Art Support**
 ```python
 from hakcer import show_banner
 
-# Use your own ASCII art
+# Bring your own designs
 show_banner(custom_file="my_logo.txt", effect_name="synthgrid")
 
 # Or inline
@@ -21,26 +32,28 @@ banner = """
 show_banner(custom_text=banner, effect_name="decrypt")
 ```
 
-**Full Guide**: See [CUSTOM_BANNERS.md](CUSTOM_BANNERS.md)
+See [CUSTOM_BANNERS.md](CUSTOM_BANNERS.md) for full guide.
 
-### Interactive Demo (NEW!)
+**Interactive Demo**
 
-**Synthwave-themed Rich UI demo for showcasing and recording!**
+Synthwave-themed Rich UI demo for showcasing and recording.
 
 ```bash
 python showcase.py
 ```
 
 Features:
-- **Showcase Mode** - Record all 261 effect combinations
-- **Theme Gallery** - Browse all 9 themes
-- **Custom Effect** - Pick specific combinations
-- **Effect Browser** - Interactive selector
-- **Synthwave Mode** - Ultimate experience
+```
+[1] Showcase Mode - Record all 261 effect combinations
+[2] Theme Gallery - Browse all 9 themes
+[3] Custom Effect - Pick specific combinations
+[4] Effect Browser - Interactive selector
+[5] Synthwave Mode - Ultimate experience
+```
 
-**Full Guide**: See [EXAMPLE_README.md](EXAMPLE_README.md)
+See [EXAMPLE_README.md](EXAMPLE_README.md) for full guide.
 
-## Core Features
+## [CORE FEATURES]
 
 ### Themes (9 Available)
 
@@ -57,11 +70,11 @@ set_theme("cyberpunk")
 
 ### Effects (29 Available)
 
-**Fast Effects (10)**: decrypt, expand, print, slide, wipe, colorshift, scattered, random_sequence, pour, errorcorrect
+**FAST** (10): decrypt, expand, print, slide, wipe, colorshift, scattered, random_sequence, pour, errorcorrect
 
-**Medium Effects (10)**: beams, binarypath, burn, crumble, overflow, rain, spray, unstable, vhstape, waves
+**MEDIUM** (10): beams, binarypath, burn, crumble, overflow, rain, spray, unstable, vhstape, waves
 
-**Slow Effects (9)**: blackhole, bouncyballs, fireworks, matrix, orbittingvolley, rings, spotlights, swarm, synthgrid
+**SLOW** (9): blackhole, bouncyballs, fireworks, matrix, orbittingvolley, rings, spotlights, swarm, synthgrid
 
 ```python
 from hakcer import show_banner
@@ -77,7 +90,7 @@ from hakcer import list_effects
 print(list_effects())
 ```
 
-### 🎛️ Customization Options
+### Customization Options
 
 ```python
 from hakcer import show_banner, set_theme
@@ -93,14 +106,13 @@ show_banner(
 )
 ```
 
-## 📚 Documentation
+## [DOCUMENTATION]
 
 - **[CUSTOM_BANNERS.md](CUSTOM_BANNERS.md)** - Complete guide to custom ASCII art
 - **[EXAMPLE_README.md](EXAMPLE_README.md)** - Interactive demo usage
-- **[examples.py](examples.py)** - Original 10 usage examples
 - **[test_custom_banner.py](test_custom_banner.py)** - Test custom banners
 
-## Quick Examples
+## [QUICK EXAMPLES]
 
 ### Basic Usage
 ```python
@@ -139,7 +151,7 @@ def main():
 show_banner(speed_preference="fast", hold_time=0.5)
 ```
 
-## Interactive Demo
+## [INTERACTIVE DEMO]
 
 Run the synthwave-themed demo:
 
@@ -148,16 +160,18 @@ python showcase.py
 ```
 
 Features:
-1. **Showcase All Effects** - Perfect for recording videos
-2. **Theme Gallery** - Browse all themes
-3. **Quick Demo** - Fast preview
-4. **Custom Effect** - Choose your combo
-5. **Effect Browser** - Explore effects by speed
-6. **Speed Test** - Compare speeds
-7. **Info** - List everything
-8. **Synthwave Mode** - Ultimate experience
+```
+[1] Showcase All Effects - Perfect for recording videos
+[2] Theme Gallery - Browse all themes
+[3] Quick Demo - Fast preview
+[4] Custom Effect - Choose your combo
+[5] Effect Browser - Explore effects by speed
+[6] Speed Test - Compare speeds
+[7] Info - List everything
+[8] Synthwave Mode - Ultimate experience
+```
 
-## Advanced Features
+## [ADVANCED FEATURES]
 
 ### Environment Variables
 ```bash
@@ -181,18 +195,18 @@ from hakcer import show_banner, set_theme
 try:
     set_theme("invalid")
 except ValueError:
-    set_theme("synthwave")  # Fallback
+    set_theme("neon")  # Fallback
 ```
 
-## 📦 Installation
+## [INSTALLATION]
 
 ```bash
 pip install hakcer
 ```
 
-## Create Custom Art
+## [CREATE CUSTOM ART]
 
-Use [patorjk.com/software/taag](http://patorjk.com/software/taag/) to generate ASCII art, then:
+Use http://patorjk.com/software/taag/ to generate ASCII art, then:
 
 ```python
 # Save to file
@@ -205,32 +219,38 @@ YOUR ASCII ART HERE
 show_banner(custom_text=my_art)
 ```
 
-## Pro Tips
+## [PRO TIPS]
 
-1. **Fast startup**: Use `speed_preference="fast"` and `hold_time=0.5`
-2. **Video recording**: Use showcase mode in `showcase.py`
-3. **Custom branding**: Create your own ASCII art file
-4. **Theme matching**: Choose themes that complement your art
-5. **Production ready**: Combine with terminal detection and env vars
+```
+[1] Fast startup: Use speed_preference="fast" and hold_time=0.5
+[2] Video recording: Use showcase mode in showcase.py
+[3] Custom branding: Create your own ASCII art file
+[4] Theme matching: Choose themes that complement your art
+[5] Production ready: Combine with terminal detection and env vars
+```
 
-## Use Cases
+## [USE CASES]
 
-- CLI tool splash screens
-- Welcome messages
-- Loading screens
-- Error/success notifications
-- Game title screens
-- Corporate branding
-- Seasonal greetings
-- Personal projects
+```
+[*] CLI tool splash screens
+[*] Welcome messages
+[*] Loading screens
+[*] Error/success notifications
+[*] Game title screens
+[*] Corporate branding
+[*] Seasonal greetings
+[*] Personal projects
+```
 
-## Resources
+## [RESOURCES]
 
 - **PyPI**: https://pypi.org/project/hakcer/
 - **GitHub**: https://github.com/haKC-ai/hakcer
 - **ASCII Art Generator**: http://patorjk.com/software/taag/
 - **Rich Library**: https://rich.readthedocs.io/
 
----
-
-Made with by haKCer - The Ultimate Terminal Banner Library
+```
+─────────────────────────────────────────────────────────
+         Made by haKCer - The Ultimate Terminal Library
+─────────────────────────────────────────────────────────
+```

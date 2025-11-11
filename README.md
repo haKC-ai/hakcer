@@ -1,16 +1,4 @@
-# haKCer - Animated ASCII Banner with Themes
-
-**Drop-in animated ASCII banners for your Python CLI tools with customizable themes**
-
-![PyPI](https://img.shields.io/pypi/v/hakcer?style=flat-square&logo=pypi&logoColor=white)
-![Python Version](https://img.shields.io/pypi/pyversions/hakcer?style=flat-square&logo=python&logoColor=white)
-![License](https://img.shields.io/github/license/haKC-ai/hakcer?style=flat-square)
-![Downloads](https://img.shields.io/pypi/dm/hakcer?style=flat-square&logo=pypi&logoColor=white)
-![GitHub Stars](https://img.shields.io/github/stars/haKC-ai/hakcer?style=flat-square&logo=github)
-![Code Size](https://img.shields.io/github/languages/code-size/haKC-ai/hakcer?style=flat-square)
-
 ```
-
                  ██████████
                 █▓       ░██
                 █▒        ██
@@ -34,13 +22,72 @@ _ __ \/ /\____________________██_____________ ███________ _________ __
      \/
 ```
 
-## What's New in v1.1.0
+![PyPI](https://img.shields.io/pypi/v/hakcer?style=flat-square&logo=pypi&logoColor=white)
+![Python Version](https://img.shields.io/pypi/pyversions/hakcer?style=flat-square&logo=python&logoColor=white)
+![License](https://img.shields.io/github/license/haKC-ai/hakcer?style=flat-square)
+![Downloads](https://img.shields.io/pypi/dm/hakcer?style=flat-square&logo=pypi&logoColor=white)
+![GitHub Stars](https://img.shields.io/github/stars/haKC-ai/hakcer?style=flat-square&logo=github)
 
-### Custom ASCII Art Support
-Use **ANY ASCII art** with haKCer's effects!
+```
+  NAME.........................................haKCer
+  Type...........................Terminal Banner Library
+  Platform.............................Python 3.8+ / pip
+  Release......................................v1.1.3
+  Effects..........................................29x
+  Themes............................................9x
+  Supplied by.........................haKC.ai / /dev/CØR
+
+  [*] Drop-in animated ASCII banners for Python CLI tools
+  [*] Custom art support - bring your own designs
+  [*] 29 terminal effects from subtle to SICK
+  [*] 9 color themes: Tokyo Night, Cyberpunk, Neon, Matrix+
+  [*] Zero config - works out the box
+
+  ─────────────────────────────────────────────────────────
+```
+
+## [INSTALLATION]
+
+```bash
+pip install hakcer
+```
+
+## [QUICK START]
+
+### Basic Usage
 
 ```python
-# Use your own ASCII art from file
+from hakcer import show_banner
+
+# Default neon theme, random fast effect
+show_banner()
+
+# Your CLI tool code here
+print("Welcome to the grid...")
+```
+
+### With Themes
+
+```python
+from hakcer import show_banner, set_theme
+
+# Tokyo Night aesthetic
+set_theme("tokyo_night")
+show_banner()
+
+# Cyberpunk 2077 vibes
+set_theme("cyberpunk")
+show_banner()
+
+# Full neon mode
+set_theme("neon")
+show_banner(effect_name="synthgrid")
+```
+
+### Custom ASCII Art
+
+```python
+# Load your own art
 show_banner(custom_file="my_logo.txt", theme="cyberpunk")
 
 # Or inline
@@ -52,287 +99,229 @@ banner = """
 show_banner(custom_text=banner, effect_name="decrypt")
 ```
 
-### Interactive Demo
-```bash
-python showcase.py  # Synthwave-themed interactive showcase
+## [THEMES]
+
+```
+┌─────────────────┬──────────────────────────────────┬────────────────────┐
+│ Theme           │ Description                      │ Colors             │
+├─────────────────┼──────────────────────────────────┼────────────────────┤
+│ synthwave       │ Classic retro cyan/magenta/purp  │ Retro synth vibes  │
+│ tokyo_night     │ Dark blue Tokyo aesthetic        │ Modern clean       │
+│ tokyo_storm     │ Deeper blue variant              │ Stormy nights      │
+│ neon            │ Bright electric [DEFAULT]        │ Full send neon     │
+│ cyberpunk       │ Yellow/pink CP2077 style         │ High contrast      │
+│ matrix          │ Classic green matrix             │ Terminal classic   │
+│ dracula         │ Popular Dracula palette          │ Dark vampire       │
+│ nord            │ Arctic bluish tones              │ Professional       │
+│ gruvbox         │ Retro warm colors                │ Cozy terminal      │
+└─────────────────┴──────────────────────────────────┴────────────────────┘
 ```
 
-## Features
+## [EFFECTS]
 
-- **29 Terminal Effects** - From subtle to spectacular animations
-- **9 Beautiful Themes** - Tokyo Night, Cyberpunk, Neon, Dracula, Nord, Gruvbox, Matrix, and more
-- **Custom ASCII Art** - Use your own logos and designs with `custom_text` or `custom_file`
-- **Speed Categories** - Fast (<2s), Medium (2-4s), Slow (4s+)
-- **Zero Config** - Works out of the box with sensible defaults
-- **Pip Installable** - `pip install hakcer`
-- **Simple API** - Just 2 lines of code to get started
-
-## Architecture
-
-```mermaid
-graph TB
-    A[User Application] --> B[hakcer Package]
-    B --> C[show_banner]
-    B --> D[set_theme]
-    B --> E[list_themes]
-    C --> F[Theme System]
-    C --> G[Effect Engine]
-    F --> H[9 Built-in Themes]
-    G --> I[23+ Terminal Effects]
-    I --> J[terminaltexteffects]
-    F --> K[Color Palettes]
-    K --> G
-    G --> L[Terminal Output]
-
-    style B fill:#00D9FF
-    style F fill:#FF10F0
-    style G fill:#7928CA
+**FAST** (<2s) - Production ready
+```
+decrypt, expand, print, slide, wipe, colorshift,
+scattered, random_sequence, pour, errorcorrect
 ```
 
-## Quick Start
-
-### Installation
-
-```bash
-pip install hakcer
+**MEDIUM** (2-4s) - Balanced
+```
+beams, binarypath, burn, crumble, overflow,
+rain, spray, unstable, vhstape, waves
 ```
 
-### Basic Usage
+**SLOW** (4s+) - Maximum flex
+```
+blackhole, bouncyballs, fireworks, matrix,
+orbittingvolley, rings, spotlights, swarm, synthgrid
+```
+
+### Speed Control
 
 ```python
-from hakcer import show_banner
-
-# Show banner with default theme (synthwave) and random fast effect
-show_banner()
-
-# Your application code here
-print("Welcome to my CLI tool!")
-```
-
-### With Themes
-
-```python
-from hakcer import show_banner, set_theme
-
-# Use Tokyo Night theme
-set_theme("tokyo_night")
-show_banner()
-
-# Or Cyberpunk theme
-set_theme("cyberpunk")
-show_banner()
-
-# Or any other theme
-set_theme("neon")
-show_banner(effect_name="synthgrid")
-```
-
-## Available Themes
-
-| Theme | Description | Color Scheme |
-|-------|-------------|--------------|
-| **synthwave** | Classic synthwave with cyan, magenta, purple (default) | `#00D9FF` `#FF10F0` `#7928CA` |
-| **tokyo_night** | Dark blue aesthetic inspired by Tokyo at night | `#7aa2f7` `#bb9af7` `#7dcfff` |
-| **tokyo_night_storm** | Deeper blue Tokyo Night variant | `#82aaff` `#c792ea` `#89ddff` |
-| **neon** | Bright electric neon colors | `#00ff00` `#ff00ff` `#00ffff` |
-| **cyberpunk** | Yellow and pink Cyberpunk 2077 inspired | `#fcee09` `#ff2a6d` `#05d9e8` |
-| **matrix** | Classic green matrix theme | `#00ff41` `#008f11` `#003b00` |
-| **dracula** | Popular Dracula theme | `#bd93f9` `#ff79c6` `#8be9fd` |
-| **nord** | Arctic north-bluish color palette | `#88c0d0` `#81a1c1` `#5e81ac` |
-| **gruvbox** | Retro groove with warm colors | `#fe8019` `#d3869b` `#83a598` |
-
-## Theme System Flow
-
-```mermaid
-sequenceDiagram
-    participant App as Your Application
-    participant API as haKCer API
-    participant Theme as Theme Engine
-    participant Effect as Effect Renderer
-    participant Term as Terminal
-
-    App->>API: set_theme("tokyo_night")
-    API->>Theme: Load theme configuration
-    Theme-->>API: Theme colors loaded
-
-    App->>API: show_banner()
-    API->>Theme: Get current theme
-    Theme-->>API: Return color palette
-    API->>Effect: Apply theme to effect
-    Effect->>Effect: Generate animation frames
-    Effect->>Term: Render to terminal
-    Term-->>App: Animation complete
-```
-
-## Terminal Effects
-
-### Speed Categories
-
-```python
-# Fast effects (<2s) - great for production
+# Fast for production
 show_banner(speed_preference="fast")
 
-# Medium effects (2-4s) - balanced
+# Medium for balance
 show_banner(speed_preference="medium")
 
-# Slow effects (4s+) - impressive for demos
+# Slow for maximum effect
 show_banner(speed_preference="slow")
 
 # Specific effect
 show_banner(effect_name="synthgrid")
 ```
 
-**Fast Effects (10)**: `decrypt`, `expand`, `print`, `slide`, `wipe`, `colorshift`, `scattered`, `randomsequence`, `pour`, `errorcorrect`
+## [DEMO]
 
-**Medium Effects (10)**: `beams`, `binarypath`, `burn`, `crumble`, `overflow`, `rain`, `spray`, `unstable`, `vhstape`, `waves`
-
-**Slow Effects (9)**: `blackhole`, `bouncyballs`, `fireworks`, `matrix`, `orbittingvolley`, `rings`, `spotlights`, `swarm`, `synthgrid`
-
-## Package Structure
-
-```mermaid
-graph LR
-    A[hakcer/] --> B[__init__.py]
-    A --> C[banner.py]
-    A --> D[themes.py]
-
-    B --> E[Package Exports]
-    C --> F[show_banner]
-    C --> G[Effect Configuration]
-    D --> H[Theme Definitions]
-    D --> I[Color Palettes]
-
-    F --> J[Terminal Rendering]
-    G --> J
-    H --> G
-    I --> G
-
-    style A fill:#00D9FF
-    style C fill:#FF10F0
-    style D fill:#7928CA
-```
-
-## Documentation
-
-### API Reference
-
-#### `show_banner()`
-
-Display the haKCer banner with animation.
-
-**Parameters:**
-- `effect_name` (str, optional): Specific effect to use
-- `speed_preference` (str, optional): "fast", "medium", "slow", or "any" (default: "fast")
-- `hold_time` (float, optional): Seconds to display final frame (default: 1.5)
-- `clear_after` (bool, optional): Clear terminal after animation (default: False)
-- `theme` (str, optional): Theme name to use (default: current global theme)
-
-#### `set_theme(theme_name)`
-
-Set the global theme for all banners.
-
-#### `list_themes()`
-
-Get list of all available theme names.
-
-#### `list_effects()`
-
-Get list of all available effect names.
-
-## Usage Examples
-
-Check out [examples.py](examples.py) for comprehensive usage examples including:
-- Basic usage
-- Theme showcase
-- CLI integration with Click
-- Smart terminal detection
-- Production-ready setups
-- Error handling
-
-Run examples:
-```bash
-python examples.py        # Show menu
-python examples.py 1      # Run example 1
-python examples.py 7      # List all features
-```
-
-## Development
-
-### Setup
+Run the interactive showcase:
 
 ```bash
-# Clone the repository
-git clone https://github.com/haKC-ai/hakcer.git
-cd hakcer
-
-# Install in development mode
-pip install -e .
-
-# Run tests
-python test_package.py
+python showcase.py
 ```
 
-### Publishing
-
-Use the automated deployment script:
-
-```bash
-./deploy.sh
+Features:
+```
+[1] Showcase All Effects - Record-ready demo (261 combos!)
+[2] Theme Gallery - Browse all themes
+[3] Quick Demo - Single random fast effect
+[4] Custom Effect - Pick theme + effect combo
+[5] Effect Browser - Interactive selector
+[6] Speed Test - Compare fast/medium/slow
+[7] Info - List all available options
+[8] Synthwave Mode - Ultimate experience
 ```
 
-The script will:
-1. Validate all required files
-2. Run tests
-3. Commit to GitHub
-4. Build the package
-5. Publish to PyPI
+## [CLI INTEGRATION]
 
-See [PYPI_SETUP_GUIDE.md](PYPI_SETUP_GUIDE.md) for detailed instructions.
+```python
+#!/usr/bin/env python3
+"""my_tool.py - Example CLI tool"""
+import sys
+from hakcer import show_banner, set_theme
 
-## Requirements
+def main():
+    # Check if terminal
+    if sys.stdout.isatty():
+        set_theme("neon")
+        show_banner(speed_preference="fast", hold_time=0.5)
 
-- Python 3.8+
-- terminaltexteffects >= 0.11.0
-- rich >= 13.0.0
+    # Your tool logic
+    print("Running my tool...")
 
-## Contributing
+if __name__ == "__main__":
+    main()
+```
 
-Contributions welcome! Areas for contribution:
-- New themes
-- Additional effects
-- Performance improvements
-- Documentation
-- Bug fixes
+### With Click Framework
 
-Please open an issue or PR on GitHub.
+```python
+import click
+from hakcer import show_banner, set_theme
 
-## License
+@click.command()
+@click.option('--no-banner', is_flag=True, help='Disable banner')
+@click.option('--theme', default='neon', help='Banner theme')
+def main(no_banner, theme):
+    if not no_banner:
+        set_theme(theme)
+        show_banner(speed_preference="fast")
 
-MIT License - see [LICENSE](LICENSE) file for details.
+    click.echo("Tool running...")
 
-## Links
+if __name__ == '__main__':
+    main()
+```
 
-- **PyPI**: https://pypi.org/project/hakcer/
-- **GitHub**: https://github.com/haKC-ai/hakcer
-- **Issues**: https://github.com/haKC-ai/hakcer/issues
-
-## Best Practices
-
-1. **Always provide `--no-banner` flag** for automation/scripting
-2. **Use fast effects** in production tools that run frequently
-3. **Check TTY** before showing banner to avoid piping issues
-4. **Pick themes** that match your tool's aesthetic
+### Smart Terminal Detection
 
 ```python
 import sys
-from hakcer import show_banner
+import os
+from hakcer import show_banner, set_theme
 
-if sys.stdout.isatty():
-    show_banner(speed_preference="fast")
+# Check env vars
+show_banner_enabled = os.getenv("SHOW_BANNER", "true").lower() == "true"
+is_interactive = sys.stdout.isatty()
+
+if show_banner_enabled and is_interactive:
+    theme = os.getenv("HAKCER_THEME", "neon")
+    set_theme(theme)
+    show_banner(speed_preference="fast", hold_time=0.5)
 ```
 
----
+## [API REFERENCE]
 
-**Made with power by haKCer | The Pinnacle of Hakcing Quality**
+### show_banner()
+Display animated ASCII banner.
 
-Add instant style to your CLI tools!
+**Parameters:**
+- `effect_name` (str, optional): Specific effect name
+- `speed_preference` (str, optional): "fast", "medium", "slow", "any" (default: "fast")
+- `hold_time` (float, optional): Seconds to hold final frame (default: 1.5)
+- `clear_after` (bool, optional): Clear terminal after (default: False)
+- `theme` (str, optional): Theme name (default: current global theme)
+- `custom_text` (str, optional): Custom ASCII art text
+- `custom_file` (str, optional): Path to custom ASCII art file
+
+### set_theme(theme_name)
+Set global theme for all banners.
+
+### list_themes()
+Get list of available theme names.
+
+### list_effects()
+Get list of available effect names.
+
+## [CUSTOM ASCII ART]
+
+### Online Generators
+- http://patorjk.com/software/taag/ - Text to ASCII (BEST!)
+- https://ascii-generator.site/ - Image to ASCII
+- https://ascii.co.uk/art/ - ASCII Art Gallery
+
+### Recommended Fonts
+```
+ANSI Shadow, Bloody, Doom, Graffiti,
+ANSI Regular, Block, Banner3, 3D-ASCII
+```
+
+### Usage
+
+```python
+from hakcer import show_banner, set_theme
+
+# From file
+show_banner(
+    custom_file="assets/logo.txt",
+    effect_name="decrypt",
+    theme="cyberpunk",
+    hold_time=1.0
+)
+
+# Inline
+my_banner = """
+ ███╗   ███╗██╗   ██╗     █████╗ ██████╗ ██████╗
+ ████╗ ████║╚██╗ ██╔╝    ██╔══██╗██╔══██╗██╔══██╗
+ ██╔████╔██║ ╚████╔╝     ███████║██████╔╝██████╔╝
+ ██║╚██╔╝██║  ╚██╔╝      ██╔══██║██╔═══╝ ██╔═══╝
+ ██║ ╚═╝ ██║   ██║       ██║  ██║██║     ██║
+ ╚═╝     ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝     ╚═╝
+"""
+show_banner(custom_text=my_banner, theme="neon")
+```
+
+## [REQUIREMENTS]
+
+```
+Python 3.8+
+terminaltexteffects >= 0.11.0
+rich >= 13.0.0
+```
+
+## [LINKS]
+
+- PyPI: https://pypi.org/project/hakcer/
+- GitHub: https://github.com/haKC-ai/hakcer
+- Issues: https://github.com/haKC-ai/hakcer/issues
+
+## [CREDITS]
+
+Built with:
+- terminaltexteffects - Terminal animation engine
+- rich - Terminal formatting
+
+## [LICENSE]
+
+MIT License - see LICENSE file
+
+```
+─────────────────────────────────────────────────────────
+              M A D E   B Y   h a K C e r
+         T H E   P I N N A C L E   O F   Q U A L I T Y
+─────────────────────────────────────────────────────────
+           Transform CLI tools from boring to LEGENDARY
+            pip install hakcer && watch the magic happen
+─────────────────────────────────────────────────────────
+```
