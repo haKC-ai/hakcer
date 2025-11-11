@@ -47,7 +47,7 @@ console = Console()
 
 def print_synthwave_header():
     """Print a sick synthwave header with random animation."""
-    header_art = """                                                ████████████████████████
+    header_art = """                                       ████████████████████████
                                                   █   ███   ███████   ████
                                                   █   ██   █████   ███   █
                               ███                 █   █   █████   ████████
