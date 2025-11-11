@@ -105,28 +105,98 @@ def showcase_all_effects(hold_time: float = 1.5, clear_between: bool = True):
                 title="Available Custom Banners"
             ))
 
-            use_custom = Confirm.ask("\n[yellow]Include custom banners in showcase?[/yellow]", default=True)
+            console.print("\n[cyan]Selection Options:[/cyan]")
+            console.print(f"  [white]'all'[/white] - Use default + all {len(available_banners)} custom banners (RECOMMENDED)")
+            console.print(f"  [white]'1'[/white] - Use only {available_banners[0].name}")
+            if len(available_banners) > 1:
+                console.print(f"  [white]'2'[/white] - Use only {available_banners[1].name}")
+            console.print("  [white]'1,2'[/white] - Use specific banners (comma-separated)")
+            console.print("  [white]'custom'[/white] - Use all custom banners (no default)")
+            console.print("  [white]'default'[/white] - Use only default haKCer banner\n")
 
-            if use_custom:
-                console.print("\n[cyan]Options:[/cyan]")
-                console.print("  [white]'all'[/white] - Use all custom banners")
-                console.print("  [white]'1,3'[/white] - Use specific banners by number")
-                console.print("  [white]'none'[/white] - Skip custom banners\n")
+            selection = Prompt.ask(
+                "[yellow]Which banners to include?[/yellow]",
+                default="all"
+            ).strip().lower()
 
-                selection = Prompt.ask(
-                    "[yellow]Which custom banners?[/yellow]",
-                    default="all"
-                ).strip().lower()
+            if selection == "all":
+                # Default + all custom banners
+                custom_banners = available_banners
+            elif selection == "custom":
+                # All custom, skip default
+                custom_banners = available_banners
+                banners = custom_banners
+                # Skip adding None later
+                console.print(Panel(
+                    "[bold cyan]SHOWCASE MODE ACTIVATED[/bold cyan]\n\n"
+                    "Recording-optimized demo of all effects across all themes!\n"
+                    "Perfect for creating promotional videos.\n\n"
+                    f"Hold time: {hold_time}s | Clear between: {clear_between}\n"
+                    f"Banners: {len(custom_banners)} custom (no default)",
+                    border_style="bright_magenta",
+                    box=box.DOUBLE
+                ))
 
-                if selection == "all":
+                themes = list_themes()
+                all_effects = get_effects_by_speed("fast")
+                total_combos = len(themes) * len(all_effects) * len(banners)
+                console.print(f"\n[yellow]Total combinations: {total_combos}[/yellow]")
+                console.print(f"[yellow]Estimated time: {total_combos * (hold_time + 0.5):.0f}s[/yellow]\n")
+
+                if not Confirm.ask("[bold]Ready to start showcase?[/bold]", default=True):
+                    return
+
+                console.print("\n[bold green]Starting in 3...[/bold green]")
+                time.sleep(1)
+                console.print("[bold green]2...[/bold green]")
+                time.sleep(1)
+                console.print("[bold green]1...[/bold green]")
+                time.sleep(1)
+
+                count = 0
+                for banner_file in banners:
+                    banner_name = banner_file.name
+                    for theme in themes:
+                        for effect in all_effects:
+                            count += 1
+                            console.print(f"\n[bold cyan]━━━ {count}/{total_combos} ━━━[/bold cyan]")
+                            console.print(f"[yellow]Banner:[/yellow] {banner_name}")
+                            console.print(f"[magenta]Theme:[/magenta] {theme}")
+                            console.print(f"[cyan]Effect:[/cyan] {effect}")
+                            time.sleep(0.5)
+
+                            set_theme(theme)
+                            try:
+                                show_banner(custom_file=str(banner_file), effect_name=effect, hold_time=hold_time)
+                            except Exception as e:
+                                console.print(f"[red]Error with {effect}: {e}[/red]")
+                                continue
+
+                            if clear_between and count < total_combos:
+                                console.clear()
+
+                console.print("\n")
+                console.print(Panel(
+                    "[bold green]SHOWCASE COMPLETE![/bold green]\n\n"
+                    f"Displayed {total_combos} effect combinations!\n"
+                    f"Banners: {len(custom_banners)} custom",
+                    border_style="bright_green",
+                    box=box.DOUBLE
+                ))
+                return
+            elif selection == "default":
+                # Only default banner, no custom
+                custom_banners = []
+            elif selection.replace(',', '').replace(' ', '').isdigit():
+                try:
+                    indices = [int(x.strip()) - 1 for x in selection.split(",")]
+                    custom_banners = [available_banners[i] for i in indices if 0 <= i < len(available_banners)]
+                except (ValueError, IndexError):
+                    console.print("[red]Invalid selection, using all banners[/red]")
                     custom_banners = available_banners
-                elif selection != "none":
-                    try:
-                        indices = [int(x.strip()) - 1 for x in selection.split(",")]
-                        custom_banners = [available_banners[i] for i in indices if 0 <= i < len(available_banners)]
-                    except (ValueError, IndexError):
-                        console.print("[red]Invalid selection, using all banners[/red]")
-                        custom_banners = available_banners
+            else:
+                console.print("[red]Invalid selection, using all banners[/red]")
+                custom_banners = available_banners
 
     # Prepare banner list (default + custom)
     banners = [None] + custom_banners  # None = default haKCer banner
