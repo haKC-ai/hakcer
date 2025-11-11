@@ -150,13 +150,32 @@ fi
 # Step 6: Push to GitHub
 print_step "Step 6: Pushing to GitHub"
 
-print_info "Pushing to GitHub..."
-git push -u origin main
+# Check if remote has conflicting changes
+print_info "Checking remote status..."
+git fetch origin main 2>/dev/null || true
 
-if [ $? -eq 0 ]; then
+if git diff origin/main...HEAD --quiet 2>/dev/null; then
+    print_info "Local and remote are in sync"
+    git push -u origin main
     print_success "Pushed to GitHub"
 else
-    print_warning "Push may have failed (possibly already up to date)"
+    print_warning "Remote has different content (likely default README)"
+    read -p "Force push and replace remote content? (yes/no): " force_push
+
+    if [ "$force_push" = "yes" ]; then
+        print_info "Force pushing to GitHub..."
+        git push -u origin main --force
+        print_success "Force pushed to GitHub (remote README replaced)"
+    else
+        print_info "Attempting normal push..."
+        git push -u origin main
+        if [ $? -eq 0 ]; then
+            print_success "Pushed to GitHub"
+        else
+            print_error "Push failed. Run manually: git push -u origin main --force"
+            exit 1
+        fi
+    fi
 fi
 
 # Step 7: Create and Push Tag
