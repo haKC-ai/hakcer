@@ -146,3 +146,26 @@ cython_debug/
 
 # Reference files (not needed in repo)
 do_not_commit/
+
+# Script files (not needed in repo)
+*_package.sh
+*_to_pypi.sh
+*_and_publish.sh
+*_push_github.sh
+deploy.sh
+
+# Extra documentation (not needed in repo)
+DEPLOY_README.md
+GETTING_STARTED.md
+GITHUB_PYPI_SETUP.md
+PROJECT_SUMMARY.md
+PUBLISH_NOW.md
+PYPI_SETUP_GUIDE.md
+QUICK_FIX.md
+QUICK_START.md
+RUN_THIS_NOW.md
+START_HERE.md
+*.md.bak
+
+# Claude configuration
+.claude/
