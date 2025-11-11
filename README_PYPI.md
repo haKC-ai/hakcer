@@ -6,6 +6,12 @@
 ![Downloads](https://img.shields.io/pypi/dm/hakcer?style=flat-square&logo=pypi&logoColor=white)
 ![GitHub Stars](https://img.shields.io/github/stars/haKC-ai/hakcer?style=flat-square&logo=github)
 
+## [DEMO VIDEO]
+
+**Watch haKCer in action!** [View Demo Video →](https://github.com/haKC-ai/hakcer/raw/main/media/hakcer_demo.mp4)
+
+> Animated ASCII banners with 29 terminal effects and 9 color themes
+
 ```
   NAME.........................................haKCer
   Type...........................Terminal Banner Library
@@ -127,6 +133,12 @@ show_banner()
 └─────────────────┴────────────────────────────┴──────────────────┘
 ```
 
+### Theme Showcase
+
+**All 9 themes in action** [View Themes Video →](https://github.com/haKC-ai/hakcer/raw/main/media/hakcer_demo_0a.mp4)
+
+> See how each color palette transforms your ASCII art
+
 ## [EFFECTS]
 
 ### Speed Categories
@@ -150,6 +162,12 @@ show_banner(effect_name="synthgrid")
 **MEDIUM** (10): `beams`, `binarypath`, `burn`, `crumble`, `overflow`, `rain`, `spray`, `unstable`, `vhstape`, `waves`
 
 **SLOW** (9): `blackhole`, `bouncyballs`, `fireworks`, `matrix`, `orbittingvolley`, `rings`, `spotlights`, `swarm`, `synthgrid`
+
+### Effects in Action
+
+**29 Terminal Effects** [View Effects Video →](https://github.com/haKC-ai/hakcer/raw/main/media/hakcer_demo_1a.mp4)
+
+> From subtle animations to maximum visual impact
 
 ## [API REFERENCE]
 
@@ -235,6 +253,12 @@ if show_banner_enabled and is_interactive:
 ```
 
 ## [CUSTOM ASCII ART]
+
+### Custom Art Demo
+
+**Bring Your Own Designs** [View Custom Art Video →](https://github.com/haKC-ai/hakcer/raw/main/media/hakcer_demo_2a.mp4)
+
+> Any ASCII art works with all effects and themes
 
 ### Online Generators
 

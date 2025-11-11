@@ -28,6 +28,12 @@ _ __ \/ /\____________________██_____________ ███________ _________ __
 ![Downloads](https://img.shields.io/pypi/dm/hakcer?style=flat-square&logo=pypi&logoColor=white)
 ![GitHub Stars](https://img.shields.io/github/stars/haKC-ai/hakcer?style=flat-square&logo=github)
 
+## [DEMO VIDEO]
+
+https://github.com/user-attachments/assets/hakcer_demo.mp4
+
+> **Watch haKCer in action!** Animated ASCII banners with 29 terminal effects and 9 color themes.
+
 ```
   NAME.........................................haKCer
   Type...........................Terminal Banner Library
@@ -117,6 +123,12 @@ show_banner(custom_text=banner, effect_name="decrypt")
 └─────────────────┴──────────────────────────────────┴────────────────────┘
 ```
 
+### Theme Showcase
+
+https://github.com/user-attachments/assets/hakcer_demo_0a.mp4
+
+> **All 9 themes** - See how each color palette transforms your ASCII art
+
 ## [EFFECTS]
 
 **FAST** (<2s) - Production ready
@@ -136,6 +148,12 @@ rain, spray, unstable, vhstape, waves
 blackhole, bouncyballs, fireworks, matrix,
 orbittingvolley, rings, spotlights, swarm, synthgrid
 ```
+
+### Effects in Action
+
+https://github.com/user-attachments/assets/hakcer_demo_1a.mp4
+
+> **29 Terminal Effects** - From subtle animations to maximum visual impact
 
 ### Speed Control
 
@@ -255,6 +273,12 @@ Get list of available theme names.
 Get list of available effect names.
 
 ## [CUSTOM ASCII ART]
+
+### Custom Art Demo
+
+https://github.com/user-attachments/assets/hakcer_demo_2a.mp4
+
+> **Bring Your Own Designs** - Any ASCII art works with all effects and themes
 
 ### Online Generators
 - http://patorjk.com/software/taag/ - Text to ASCII (BEST!)
