@@ -47,8 +47,7 @@ console = Console()
 
 def print_synthwave_header():
     """Print a sick synthwave header with random animation."""
-    header_art = """
-                        ████████████████████████
+    header_art = """                        ████████████████████████
                         █   ███   ███████   ████
                         █   ██   █████   ███   █
     ███                 █   █   █████   ████████
@@ -56,8 +55,7 @@ def print_synthwave_header():
     █████     ███  ███  █   ██   ████   ████████  ██   ███   ███
     ███  ██  ███   ███  █   ███   ████   ███   █ █████████   ███
     ██   ███ ███   ███  █   █████   ████     ███ ██          ███
-    ██   ███   ███ ████ ████ S H O W C A S E ███   █████    ████
-"""
+    ██   ███   ███ ████ ████ S H O W C A S E ███   █████    ████"""
 
     # Pick random fast effect for quick load
     fast_effects = get_effects_by_speed("fast")
