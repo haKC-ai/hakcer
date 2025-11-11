@@ -1,368 +1,896 @@
-# haKCer - Terminal Banner Library
 
-![PyPI](https://img.shields.io/pypi/v/hakcer?style=flat-square&logo=pypi&logoColor=white)
-![Python Version](https://img.shields.io/pypi/pyversions/hakcer?style=flat-square&logo=python&logoColor=white)
-![License](https://img.shields.io/github/license/haKC-ai/hakcer?style=flat-square)
-![Downloads](https://img.shields.io/pypi/dm/hakcer?style=flat-square&logo=pypi&logoColor=white)
-![GitHub Stars](https://img.shields.io/github/stars/haKC-ai/hakcer?style=flat-square&logo=github)
+```
+                 ██████████
+                █▓       ░██
+                █▒        ██
+    █████████████░        █████████████████ ████████████ ████████████      ████████████
+   ██         ███░        ███▓▒▒▒▒▒▒▒▒▒▒▒██ █▒▒▒▒▒▒▒▒▓████        █████████▓          ▒█
+   ██         ███         ███▒▒▒▒▒▒▒▒▒▒▒▒▓██████████████▓        ███▓▒      ▒▓░       ▒█
+   ██         ███        ░██▓▒▒▒▒▒▒▒▒▒▒▒▒▒▓██▓▒▒▒▒▒▒▒▒█▓        ███░       ░██░       ▒█
+   ██         ███        ▒██▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒██▓▒▒▒▒▒▒▒▓▒        ██  ▓        ██░       ▓█
+   ██         ██▓        ███▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█▓▒▒▒▒▒▒▒▓▒       ██   █        ██░       ▓
+   ██         ██▒        ██▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▒▒▒▒▒▒▒▓▒      ██    █        ▓█████████
+   ██                    ██▒▒▒▒▒▒▒▒█▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒   ▒███████ █░       ░▓        █
+   ██         ░░         ██▒▒▒▒▒▒▒▒██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓█ ▓        ░█ ▓       ░▒       ░█
+   ██         ██░       ░█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓█ █░        ▒ █                ░█
+   ██         ██        ▓█▒▒▒▒▒▒▒▒▒██▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓█ █░        ▒ █░               ▒█
+    ██████████  ███████████▓██▓▓█▓█  █▓▒▒▒▒▒▒▒▒▒▓██▓██   █▓▓▓▓▓▓▓█    █▓▓▓▓▓▓▓▓▓▓▓▓▓▓██
+  .:/====================█▓██▓██=========████▓█▓█ ███======> [ P R E S E N T S ] ====\:.
+        /\                 ██▓██           █▓▓▓██ ██
+ _ __  /  \__________________█▓█_____________██▓██______________________________ _  _    _
+_ __ \/ /\____________________██_____________ ███________ _________ __ _______ _
+    \  /         T H E   P I N A C L E    O F   H A K C I N G   Q U A L I T Y
+     \/
+            Name :                            haKC.ai - haKCer module for 1337 banners
+            Release date:                     Nov 2024 (but the vibe is from 1994)
 
-## [DEMO VIDEO]
+      GROUP NEWS: haKC.ai is Still Looking For haKC Coders & ASCII Art Wizards,
+                  Drop corykennedy A Message on Any Fine BBS in the USA
+                        Or On The Internet at cory@haKC.ai.
+
+       _ __ ___________________________________________________________  /\ ___ ___  _ _
+       __ __ __ ______________________________________________________ \/ /\__________ ___
+         |  Notes from the author:                                    \  /              |
+         |                                                             \/               |
+         |  This library brings back the golden age of terminal art. Drop it            |
+         |  into any Python CLI tool and watch boring print() statements                |
+         |  transform into animated synthwave glory. 29 effects, 9 themes,              |
+         |  zero config. While the script kiddies use Comic Sans, we keep               |
+         |  ASCII art alive. Your tools deserve better than plain text.                 |
+         |                                       Greetz to the real ones. -cory         |
+         |*~'`^`'~*-,._.,-*~'`^`'~*-,._.,-*~'`^`'~*-,._.,-*~'`^`'~*-,._.,-*~'`^`'~*~'`^ |
+
+        ┌──────────────────────── [ R E L E A S E   I N F O ] ──────────────────────────┐
+        │                                                                               │
+        │  NAME.........................................haKCer Terminal Banner Library  │
+        │  TYPE..................................................Python CLI Enhancement │
+        │  VERSION........................................................v1.2.2-FINAL  │
+        │  PLATFORM............................................Python 3.8+ / Cross-OS   │
+        │  RELEASE DATE.................................................November 2024   │
+        │  RIPPED BY.............................................haKC.ai / /dev/CØR.23  │
+        │  CATEGORY..................................................Developer Tooling  │
+        │  EFFECTS PACK...........................................................29x   │
+        │  THEME COLLECTION........................................................9x   │
+        │  SIZE...................................................Lightweight (~50KB)   │
+        │                                                                               │
+        │  [*] ZERO-CONFIG animated ASCII banners for Python CLI tools                  │
+        │  [*] Drop-in replacement for boring print() statements                        │
+        │  [*] 29 terminal effects from subtle fades to FULL SYNTHGRID                  │
+        │  [*] 9 color themes: Tokyo Night, Cyberpunk, Matrix, Synthwave++              │
+        │  [*] Custom ASCII art support - BYOB (Bring Your Own Banner)                  │
+        │  [*] Production-ready with smart terminal detection                           │
+        │  [*] No dependencies on legacy ncurses or termcap crap                        │
+        │                                                                               │
+        └───────────────────────────────────────────────────────────────────────────────┘
+         ════════════════════════════════════════════════════════════════════════════════
+         [*] If you're still using print() for your CLI banners, this file is for you
+         [*] If your terminal looks like notepad.exe, bounce now
+         [*] Real hackers use Nano and animated ASCII art, not Comic Sans
+         ════════════════════════════════════════════════════════════════════════════════
+
+
+```
+
+## [:::  WHAT THE HELL IS THIS  :::]
+
+![Demo Category](https://img.shields.io/badge/DEMO-AVAILABLE-00D9FF?style=for-the-badge)
+![Effect Count](https://img.shields.io/badge/EFFECTS-29-FF10F0?style=for-the-badge)
+![Theme Count](https://img.shields.io/badge/THEMES-9-7928CA?style=for-the-badge)
+![Custom Art](https://img.shields.io/badge/CUSTOM%20ART-SUPPORTED-00F0FF?style=for-the-badge)
+
+Back in the 90s, we used to spend HOURS crafting sick ASCII art for our tool releases.
+BBS splash screens, NFO files, cracktro animations. That art is DEAD because every script
+kiddie today just slaps `print("My Tool v1.0")` and calls it a day.
+
+haKCer brings that culture back. Drop this library into ANY Python CLI tool and instantly
+get animated ASCII banners with 29 different terminal effects and 9 color themes.
+
+Think of it like this: Your boring CLI tool is a Honda Civic. haKCer is the body kit,
+underglow LEDs, and sound system that makes people actually WANT to use your shit.
+
+### Demo Time (Because Seeing Is Believing)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/haKC-ai/hakcer/main/media/hakcer_demo.gif" alt="haKCer Demo" width="600">
 </p>
 
-> **Watch haKCer in action!** Animated ASCII banners with 29 terminal effects and 9 color themes
+> **WATCH IT RUN** - Animated ASCII banners with 29 terminal effects and 9 color themes
 
 ```
-  NAME.........................................haKCer
-  Type...........................Terminal Banner Library
-  Platform.............................Python 3.8+ / pip
-  Release......................................v1.1.3
-  Effects..........................................29x
-  Themes............................................9x
-  Supplied by.........................haKC.ai / /dev/CØR
-
-  NFO: Drop-in animated ASCII banners for Python CLI tools.
-       Custom art support. 29 terminal effects. 9 color themes.
-       Zero config. Works out the box.
-
-  ─────────────────────────────────────────────────────────
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ WHAT YOU GET:                                                               │
+│                                                                             │
+│  [✓] 29 terminal effects (decrypt, matrix, synthgrid, fireworks++)         │
+│  [✓] 9 color themes (synthwave, cyberpunk, tokyo_night, matrix++)          │
+│  [✓] Zero config - works out of the box with sane defaults                 │
+│  [✓] Custom ASCII art support - use your own designs                       │
+│  [✓] Smart terminal detection - no banners in pipes/redirects              │
+│  [✓] Production ready - fast effects for CI/CD, slow for demos             │
+│  [✓] Framework agnostic - works with Click, Typer, argparse, whatever      │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## [WHAT'S NEW - v1.1.x]
+## [:::  INSTALLATION / SETUP  :::]
 
-**Custom ASCII Art Support**
-- Bring your own designs - any ASCII art works
-- Load from file or inline
-- Works with all 29 effects
+![Installation](https://img.shields.io/badge/INSTALL-PIP-00D9FF?style=for-the-badge&logo=pypi)
+![Setup Time](https://img.shields.io/badge/SETUP%20TIME-30%20SECONDS-FF10F0?style=for-the-badge)
+![Skill Required](https://img.shields.io/badge/SKILL-SCRIPT%20KIDDIE-7928CA?style=for-the-badge)
 
-**Interactive Demo**
-- Synthwave-themed showcase
-- Record all 261 effect combinations
-- Theme gallery + effect browser
-
-```python
-from hakcer import show_banner
-
-# Use your own art
-show_banner(custom_file="my_logo.txt", theme="cyberpunk")
-
-# Or inline
-banner = """
-╔═══════════════╗
-║  MY COOL APP  ║
-╚═══════════════╝
-"""
-show_banner(custom_text=banner, effect_name="decrypt")
-```
-
-## [INSTALLATION]
+### The Easy Way (For Normal People)
 
 ```bash
 pip install hakcer
 ```
 
-## [QUICK START]
+### The Proper Way (For People Who Know What They're Doing)
+
+```bash
+# Create a venv like you're supposed to
+python3 -m venv myproject_venv
+source myproject_venv/bin/activate  # Windows: myproject_venv\Scripts\activate
+
+# Upgrade pip (because distros ship ancient versions)
+pip install --upgrade pip
+
+# Install haKCer
+pip install hakcer
+
+# Verify it worked
+python -c "from hakcer import show_banner; show_banner()"
+```
+
+### From Source (For Paranoid Hackers Who Don't Trust PyPI)
+
+```bash
+git clone https://github.com/haKC-ai/hakcer.git
+cd hakcer
+pip install -e .
+```
+
+### Requirements
+
+![Python Required](https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python)
+![terminaltexteffects](https://img.shields.io/badge/terminaltexteffects-0.11.0+-00D9FF?style=for-the-badge)
+![rich](https://img.shields.io/badge/rich-13.0.0+-FF10F0?style=for-the-badge)
+
+```
+Python 3.8 or higher (if you're still on 2.7, we can't help you)
+terminaltexteffects >= 0.11.0 (the animation engine)
+rich >= 13.0.0 (because life's too short for manual ANSI codes)
+```
+
+```
+════════════════════════════════════════════════════════════════════════════════
+  INSTALLATION NOTES:
+
+  [*] Works on Linux, macOS, Windows (even Windows Terminal, surprisingly)
+  [*] No compilation required - pure Python
+  [*] Installs in under 10 seconds on a potato connection
+  [*] Zero system dependencies (no ncurses, no termcap, none of that)
+════════════════════════════════════════════════════════════════════════════════
+```
+
+## [:::  QUICK START / USAGE  :::]
+
+![Difficulty](https://img.shields.io/badge/DIFFICULTY-TRIVIAL-00D9FF?style=for-the-badge)
+![Lines Of Code](https://img.shields.io/badge/LOC%20REQUIRED-2-FF10F0?style=for-the-badge)
+
+### Basic Usage (The Absolute Minimum)
 
 ```python
 from hakcer import show_banner
 
-# Default neon theme, random fast effect
+# That's it. This works.
 show_banner()
 
-# Your application code here
-print("Welcome to my CLI tool!")
+# Your actual CLI tool code goes here
+print("Welcome to my tool...")
 ```
 
-### With Custom Art
+**Output:** Random fast effect with neon theme. Good enough for 99% of use cases.
+
+### With Theme Selection (Looking Fly)
+
+![Themes Available](https://img.shields.io/badge/THEMES-9%20VARIANTS-00D9FF?style=for-the-badge)
 
 ```python
 from hakcer import show_banner, set_theme
 
-# Your logo
-my_logo = """
- ███╗   ███╗██╗   ██╗     █████╗ ██████╗ ██████╗
- ████╗ ████║╚██╗ ██╔╝    ██╔══██╗██╔══██╗██╔══██╗
- ██╔████╔██║ ╚████╔╝     ███████║██████╔╝██████╔╝
- ██║╚██╔╝██║  ╚██╔╝      ██╔══██║██╔═══╝ ██╔═══╝
- ██║ ╚═╝ ██║   ██║       ██║  ██║██║     ██║
- ╚═╝     ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝     ╚═╝
-"""
+# Tokyo Night aesthetic (for the refined hacker)
+set_theme("tokyo_night")
+show_banner()
 
-set_theme("neon")
-show_banner(custom_text=my_logo, effect_name="synthgrid")
-```
-
-## [FEATURES]
-
-```
-[*] 29 Terminal Effects - From subtle to SICK
-[*] 9 Beautiful Themes - Tokyo Night, Cyberpunk, Neon, Matrix+
-[*] Custom ASCII Art - Use your own logos and designs
-[*] Speed Categories - Fast (<2s), Medium (2-4s), Slow (4s+)
-[*] Zero Config - Works out the box with sensible defaults
-[*] Simple API - Just 2 lines of code to get started
-```
-
-## [THEMES]
-
-```python
-from hakcer import list_themes, set_theme
-
-# See all themes
-print(list_themes())
-# ['cyberpunk', 'dracula', 'gruvbox', 'matrix', 'neon',
-#  'nord', 'synthwave', 'tokyo_night', 'tokyo_night_storm']
-
-# Use any theme
+# Cyberpunk 2077 vibes (yellow/pink high contrast)
 set_theme("cyberpunk")
 show_banner()
+
+# Full synthwave mode (cyan/magenta/purple retro)
+set_theme("synthwave")
+show_banner(effect_name="synthgrid")
+
+# Classic green Matrix (because we're old school)
+set_theme("matrix")
+show_banner(effect_name="matrix")
 ```
 
-```
-┌─────────────────┬────────────────────────────┬──────────────────┐
-│ Theme           │ Description                │ Vibe             │
-├─────────────────┼────────────────────────────┼──────────────────┤
-│ synthwave       │ Cyan/magenta/purple        │ Retro synth      │
-│ tokyo_night     │ Dark blue aesthetic        │ Modern clean     │
-│ neon            │ Bright electric [DEFAULT]  │ Full send        │
-│ cyberpunk       │ Yellow/pink CP2077 style   │ High contrast    │
-│ matrix          │ Classic green matrix       │ Terminal classic │
-│ dracula         │ Popular Dracula palette    │ Dark vampire     │
-│ nord            │ Arctic bluish tones        │ Professional     │
-│ gruvbox         │ Retro warm colors          │ Cozy terminal    │
-└─────────────────┴────────────────────────────┴──────────────────┘
+### Custom ASCII Art (BYOB - Bring Your Own Banner)
+
+![Custom Art](https://img.shields.io/badge/CUSTOM%20ART-FULLY%20SUPPORTED-FF10F0?style=for-the-badge)
+
+```python
+from hakcer import show_banner
+
+# Load from file (recommended for complex art)
+show_banner(
+    custom_file="assets/my_logo.txt",
+    theme="cyberpunk",
+    effect_name="decrypt"
+)
+
+# Inline ASCII art (for quick stuff)
+my_banner = """
+╔═══════════════════════════════╗
+║  MY SICK CLI TOOL v2.0        ║
+║  Coded by: l33th4x0r          ║
+╚═══════════════════════════════╝
+"""
+show_banner(custom_text=my_banner, theme="neon")
 ```
 
-### Theme Showcase
+**Pro Tip:** Generate ASCII art at http://patorjk.com/software/taag/ (ANSI Shadow font is sick)
+
+```
+════════════════════════════════════════════════════════════════════════════════
+  QUICK START NOTES:
+
+  [*] If you don't specify a theme, you get "neon" (good default)
+  [*] If you don't specify an effect, you get a random fast one
+  [*] Fast effects run under 2 seconds (production ready)
+  [*] Slow effects run 4+ seconds (demo mode, conferences, showing off)
+════════════════════════════════════════════════════════════════════════════════
+```
+
+## [:::  THEMES REFERENCE  :::]
+
+![Theme Count](https://img.shields.io/badge/TOTAL%20THEMES-9-00D9FF?style=for-the-badge)
+![Theme System](https://img.shields.io/badge/SYSTEM-JSON%20BASED-FF10F0?style=for-the-badge)
+
+### Theme Gallery
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/haKC-ai/hakcer/main/media/hakcer_demo_0a.gif" alt="Theme Showcase" width="600">
 </p>
 
-> **All 9 themes in action** - See how each color palette transforms your ASCII art
+> **ALL 9 THEMES** - See how each color palette transforms your ASCII art
 
-## [EFFECTS]
+### Available Themes (Pick Your Poison)
 
-### Speed Categories
+| Theme | Description | Primary Colors | Vibe | Badge |
+|-------|-------------|----------------|------|-------|
+| **synthwave** | Classic 80s retro | Cyan, Magenta, Purple | Retro synth | ![Synthwave](https://img.shields.io/badge/synthwave-classic-FF10F0?style=flat-square) |
+| **neon** | Bright electric **[DEFAULT]** | All neon spectrum | Maximum brightness | ![Neon](https://img.shields.io/badge/neon-default-00F0FF?style=flat-square) |
+| **tokyo_night** | Dark blue Tokyo aesthetic | Deep blues, soft accents | Modern clean | ![Tokyo Night](https://img.shields.io/badge/tokyo__night-aesthetic-7928CA?style=flat-square) |
+| **tokyo_storm** | Deeper Tokyo variant | Darker blues | Stormy nights | ![Tokyo Storm](https://img.shields.io/badge/tokyo__storm-darker-00D9FF?style=flat-square) |
+| **cyberpunk** | CP2077 yellow/pink | Hot pink, electric yellow | High contrast | ![Cyberpunk](https://img.shields.io/badge/cyberpunk-2077-FF0080?style=flat-square) |
+| **matrix** | Classic green terminals | Matrix green | OG hacker | ![Matrix](https://img.shields.io/badge/matrix-classic-00FF00?style=flat-square) |
+| **dracula** | Popular Dracula palette | Purple, pink, cyan | Dark vampire | ![Dracula](https://img.shields.io/badge/dracula-vampire-BD93F9?style=flat-square) |
+| **nord** | Arctic bluish tones | Cool blues, whites | Professional | ![Nord](https://img.shields.io/badge/nord-arctic-88C0D0?style=flat-square) |
+| **gruvbox** | Retro warm colors | Warm browns, oranges | Cozy terminal | ![Gruvbox](https://img.shields.io/badge/gruvbox-retro-FB4934?style=flat-square) |
+
+### Usage
 
 ```python
-# Fast effects (<2s) - Production ready
-show_banner(speed_preference="fast")
+from hakcer import set_theme, show_banner, list_themes
 
-# Medium effects (2-4s) - Balanced
-show_banner(speed_preference="medium")
+# Set theme globally (affects all subsequent banners)
+set_theme("cyberpunk")
+show_banner()
 
-# Slow effects (4s+) - Maximum flex
-show_banner(speed_preference="slow")
+# Override theme for a specific banner
+show_banner(theme="matrix")
 
-# Specific effect
-show_banner(effect_name="synthgrid")
+# List all available themes
+themes = list_themes()
+print(themes)  # ['synthwave', 'neon', 'tokyo_night', ...]
 ```
 
-**FAST** (10): `decrypt`, `expand`, `print`, `slide`, `wipe`, `colorshift`, `scattered`, `random_sequence`, `pour`, `errorcorrect`
+```
+════════════════════════════════════════════════════════════════════════════════
+  THEME NOTES:
 
-**MEDIUM** (10): `beams`, `binarypath`, `burn`, `crumble`, `overflow`, `rain`, `spray`, `unstable`, `vhstape`, `waves`
+  [*] Themes are JSON configs in themes/ directory
+  [*] Easy to add your own (PR welcome if it's not garbage)
+  [*] Neon is the default because it looks sick on most terminals
+  [*] Matrix theme required by law for any "hacking" tool
+════════════════════════════════════════════════════════════════════════════════
+```
 
-**SLOW** (9): `blackhole`, `bouncyballs`, `fireworks`, `matrix`, `orbittingvolley`, `rings`, `spotlights`, `swarm`, `synthgrid`
+## [:::  EFFECTS REFERENCE  :::]
 
-### Effects in Action
+![Effect Count](https://img.shields.io/badge/TOTAL%20EFFECTS-29-00D9FF?style=for-the-badge)
+![Effect Engine](https://img.shields.io/badge/ENGINE-terminaltexteffects-FF10F0?style=for-the-badge)
+
+### Effects Demo Reel
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/haKC-ai/hakcer/main/media/hakcer_demo_1a.gif" alt="Effects Demo" width="600">
 </p>
 
-> **29 Terminal Effects** - From subtle animations to maximum visual impact
+> **29 TERMINAL EFFECTS** - From subtle animations to maximum visual impact
 
-## [API REFERENCE]
+### Effect Categories By Speed
 
-### show_banner()
+#### FAST Effects (<2 seconds) - Production Ready
 
-Display an animated ASCII banner.
+![Fast Effects](https://img.shields.io/badge/FAST%20EFFECTS-10-00D9FF?style=flat-square)
+![Production Use](https://img.shields.io/badge/PROD%20READY-YES-00FF00?style=flat-square)
 
-**Parameters:**
-- `effect_name` (str, optional): Specific effect to use
-- `speed_preference` (str, optional): "fast", "medium", "slow", or "any" (default: "fast")
-- `hold_time` (float, optional): Seconds to display final frame (default: 1.5)
-- `clear_after` (bool, optional): Clear terminal after animation (default: False)
-- `theme` (str, optional): Theme name to use (default: current global theme)
-- `custom_text` (str, optional): Custom ASCII art text to display
-- `custom_file` (str, optional): Path to file containing custom ASCII art
+```
+decrypt         - Matrix-style decryption reveal
+expand          - Text expands from center
+print           - Typewriter effect
+slide           - Slides in from edge
+wipe            - Screen wipe transition
+colorshift      - Colors cycle through palette
+scattered       - Characters scatter then assemble
+random_sequence - Random character appearance
+pour            - Text pours down like liquid
+errorcorrect    - Glitchy error correction
+```
 
-### set_theme(theme_name)
+**Use Case:** CI/CD pipelines, production tools, frequent runs, impatient users
 
-Set the global theme for all banners.
+#### MEDIUM Effects (2-4 seconds) - Balanced
 
-### list_themes()
+![Medium Effects](https://img.shields.io/badge/MEDIUM%20EFFECTS-9-FF10F0?style=flat-square)
+![Demo Use](https://img.shields.io/badge/DEMO%20FRIENDLY-YES-FFD700?style=flat-square)
 
-Get list of all available theme names.
+```
+beams           - Light beams scan across
+binarypath      - Binary code path tracing
+burn            - Text burns onto screen
+crumble         - Crumbling reveal effect
+overflow        - Buffer overflow animation
+rain            - Digital rain (mini matrix)
+spray           - Spray paint effect
+unstable        - Unstable/glitchy appearance
+vhstape         - VHS tape tracking errors
+waves           - Wave distortion effect
+```
 
-### list_effects()
+**Use Case:** Demos, presentations, tool launches, showing off to colleagues
 
-Get list of all available effect names.
+#### SLOW Effects (4+ seconds) - Maximum Flex
 
-## [USAGE EXAMPLES]
+![Slow Effects](https://img.shields.io/badge/SLOW%20EFFECTS-10-7928CA?style=flat-square)
+![Conference Use](https://img.shields.io/badge/CONFERENCE%20READY-YES-FF0080?style=flat-square)
 
-### CLI Tool Integration
+```
+blackhole       - Black hole gravity effect
+bouncyballs     - Bouncing ball physics
+fireworks       - Fireworks explosion
+matrix          - Full Matrix digital rain
+orbittingvolley - Orbiting particles
+rings           - Expanding rings
+spotlights      - Spotlight scanning
+swarm           - Particle swarm
+synthgrid       - Full synthwave grid animation
+```
+
+**Use Case:** Conference talks, demos, YouTube videos, impressing management
+
+### Speed Preference System
+
+```python
+from hakcer import show_banner
+
+# Let haKCer pick a fast effect (default)
+show_banner(speed_preference="fast")
+
+# Let haKCer pick a medium effect
+show_banner(speed_preference="medium")
+
+# Let haKCer pick a slow effect
+show_banner(speed_preference="slow")
+
+# Let haKCer pick ANY effect (random)
+show_banner(speed_preference="any")
+
+# Specify exact effect (override everything)
+show_banner(effect_name="synthgrid")
+```
+
+### Usage Recommendations
+
+| Scenario | Speed Setting | Why |
+|----------|---------------|-----|
+| CI/CD Pipeline | `fast` | Don't slow down builds |
+| Production CLI Tool | `fast` | Users run it frequently |
+| Demo at Meetup | `medium` | Balance of cool + time |
+| Conference Talk | `slow` | Make it MEMORABLE |
+| YouTube Video | `slow` | Production value matters |
+| Internal Tool | `medium` | Colleagues will appreciate it |
+
+```
+════════════════════════════════════════════════════════════════════════════════
+  EFFECT NOTES:
+
+  [*] All effects provided by terminaltexteffects library (credit where due)
+  [*] Fast effects are <2s because that's the user patience threshold
+  [*] Slow effects are 4+ seconds of pure eye candy
+  [*] If you're in a hurry, just use speed_preference="fast"
+  [*] If you're showing off, use effect_name="synthgrid" (trust us)
+════════════════════════════════════════════════════════════════════════════════
+```
+
+## [:::  INTEGRATION PATTERNS  :::]
+
+![Integration](https://img.shields.io/badge/INTEGRATION-DROP--IN-00D9FF?style=for-the-badge)
+![Frameworks](https://img.shields.io/badge/FRAMEWORKS-ALL-FF10F0?style=for-the-badge)
+
+### Pattern 1: Basic CLI Tool
 
 ```python
 #!/usr/bin/env python3
+"""
+basic_tool.py - Example CLI tool with haKCer banner
+"""
 import sys
 from hakcer import show_banner, set_theme
 
 def main():
+    # Only show banner if running in a terminal (not piped)
     if sys.stdout.isatty():
         set_theme("neon")
         show_banner(speed_preference="fast", hold_time=0.5)
 
+    # Your actual tool logic here
     print("Running my tool...")
+    print("Processing complete!")
 
 if __name__ == "__main__":
     main()
 ```
 
-### With Click Framework
+**Why This Pattern:**
+- Respects pipes and redirects (no banners in logs)
+- Fast by default (production friendly)
+- Clean separation of concerns
+
+### Pattern 2: Click Framework Integration
+
+![Click](https://img.shields.io/badge/FRAMEWORK-Click-FF10F0?style=flat-square&logo=python)
 
 ```python
 import click
 from hakcer import show_banner, set_theme
 
-@click.command()
-@click.option('--no-banner', is_flag=True, help='Disable banner')
+@click.group()
+@click.option('--no-banner', is_flag=True, help='Disable ASCII banner')
 @click.option('--theme', default='neon', help='Banner theme')
-def main(no_banner, theme):
+@click.pass_context
+def cli(ctx, no_banner, theme):
+    """My Awesome CLI Tool"""
+    ctx.ensure_object(dict)
+    ctx.obj['no_banner'] = no_banner
+
     if not no_banner:
         set_theme(theme)
         show_banner(speed_preference="fast")
 
-    click.echo("Tool running...")
+@cli.command()
+@click.pass_context
+def process(ctx):
+    """Process some data"""
+    click.echo("Processing...")
 
 if __name__ == '__main__':
-    main()
+    cli()
 ```
 
-### Environment Variables
+**Why This Pattern:**
+- Users can disable banners with `--no-banner`
+- Theme selection via CLI flag
+- Plays nice with Click's context system
+
+### Pattern 3: Environment Variable Control
 
 ```python
+#!/usr/bin/env python3
 import sys
 import os
 from hakcer import show_banner, set_theme
 
-show_banner_enabled = os.getenv("SHOW_BANNER", "true").lower() == "true"
-is_interactive = sys.stdout.isatty()
+# Read config from environment
+SHOW_BANNER = os.getenv("SHOW_BANNER", "true").lower() == "true"
+BANNER_THEME = os.getenv("BANNER_THEME", "neon")
+BANNER_SPEED = os.getenv("BANNER_SPEED", "fast")
 
-if show_banner_enabled and is_interactive:
-    theme = os.getenv("HAKCER_THEME", "neon")
-    set_theme(theme)
-    show_banner(speed_preference="fast", hold_time=0.5)
+def main():
+    if SHOW_BANNER and sys.stdout.isatty():
+        set_theme(BANNER_THEME)
+        show_banner(speed_preference=BANNER_SPEED)
+
+    print("Tool running...")
+
+if __name__ == "__main__":
+    main()
 ```
 
-## [CUSTOM ASCII ART]
+**Usage:**
+```bash
+# Normal run with banner
+./tool.py
+
+# Disable banner
+SHOW_BANNER=false ./tool.py
+
+# Custom theme
+BANNER_THEME=cyberpunk ./tool.py
+
+# Slow banner for demo
+BANNER_SPEED=slow BANNER_THEME=synthwave ./tool.py
+```
+
+**Why This Pattern:**
+- Docker-friendly (env vars are standard)
+- CI/CD friendly (can disable in pipelines)
+- Power users can customize without code changes
+
+```
+════════════════════════════════════════════════════════════════════════════════
+  INTEGRATION NOTES:
+
+  [*] Always check sys.stdout.isatty() - don't spam logs with ANSI codes
+  [*] Provide a --no-banner flag (someone will need it)
+  [*] Default to fast effects (production users will thank you)
+  [*] Use environment variables for Docker/CI/CD friendliness
+  [*] If your tool gets piped to other commands, banners will auto-disable
+════════════════════════════════════════════════════════════════════════════════
+```
+
+## [:::  CUSTOM ASCII ART  :::]
+
+![Custom Art](https://img.shields.io/badge/CUSTOM%20ART-FULLY%20SUPPORTED-00D9FF?style=for-the-badge)
+![Art Generators](https://img.shields.io/badge/GENERATORS-MULTIPLE-FF10F0?style=for-the-badge)
 
 ### Custom Art Demo
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/haKC-ai/hakcer/main/media/hakcer_demo_2a.gif" alt="Custom Art Demo" width="600">
+  <img src="https://raw.githubusercontent.com/haKC-ai/hakcer/main/media/hakcer_demo_2a.gif" alt="Custom Art" width="600">
 </p>
 
-> **Bring Your Own Designs** - Any ASCII art works with all effects and themes
+> **BRING YOUR OWN DESIGNS** - Any ASCII art works with all effects and themes
 
-### Online Generators
+### ASCII Art Generation Tools
 
-Use these tools to create your ASCII art:
-- **http://patorjk.com/software/taag/** - Text to ASCII (BEST!)
-- **https://ascii-generator.site/** - Image to ASCII
-- **https://ascii.co.uk/art/** - ASCII Art Gallery
+| Tool | URL | Best For | Badge |
+|------|-----|----------|-------|
+| **TAAG** | http://patorjk.com/software/taag/ | Text to ASCII | ![TAAG](https://img.shields.io/badge/RECOMMENDED-YES-00FF00?style=flat-square) |
+| **ASCII Generator** | https://ascii-generator.site/ | Images to ASCII | ![Generator](https://img.shields.io/badge/IMAGES-YES-00D9FF?style=flat-square) |
+| **ASCII Art Archive** | https://ascii.co.uk/art/ | Pre-made art | ![Archive](https://img.shields.io/badge/GALLERY-HUGE-FF10F0?style=flat-square) |
+| **Text-Image.com** | https://www.text-image.com/convert/ | Photos to ASCII | ![Photos](https://img.shields.io/badge/PHOTOS-YES-7928CA?style=flat-square) |
 
-### Recommended Fonts
-
-```
-ANSI Shadow, Bloody, Doom, Graffiti,
-ANSI Regular, Block, Banner3, 3D-ASCII
-```
-
-### Tips
+### Recommended Fonts (From TAAG)
 
 ```
-[1] Keep it reasonably sized (under 100 lines)
-[2] Use box drawing characters: ╔═══╗, ║, ╚═══╝
-[3] Test with different effects
-[4] Consider color themes when designing
-[5] UTF-8 support - full Unicode character support
+Top Picks for Terminal Banners:
+- ANSI Shadow (clean, professional, works everywhere)
+- Bloody (horror/metal aesthetic)
+- Doom (classic, recognizable from the game)
+- Graffiti (street art style)
+- ANSI Regular (safe default)
+- Block (bold and readable)
+- Banner3 (old school BBS vibes)
+- 3D-ASCII (depth perception)
 ```
 
-## [REAL-WORLD USE CASES]
+### Usage Examples
 
-```
-[*] CLI tool splash screens - Welcome users with style
-[*] Loading screens - Make waits more interesting
-[*] Error/success messages - Visual feedback
-[*] Game title screens - Set the mood
-[*] Corporate branding - Professional presence
-[*] Seasonal greetings - Holiday themes
-```
+#### From External File (Recommended)
 
-## [INTERACTIVE DEMO]
+```python
+from hakcer import show_banner, set_theme
 
-The package includes a synthwave-themed interactive demo:
-
-```bash
-# Run the demo
-python showcase.py
+# Load custom ASCII art from file
+set_theme("cyberpunk")
+show_banner(
+    custom_file="assets/my_logo.txt",
+    effect_name="decrypt",
+    hold_time=1.0
+)
 ```
 
-Features:
+**my_logo.txt:**
 ```
-[1] Showcase Mode - All 261 effect combinations
-[2] Theme Gallery - Browse themes
-[3] Custom Effect - Pick combinations
-[4] Effect Browser - Explore by speed
-[5] Synthwave Mode - Ultimate experience
-```
+ ███╗   ███╗██╗   ██╗    ████████╗ ██████╗  ██████╗ ██╗
+ ████╗ ████║╚██╗ ██╔╝    ╚══██╔══╝██╔═══██╗██╔═══██╗██║
+ ██╔████╔██║ ╚████╔╝        ██║   ██║   ██║██║   ██║██║
+ ██║╚██╔╝██║  ╚██╔╝         ██║   ██║   ██║██║   ██║██║
+ ██║ ╚═╝ ██║   ██║          ██║   ╚██████╔╝╚██████╔╝███████╗
+ ╚═╝     ╚═╝   ╚═╝          ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝
 
-Perfect for recording promotional videos!
-
-## [REQUIREMENTS]
-
-```
-Python 3.8+
-terminaltexteffects >= 0.11.0
-rich >= 13.0.0
+         H A C K I N G   T H E   P L A N E T   v2.0
 ```
 
-## [BEST PRACTICES]
+#### Inline ASCII Art (Quick and Dirty)
+
+```python
+from hakcer import show_banner
+
+banner = """
+╔═══════════════════════════════════════╗
+║  ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄      ║
+║ █       █       █       █       █     ║
+║ █▄     ▄█    ▄  █   ▄   █   ▄   █    ║
+║   █   █ █   █▄█ █  █ █  █  █ █  █    ║
+║   █   █ █    ▄▄▄█  █▄█  █  █▄█  █    ║
+║   █   █ █   █   █       █       █    ║
+║   █▄▄▄█ █▄▄▄█   █▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█    ║
+║                                       ║
+║    The Absolute Penetration Tool     ║
+║         v3.0 - UNDETECTABLE          ║
+╚═══════════════════════════════════════╝
+"""
+
+show_banner(custom_text=banner, theme="matrix", effect_name="decrypt")
+```
+
+### Pro Tips For Custom Art
+
+#### Width Guidelines
+```
+Recommended widths for different terminals:
+- 60-70 chars: Safe for most terminals
+- 80 chars: Classic terminal width
+- 100 chars: Modern wide terminals
+- 120+ chars: Ultra-wide monitors only
+```
+
+#### Common Issues and Fixes
+
+| Issue | Cause | Fix |
+|-------|-------|-----|
+| Art gets cut off | Too wide for terminal | Reduce width to <80 chars |
+| Weird spacing | Tab characters | Replace tabs with spaces |
+| Missing characters | Encoding issues | Save as UTF-8 |
+| Looks garbled | Font doesn't support chars | Use ASCII-only characters |
 
 ```
-[1] Provide --no-banner flag for automation
-[2] Use fast effects for frequently-run tools
-[3] Check TTY before showing banners
-[4] Match themes to your tool's aesthetic
-[5] Keep custom art reasonably sized
+════════════════════════════════════════════════════════════════════════════════
+  CUSTOM ART NOTES:
+
+  [*] Keep your art under 80 chars wide (some terminals still use this)
+  [*] Use UTF-8 encoding for files (not ASCII or Latin-1)
+  [*] Test with multiple themes - some chars look better in certain palettes
+  [*] Box-drawing characters (─ │ ╔ ╗ ╚ ╝) work great
+  [*] Avoid colors in your art file - let haKCer handle the colors
+════════════════════════════════════════════════════════════════════════════════
 ```
 
-## [LINKS]
+## [:::  API REFERENCE  :::]
 
-- **PyPI**: https://pypi.org/project/hakcer/
-- **GitHub**: https://github.com/haKC-ai/hakcer
-- **Issues**: https://github.com/haKC-ai/hakcer/issues
-- **Docs**: https://github.com/haKC-ai/hakcer#readme
+![API](https://img.shields.io/badge/API-DOCUMENTED-00D9FF?style=for-the-badge)
+![Functions](https://img.shields.io/badge/FUNCTIONS-5-FF10F0?style=for-the-badge)
 
-## [LICENSE]
+### show_banner()
 
-MIT License
+![Function](https://img.shields.io/badge/FUNCTION-show__banner-00D9FF?style=flat-square)
 
-## [CREDITS]
+Display an animated ASCII banner with the specified theme and effect.
 
+**Parameters:**
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `effect_name` | str | None | Specific effect to use (e.g., "decrypt", "matrix") |
+| `speed_preference` | str | "fast" | Speed category: "fast", "medium", "slow", or "any" |
+| `hold_time` | float | 1.5 | Seconds to hold the final frame |
+| `clear_after` | bool | False | Clear terminal after displaying banner |
+| `theme` | str | None | Override global theme for this banner only |
+| `custom_text` | str | None | Custom ASCII art as string |
+| `custom_file` | str | None | Path to file containing custom ASCII art |
+
+**Returns:** None
+
+**Raises:**
+- `ValueError`: If effect_name is invalid
+- `FileNotFoundError`: If custom_file doesn't exist
+
+**Examples:**
+```python
+# Basic usage (random fast effect, current theme)
+show_banner()
+
+# Specific effect
+show_banner(effect_name="synthgrid")
+
+# Speed preference
+show_banner(speed_preference="slow")
+
+# Custom theme for this banner only
+show_banner(theme="cyberpunk", effect_name="decrypt")
+
+# Custom ASCII art from file
+show_banner(custom_file="logo.txt", theme="neon")
+
+# Custom ASCII art inline
+banner = "My Tool v1.0"
+show_banner(custom_text=banner, effect_name="print")
+```
+
+---
+
+### set_theme()
+
+![Function](https://img.shields.io/badge/FUNCTION-set__theme-FF10F0?style=flat-square)
+
+Set the global theme for all subsequent banner calls.
+
+**Available Themes:**
+```python
+[
+    "synthwave",      # Cyan/Magenta/Purple retro
+    "neon",           # Full neon spectrum (default)
+    "tokyo_night",    # Dark blue Tokyo aesthetic
+    "tokyo_storm",    # Darker Tokyo variant
+    "cyberpunk",      # Yellow/Pink CP2077
+    "matrix",         # Classic green terminals
+    "dracula",        # Popular Dracula palette
+    "nord",           # Arctic bluish tones
+    "gruvbox"         # Retro warm colors
+]
+```
+
+---
+
+### list_themes()
+
+![Function](https://img.shields.io/badge/FUNCTION-list__themes-7928CA?style=flat-square)
+
+Get a list of all available theme names.
+
+**Returns:** List of theme name strings
+
+---
+
+### list_effects()
+
+![Function](https://img.shields.io/badge/FUNCTION-list__effects-00F0FF?style=flat-square)
+
+Get a list of all available effect names.
+
+**Returns:** List of effect name strings
+
+---
+
+### get_effect_info()
+
+![Function](https://img.shields.io/badge/FUNCTION-get__effect__info-FF0080?style=flat-square)
+
+Get detailed information about a specific effect.
+
+**Return Structure:**
+```python
+{
+    "name": str,           # Effect name
+    "speed": str,          # "fast", "medium", or "slow"
+    "duration": float,     # Approximate duration in seconds
+    "description": str     # Human-readable description
+}
+```
+
+```
+════════════════════════════════════════════════════════════════════════════════
+  API NOTES:
+
+  [*] All functions are in the hakcer namespace (from hakcer import *)
+  [*] Type hints provided for all parameters
+  [*] Functions validate input and raise ValueError for invalid args
+  [*] No async/await - everything is synchronous
+  [*] Thread-safe (but why would you multithread ASCII art?)
+════════════════════════════════════════════════════════════════════════════════
+```
+
+## [:::  REQUIREMENTS / DEPENDENCIES  :::]
+
+![Python](https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python&logoColor=white)
+![Dependencies](https://img.shields.io/badge/DEPS-2%20REQUIRED-00D9FF?style=for-the-badge)
+
+### Core Requirements
+
+![terminaltexteffects](https://img.shields.io/badge/terminaltexteffects-0.11.0+-00D9FF?style=flat-square)
+![rich](https://img.shields.io/badge/rich-13.0.0+-FF10F0?style=flat-square)
+
+```
+Python 3.8 or higher
+├── terminaltexteffects >= 0.11.0  (animation engine)
+└── rich >= 13.0.0                 (terminal formatting)
+```
+
+### Platform Support
+
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
+![macOS](https://img.shields.io/badge/macOS-000000?style=flat-square&logo=apple&logoColor=white)
+![Windows](https://img.shields.io/badge/Windows-0078D6?style=flat-square&logo=windows&logoColor=white)
+
+| Platform | Terminal | Status | Notes |
+|----------|----------|--------|-------|
+| Linux | All | ![Works](https://img.shields.io/badge/WORKS-YES-00FF00?style=flat-square) | Native support |
+| macOS | Terminal.app | ![Works](https://img.shields.io/badge/WORKS-YES-00FF00?style=flat-square) | Works great |
+| macOS | iTerm2 | ![Works](https://img.shields.io/badge/WORKS-YES-00FF00?style=flat-square) | Recommended |
+| Windows | Windows Terminal | ![Works](https://img.shields.io/badge/WORKS-YES-00FF00?style=flat-square) | Best option |
+| Windows | PowerShell | ![Works](https://img.shields.io/badge/WORKS-YES-00FF00?style=flat-square) | Decent |
+| Windows | CMD.exe | ![Meh](https://img.shields.io/badge/WORKS-MEH-FFD700?style=flat-square) | Limited colors |
+
+```
+════════════════════════════════════════════════════════════════════════════════
+  REQUIREMENTS NOTES:
+
+  [*] Only 2 dependencies - we don't pull in half of PyPI
+  [*] All dependencies are MIT licensed (compatible with everything)
+  [*] No native extensions - pure Python, no compilation
+  [*] No network dependencies - works completely offline
+  [*] No system libraries required (ncurses, termcap, etc)
+════════════════════════════════════════════════════════════════════════════════
+```
+
+## [:::  LINKS / REFERENCES  :::]
+
+![Links](https://img.shields.io/badge/LINKS-OFFICIAL-00D9FF?style=for-the-badge)
+
+### Official Resources
+
+| Resource | URL | Badge |
+|----------|-----|-------|
+| **PyPI Package** | https://pypi.org/project/hakcer/ | ![PyPI](https://img.shields.io/pypi/v/hakcer?style=flat-square&logo=pypi) |
+| **GitHub Repository** | https://github.com/haKC-ai/hakcer | ![GitHub](https://img.shields.io/github/stars/haKC-ai/hakcer?style=flat-square&logo=github) |
+| **Issue Tracker** | https://github.com/haKC-ai/hakcer/issues | ![Issues](https://img.shields.io/github/issues/haKC-ai/hakcer?style=flat-square) |
+| **Documentation** | https://github.com/haKC-ai/hakcer#readme | ![Docs](https://img.shields.io/badge/docs-README-00D9FF?style=flat-square) |
+
+### Dependencies
+
+| Dependency | Repository | License |
+|------------|------------|---------|
+| **terminaltexteffects** | https://github.com/ChrisBuilds/terminaltexteffects | ![MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square) |
+| **rich** | https://github.com/Textualize/rich | ![MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square) |
+
+### Credits & Acknowledgments
+
+![Credits](https://img.shields.io/badge/CREDITS-PROPER-00D9FF?style=flat-square)
+
+```
 Built with:
-- **terminaltexteffects** - Terminal animation engine
-- **rich** - Terminal formatting
+├── terminaltexteffects - Terminal animation engine by ChrisBuilds
+├── rich - Terminal formatting by Textualize
+├── Python - Because we're not masochists
+└── https://github.com/NoDataFound/awesome-hacker-art
+```
+
+**Contact:** Use GitHub Issues (no email support)
+
+---
+
+## [:::  GREETS & SHOUTOUTS  :::]
+
+![Greets](https://img.shields.io/badge/GREETS-OLDSCHOOL-00D9FF?style=for-the-badge)
 
 ```
-─────────────────────────────────────────────────────────
-              M A D E   B Y   h a K C e r
-         T H E   P I N N A C L E   O F   Q U A L I T Y
-─────────────────────────────────────────────────────────
-           Transform CLI tools from boring to LEGENDARY
-─────────────────────────────────────────────────────────
+
+                          GROUP NEWS: Be a real one and contribute.
+
+                          GR33TZ: SecKC, LEGACY CoWTownComputerCongress,ACiD,
+                                                   iCE, T$A, +o--, badge lords
+                          SHOUTZ:
+                                  [*] 14.4k Modem Jammers
+                                  [*] l33t soulz still patching proggies &
+                                    huntin' sick ANSIs for their AOHELL punter
+
+                                           FU to [LAMERZ] still using WordPad
+                                  If your editor auto wraps lines, bounce now.
+
+                               ───── ▓ signed, /dev/CØR.23: ▓ ─────
+                                       "nano > vim. come fight us."
+
 ```
