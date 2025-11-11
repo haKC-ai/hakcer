@@ -1,0 +1,7 @@
+include README_PYPI.md
+include LICENSE
+include pyproject.toml
+include requirements.txt
+recursive-include hakcer *.py
+global-exclude __pycache__
+global-exclude *.py[co]

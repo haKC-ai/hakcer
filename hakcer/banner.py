@@ -1,0 +1,437 @@
+"""
+haKCer ASCII Banner with Randomized Terminal Text Effects
+
+A reusable splash screen module that displays the haKCer logo with
+randomly selected terminal effects from terminaltexteffects library.
+
+Usage:
+    from hakcer import show_banner, set_theme
+
+    set_theme("tokyo_night")  # Optional: set theme
+    show_banner()  # Random effect
+    show_banner(effect_name="decrypt")  # Specific effect
+    show_banner(hold_time=3.0)  # Hold for 3 seconds after animation
+"""
+
+import random
+import time
+from typing import Optional
+
+from terminaltexteffects.effects import (
+    effect_beams,
+    effect_binarypath,
+    effect_blackhole,
+    effect_bouncyballs,
+    effect_burn,
+    effect_colorshift,
+    effect_crumble,
+    effect_decrypt,
+    effect_errorcorrect,
+    effect_expand,
+    effect_fireworks,
+    effect_matrix,
+    effect_orbittingvolley,
+    effect_overflow,
+    effect_pour,
+    effect_print,
+    effect_rain,
+    effect_randomsequence,
+    effect_rings,
+    effect_scattered,
+    effect_slide,
+    effect_spotlights,
+    effect_spray,
+    effect_swarm,
+    effect_synthgrid,
+    effect_unstable,
+    effect_vhstape,
+    effect_waves,
+    effect_wipe,
+)
+
+from .themes import get_theme, set_current_theme, get_current_theme_name, list_available_themes
+
+HAKCER_ASCII = """
+
+                 ██████████
+                █▓       ░██
+                █▒        ██
+    █████████████░        █████████████████ ████████████ ████████████      ████████████
+   ██         ███░        ███▓▒▒▒▒▒▒▒▒▒▒▒██ █▒▒▒▒▒▒▒▒▓████        █████████▓          ▒█
+   ██         ███         ███▒▒▒▒▒▒▒▒▒▒▒▒▓██████████████▓        ███▓▒      ▒▓░       ▒█
+   ██         ███        ░██▓▒▒▒▒▒▒▒▒▒▒▒▒▒▓██▓▒▒▒▒▒▒▒▒█▓        ███░       ░██░       ▒█
+   ██         ███        ▒██▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒██▓▒▒▒▒▒▒▒▓▒        ██  ▓        ██░       ▓█
+   ██         ██▓        ███▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█▓▒▒▒▒▒▒▒▓▒       ██   █        ██░       ▓
+   ██         ██▒        ██▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▒▒▒▒▒▒▒▓▒      ██    █        ▓█████████
+   ██                    ██▒▒▒▒▒▒▒▒█▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒   ▒███████ █░       ░▓        █
+   ██         ░░         ██▒▒▒▒▒▒▒▒██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓█ ▓        ░█ ▓       ░▒       ░█
+   ██         ██░       ░█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓█ █░        ▒ █                ░█
+   ██         ██        ▓█▒▒▒▒▒▒▒▒▒██▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓█ █░        ▒ █░               ▒█
+    ██████████  ███████████▓██▓▓█▓█  █▓▒▒▒▒▒▒▒▒▒▓██▓██   █▓▓▓▓▓▓▓█    █▓▓▓▓▓▓▓▓▓▓▓▓▓▓██
+  .:/====================█▓██▓██=========████▓█▓█ ███======> [ P R E S E N T S ] ====\\:.
+        /\\                 ██▓██           █▓▓▓██ ██
+ _ __  /  \\__________________█▓█_____________██▓██______________________________ _  _    _
+_ __ \\/ /\\____________________██_____________ ███________ _________ __ _______ _
+    \\  /         T H E   P I N A C L E    O F   H A K C I N G   Q U A L I T Y
+     \\/
+"""
+
+
+def _get_effect_config(effect_name: str, theme: dict) -> dict:
+    """Generate effect configuration with theme colors."""
+    colors = theme["colors"]
+
+    configs = {
+        "beams": {
+            "module": effect_beams,
+            "args": [
+                "--beam-row-symbols", "▂ ▁ _ ⎽",
+                "--beam-column-symbols", "▌ ▍ ▎ ▏",
+                "--final-gradient-stops"] + colors["primary"] + [
+                "--beam-gradient-stops"] + colors["beam_colors"],
+        },
+        "binarypath": {
+            "module": effect_binarypath,
+            "args": [
+                "--final-gradient-stops"] + colors["primary"] + [
+                "--binary-colors"] + colors["accent"],
+        },
+        "blackhole": {
+            "module": effect_blackhole,
+            "args": ["--star-colors"] + colors["primary"] + colors["accent"],
+        },
+        "bouncyballs": {
+            "module": effect_bouncyballs,
+            "args": ["--ball-colors"] + colors["primary"] + colors["accent"],
+        },
+        "burn": {
+            "module": effect_burn,
+            "args": [
+                "--starting-color", colors["accent"][0],
+                "--burn-colors"] + colors["accent"] + [colors["primary"][2]],
+        },
+        "colorshift": {
+            "module": effect_colorshift,
+            "args": [
+                "--travel-direction", "diagonal",
+                "--gradient-stops"] + colors["gradient_stops"] + [colors["accent"][0]],
+        },
+        "crumble": {
+            "module": effect_crumble,
+            "args": ["--final-gradient-stops"] + colors["primary"],
+        },
+        "decrypt": {
+            "module": effect_decrypt,
+            "args": [
+                "--typing-speed", "2",
+                "--ciphertext-colors"] + colors["accent"] + [
+                "--final-gradient-stops"] + colors["gradient_stops"],
+        },
+        "errorcorrect": {
+            "module": effect_errorcorrect,
+            "args": [
+                "--error-pairs", "20",
+                "--error-color", colors["error"][0],
+                "--correct-color", colors["primary"][0]],
+        },
+        "expand": {
+            "module": effect_expand,
+            "args": [
+                "--final-gradient-stops"] + colors["primary"] + [
+                "--movement-speed", "0.5"],
+        },
+        "fireworks": {
+            "module": effect_fireworks,
+            "args": [
+                "--firework-colors"] + colors["primary"] + colors["accent"] + [
+                "--firework-symbol", "●"],
+        },
+        "matrix": {
+            "module": effect_matrix,
+            "args": [
+                "--matrix-symbols", "ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍ",
+                "--final-gradient-stops"] + colors["primary"][:2],
+        },
+        "orbittingvolley": {
+            "module": effect_orbittingvolley,
+            "args": [
+                "--top-launcher-symbol", "▲",
+                "--right-launcher-symbol", "▶",
+                "--bottom-launcher-symbol", "▼",
+                "--left-launcher-symbol", "◀",
+                "--volley-colors"] + colors["primary"],
+        },
+        "overflow": {
+            "module": effect_overflow,
+            "args": [
+                "--overflow-gradient-stops"] + colors["accent"] + [
+                "--final-gradient-stops", colors["primary"][0], colors["primary"][2]],
+        },
+        "pour": {
+            "module": effect_pour,
+            "args": [
+                "--pour-direction", "down",
+                "--pour-speed", "2",
+                "--gap", "1",
+                "--final-gradient-stops"] + colors["primary"],
+        },
+        "print": {
+            "module": effect_print,
+            "args": [
+                "--final-gradient-stops"] + colors["primary"] + [
+                "--print-head-return-speed", "1.5"],
+        },
+        "rain": {
+            "module": effect_rain,
+            "args": ["--rain-colors"] + colors["primary"] + [colors["accent"][0]],
+        },
+        "randomsequence": {
+            "module": effect_randomsequence,
+            "args": [
+                "--starting-color", colors["primary"][1],
+                "--final-gradient-stops", colors["primary"][0], colors["primary"][2]],
+        },
+        "rings": {
+            "module": effect_rings,
+            "args": ["--ring-colors"] + colors["primary"] + [colors["accent"][0]],
+        },
+        "scattered": {
+            "module": effect_scattered,
+            "args": [
+                "--final-gradient-stops"] + colors["primary"] + [
+                "--movement-speed", "0.5"],
+        },
+        "slide": {
+            "module": effect_slide,
+            "args": [
+                "--slider-symbol", "▓",
+                "--final-gradient-stops"] + colors["primary"],
+        },
+        "spotlights": {
+            "module": effect_spotlights,
+            "args": [
+                "--beam-width-ratio", "2.0",
+                "--search-duration", "750",
+                "--search-speed", "0.25",
+                "--final-gradient-stops"] + colors["primary"][:2],
+        },
+        "spray": {
+            "module": effect_spray,
+            "args": [
+                "--spray-colors"] + colors["primary"] + [colors["accent"][0]] + [
+                "--final-gradient-stops"] + colors["primary"][:2],
+        },
+        "swarm": {
+            "module": effect_swarm,
+            "args": [
+                "--swarm-colors"] + colors["primary"] + [colors["accent"][0]] + [
+                "--final-gradient-stops", colors["primary"][0], colors["primary"][2]],
+        },
+        "synthgrid": {
+            "module": effect_synthgrid,
+            "args": [
+                "--grid-gradient-stops", colors["primary"][1], colors["primary"][0],
+                "--text-gradient-stops"] + colors["gradient_stops"],
+        },
+        "unstable": {
+            "module": effect_unstable,
+            "args": [
+                "--unstable-color", colors["error"][0],
+                "--final-gradient-stops"] + colors["primary"],
+        },
+        "vhstape": {
+            "module": effect_vhstape,
+            "args": [
+                "--final-gradient-stops"] + colors["primary"] + [
+                "--glitch-line-colors"] + colors["accent"],
+        },
+        "waves": {
+            "module": effect_waves,
+            "args": [
+                "--wave-symbols", "▁ ▂ ▃ ▄ ▅ ▆ ▇ █ ▇ ▆ ▅ ▄ ▃ ▂ ▁",
+                "--wave-gradient-stops"] + colors["primary"] + [
+                "--final-gradient-stops", colors["primary"][0], colors["primary"][2]],
+        },
+        "wipe": {
+            "module": effect_wipe,
+            "args": [
+                "--wipe-direction", "diagonal",
+                "--final-gradient-stops"] + colors["primary"],
+        },
+    }
+
+    return configs.get(effect_name)
+
+
+FAST_EFFECTS = [
+    "decrypt", "expand", "print", "slide", "wipe", "colorshift",
+    "scattered", "randomsequence", "pour", "errorcorrect"
+]
+
+MEDIUM_EFFECTS = [
+    "beams", "binarypath", "burn", "crumble", "overflow",
+    "rain", "spray", "unstable", "vhstape", "waves"
+]
+
+SLOW_EFFECTS = [
+    "blackhole", "bouncyballs", "fireworks", "matrix",
+    "orbittingvolley", "rings", "spotlights", "swarm", "synthgrid"
+]
+
+ALL_EFFECTS = FAST_EFFECTS + MEDIUM_EFFECTS + SLOW_EFFECTS
+
+
+def show_banner(
+    effect_name: Optional[str] = None,
+    speed_preference: str = "fast",
+    hold_time: float = 1.5,
+    clear_after: bool = False,
+    theme: Optional[str] = None,
+) -> None:
+    """
+    Display the haKCer ASCII banner with a randomized terminal effect.
+
+    Args:
+        effect_name: Specific effect to use. If None, randomly selects based on speed_preference.
+        speed_preference: Speed category for random selection ("fast", "medium", "slow", "any").
+        hold_time: Seconds to hold the final frame before returning.
+        clear_after: Whether to clear the terminal after the effect completes.
+        theme: Theme name to use. If None, uses current global theme.
+
+    Raises:
+        ValueError: If effect_name or theme is not recognized.
+    """
+    # Get theme configuration
+    theme_config = get_theme(theme)
+
+    # Select effect
+    if effect_name:
+        if effect_name not in ALL_EFFECTS:
+            available = ", ".join(sorted(ALL_EFFECTS))
+            raise ValueError(
+                f"Unknown effect: {effect_name}. Available: {available}"
+            )
+        selected_effect = effect_name
+    else:
+        if speed_preference == "fast":
+            selected_effect = random.choice(FAST_EFFECTS)
+        elif speed_preference == "medium":
+            selected_effect = random.choice(MEDIUM_EFFECTS)
+        elif speed_preference == "slow":
+            selected_effect = random.choice(SLOW_EFFECTS)
+        else:
+            selected_effect = random.choice(ALL_EFFECTS)
+
+    # Get effect configuration with theme colors
+    config = _get_effect_config(selected_effect, theme_config)
+    if not config:
+        raise ValueError(f"Effect {selected_effect} not properly configured")
+
+    effect = config["module"].Effect(HAKCER_ASCII)
+    effect.effect_config.merge_args(config["args"])
+
+    with effect.terminal_output() as terminal:
+        for frame in effect:
+            terminal.print(frame)
+
+    if hold_time > 0:
+        time.sleep(hold_time)
+
+    if clear_after:
+        print("\033[2J\033[H", end="", flush=True)
+
+
+def list_effects() -> list[str]:
+    """
+    Get a list of all available effect names.
+
+    Returns:
+        Sorted list of effect names.
+    """
+    return sorted(ALL_EFFECTS)
+
+
+def get_effects_by_speed(speed: str) -> list[str]:
+    """
+    Get effects filtered by speed category.
+
+    Args:
+        speed: Speed category ("fast", "medium", "slow").
+
+    Returns:
+        List of effect names in the specified speed category.
+
+    Raises:
+        ValueError: If speed is not recognized.
+    """
+    speed_map = {
+        "fast": FAST_EFFECTS,
+        "medium": MEDIUM_EFFECTS,
+        "slow": SLOW_EFFECTS,
+    }
+
+    if speed not in speed_map:
+        raise ValueError(f"Unknown speed: {speed}. Use: fast, medium, slow")
+
+    return speed_map[speed]
+
+
+def set_theme(theme_name: str) -> None:
+    """
+    Set the global theme for banner effects.
+
+    Args:
+        theme_name: Name of the theme to use.
+
+    Raises:
+        ValueError: If theme_name is not recognized.
+    """
+    set_current_theme(theme_name)
+
+
+def list_themes() -> list[str]:
+    """
+    Get a list of all available theme names.
+
+    Returns:
+        Sorted list of theme names.
+    """
+    return list_available_themes()
+
+
+def get_current_theme() -> str:
+    """
+    Get the name of the currently active theme.
+
+    Returns:
+        Current theme name.
+    """
+    return get_current_theme_name()
+
+
+if __name__ == "__main__":
+    import sys
+
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "list":
+            print("Available effects:")
+            for effect in list_effects():
+                print(f"  - {effect}")
+        elif sys.argv[1] == "themes":
+            print("Available themes:")
+            from .themes import THEMES
+            for theme_name, theme_data in sorted(THEMES.items()):
+                current = " (current)" if theme_name == get_current_theme() else ""
+                print(f"  - {theme_name}: {theme_data['description']}{current}")
+        elif sys.argv[1] in ["fast", "medium", "slow"]:
+            print(f"\n{sys.argv[1].upper()} effects:")
+            for effect in get_effects_by_speed(sys.argv[1]):
+                print(f"  - {effect}")
+        else:
+            try:
+                show_banner(effect_name=sys.argv[1])
+            except ValueError as e:
+                print(f"Error: {e}")
+                sys.exit(1)
+    else:
+        show_banner()

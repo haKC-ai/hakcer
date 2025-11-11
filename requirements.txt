@@ -1,0 +1,2 @@
+terminaltexteffects>=0.11.0
+rich>=13.0.0
