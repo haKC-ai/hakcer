@@ -975,53 +975,18 @@ Select option [1-9]:
 
 ![Features](https://img.shields.io/badge/FEATURES-8%20MODES-00D9FF?style=flat-square)
 
-#### Mode 1: All Effects (The Full Monte)
-- Shows ALL 29 effects with ALL 9 themes
-- 261 total combinations
-- Takes about 15 minutes to run
-- Perfect for recording demo videos
 
-#### Mode 2: Theme Gallery
-- Quick tour of all 9 themes
-- Same effect, different colors
-- Shows palette capabilities
-- Under 1 minute
+| Mode | Description | Stats | Best For |
+|------|-------------|-------|----------|
+| **Mode 1: All Effects** | Shows ALL 29 effects with ALL 9 themes<br>261 total combinations | ![Combos](https://img.shields.io/badge/combos-261-FF10F0?style=flat-square) ![Duration](https://img.shields.io/badge/duration-15min-FF0080?style=flat-square) | ![Use Case](https://img.shields.io/badge/use-demo%20videos-00D9FF?style=flat-square) |
+| **Mode 2: Theme Gallery** | Quick tour of all 9 themes<br>Same effect, different colors<br>Shows palette capabilities | ![Themes](https://img.shields.io/badge/themes-9-7928CA?style=flat-square) ![Duration](https://img.shields.io/badge/duration-<1min-00FF00?style=flat-square) | ![Use Case](https://img.shields.io/badge/use-palette%20preview-00D9FF?style=flat-square) |
+| **Mode 3: Quick Demo** | Single random fast effect<br>Good for testing<br>Default when you just want to see SOMETHING | ![Speed](https://img.shields.io/badge/speed-fast-00FF00?style=flat-square) ![Duration](https://img.shields.io/badge/duration-<2sec-00FF00?style=flat-square) | ![Use Case](https://img.shields.io/badge/use-quick%20test-00D9FF?style=flat-square) |
+| **Mode 4: Custom Effect** | Pick theme manually<br>Pick effect manually<br>Good for testing specific combos | ![Interactive](https://img.shields.io/badge/mode-interactive-F7FF00?style=flat-square) ![Manual](https://img.shields.io/badge/selection-manual-FF10F0?style=flat-square) | ![Use Case](https://img.shields.io/badge/use-testing%20combos-00D9FF?style=flat-square) |
+| **Mode 5: Effect Browser** | Lists all effects with descriptions<br>Interactive selection<br>Shows speed category | ![Effects](https://img.shields.io/badge/effects-29-FF10F0?style=flat-square) ![Interactive](https://img.shields.io/badge/mode-interactive-F7FF00?style=flat-square) | ![Use Case](https://img.shields.io/badge/use-effect%20discovery-00D9FF?style=flat-square) |
+| **Mode 6: Speed Test** | Shows fast, medium, and slow examples<br>Side-by-side comparison<br>Good for picking defaults | ![Categories](https://img.shields.io/badge/categories-3-7928CA?style=flat-square) ![Duration](https://img.shields.io/badge/duration-<30sec-FFD700?style=flat-square) | ![Use Case](https://img.shields.io/badge/use-speed%20comparison-00D9FF?style=flat-square) |
+| **Mode 7: Info Dump** | Lists all themes<br>Lists all effects<br>Shows categorization<br>Copy-paste friendly output | ![Output](https://img.shields.io/badge/output-text-00F0FF?style=flat-square) ![Format](https://img.shields.io/badge/format-copyable-00FF00?style=flat-square) | ![Use Case](https://img.shields.io/badge/use-reference-00D9FF?style=flat-square) |
+| **Mode 8: Synthwave Mode** | THE ULTIMATE EXPERIENCE<br>Synthwave theme with synthgrid effect<br>Maximum visual impact | ![Epic](https://img.shields.io/badge/status-EPIC-FF0080?style=flat-square) ![Boss](https://img.shields.io/badge/boss-approved-00FF00?style=flat-square) | ![Use Case](https://img.shields.io/badge/use-impress%20everyone-FF10F0?style=flat-square) |
 
-#### Mode 3: Quick Demo
-- Single random fast effect
-- Good for testing
-- Under 2 seconds
-- Default when you just want to see SOMETHING
-
-#### Mode 4: Custom Effect
-- Pick theme manually
-- Pick effect manually
-- Good for testing specific combos
-- Interactive prompts
-
-#### Mode 5: Effect Browser
-- Lists all effects with descriptions
-- Interactive selection
-- Shows speed category
-- Runs your choice immediately
-
-#### Mode 6: Speed Test
-- Shows fast, medium, and slow examples
-- Side-by-side comparison
-- Good for picking defaults
-- Under 30 seconds
-
-#### Mode 7: Info Dump
-- Lists all themes
-- Lists all effects
-- Shows categorization
-- Copy-paste friendly output
-
-#### Mode 8: Synthwave Mode
-- THE ULTIMATE EXPERIENCE
-- Synthwave theme with synthgrid effect
-- Maximum visual impact
-- This is what you show your boss
 
 ### Recording Demo Videos
 
