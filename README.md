@@ -67,9 +67,17 @@ _ __ \/ /\____________________██_____________ ███________ _________ __
          [*] If your terminal looks like notepad.exe, bounce now
          [*] Real hackers use Nano and animated ASCII art, not Comic Sans
          ════════════════════════════════════════════════════════════════════════════════
-
-
 ```
+### [::: COMPANION REPO :::]
+
+[![Companion Assets](https://img.shields.io/badge/COMPANION-haKCAssets-7928CA?style=for-the-badge&logo=github)](https://github.com/haKC-ai/haKCAssets)
+
+**[haKCAssets](https://github.com/haKC-ai/haKCAssets)** - The art locker. Pre-built ASCII banners, generators, and 101+ MOTD messages in proper BBS/warez style. Grab any banner from `banners/` and feed it to hakcer's `custom_file` param - instant animated glory without crafting your own art.
+
+- Ready-to-drop ASCII banners with template vars (`{motd}`, `{greets}`, `{signatures}`)
+- Banner/menu/hackerart generators for when you need fresh stuff
+- haKC Studio orchestrator - menu-driven asset creation with hakcer effects baked in
+
 
 ## [:::  WHAT THE HELL IS THIS  :::]
 
