@@ -1,49 +1,68 @@
 # hakcer-statusline — Design Spec
 
-> **Status:** Draft — approved through brainstorming, pending implementation plan.
-> **Date:** 2026-04-08
+> **Status:** Revised draft (v2) — pivoted onto the JSON content library. Pending implementation plan.
+> **Date:** 2026-04-08 (revised same day)
 > **Author:** Cory Kennedy (@NoDataFound) + Claude (brainstorm)
 > **Project:** [hakcer-1](https://github.com/NoDataFound/hakcer)
 > **Target version:** hakcer@1.3.0
 
+## 0. Revision notes (v1 → v2)
+
+The v1 spec assumed scenes would be hand-coded TypeScript files in `scenes/*.ts`. In parallel with the v1 brainstorm, the author built [ink/source/statusline/data/scenes.json](ink/source/statusline/data/scenes.json) — a complete 157-scene declarative content library covering 19 culture packs, 20 palettes, 14 effects, 18 separator styles, 5 glyph registries, and 6 special modes. v2 pivots the architecture onto this JSON as the single source of truth. The engine becomes a generic interpreter that loads the JSON, substitutes `{token}` placeholders with live session data, and applies the referenced palette/separator/glyph/effect combinations.
+
+The pivot simplifies the code path (no per-scene TS files) and improves the contribution story (new scenes are JSON edits, no TypeScript required). All §3, §4, §5 reworked. §6 gains a dotted-path resolver. §7 gains pack filtering. §9 gains a render resolver chain. New §9b covers special modes. New §9c covers font policy. Demos (§13) shift from per-scene to per-pack recordings.
+
 ## 1. Summary
 
-A Claude Code statusline that replaces the conventional cost/context/git readout with animated full-width "hacking scenes" — matrix rain, base64 cracking, PCB trace drawing, Metasploit MS08-067 pwning, snake game, etc. Each scene is a different **visual lens** on the same live session data (model, cost, context %, git branch); some scenes weave the data into the scene itself, others are pure theater. Scenes rotate every 20 seconds, but key session events (context ≥ 90 %, cost ≥ $5, branch change) **force** a thematically-appropriate scene to play out for a pinned duration.
+A Claude Code statusline that replaces the conventional cost/context/git readout with animated full-width "hacking scenes" — matrix rain, Napster-vs-Metallica drama, AOL progz, DELTREE accidents, BBS ANSI art, Jurassic Park Unix, TMNT sewer HQ, 154+ more. Each scene is a different **visual lens** on the same live session data (model, cost, context %, git branch); data scenes weave the data into the scene, theater scenes are pure retro-hacker culture.
 
-The statusline ships inside the existing `hakcer` Ink package as a second CLI bin (`hakcer-statusline`), wired into `~/.claude/settings.json`. Scenes are pure TypeScript functions auto-discovered from `ink/source/statusline/scenes/`, so adding a new scene is a single-file PR. Event providers (SecKC by default, opt-in) fetch upcoming meetup data on a cached background schedule and fire dedicated scenes when events are imminent.
+Scenes are **declarative JSON data**, not code. The engine loads [ink/source/statusline/data/scenes.json](ink/source/statusline/data/scenes.json) once per invocation, selects a scene via the rotation engine, substitutes placeholders via a dotted-path data resolver, applies the referenced palette + separator + glyph registry, and runs the scene through one of 14 effect animations. Rotation is time-based with trigger overrides (context ≥ 90 % → buffer-overflow, cost ≥ $5 → msf kill chain, ctx ≥ 98 % → kernel panic, and so on).
+
+**Six special modes** layer on top of the normal render path: `corruption` (1-in-50 frames flash SEGFAULT/BSOD/GURU MEDITATION), `konami_easter_egg` (↑↑↓↓←→←→BA unlocks hidden scene), `sound_mode`, `combo_frames`, `screensaver` (idle timeout → banner + synthgrid), and `motd_rotation`.
+
+**Event providers** (opt-in) fetch upcoming meetup data on a cached background schedule. **SecKC** is the reference provider, scraping `https://www.seckc.org/upcoming-events?format=json-pretty`. When the next event is within 7 days, `events_seckc_upcoming` enters the rotation pool; on event day, `events_seckc_today` is force-pinned for 5 minutes.
+
+The statusline ships inside the existing `hakcer` Ink package as a second CLI bin (`hakcer-statusline`), wired into `~/.claude/settings.json` via `npx hakcer-statusline`. Nerd Fonts are recommended but optional — the render pipeline detects missing glyph support and falls back gracefully, and an explicit `hakcer-statusline --install-fonts` command downloads JetBrains Mono Nerd Font for users who want the full experience.
 
 ### Primary goals
 
-1. Ship a daily-driver statusline that is visually unique to `hakcer` and not confusable with cship or levz0r.
+1. Ship a daily-driver statusline whose visual identity is unmistakably `hakcer`.
 2. Double as marketing for the `hakcer` package — screenshots and GIFs should sell it.
-3. Make scene contribution trivial: one TypeScript file in a known folder, one PR, reviewed, merged.
-4. Reactive session-state behavior (triggers) is the single most distinctive feature.
+3. Make scene contribution trivial: edit one JSON object, open a PR. No TypeScript knowledge required.
+4. Reactive session-state triggers are the hero feature. Context pressure and cost escalation visibly change what the statusline is doing.
+5. The 19 culture packs make the tool a nostalgia playground — users can enable `--pack=warez,phreaking,2600` to theme their session around a subculture.
 
 ### Non-goals (v1)
 
-- TOML / YAML config files (flags only).
+- TOML / YAML config files (CLI flags only).
 - Starship passthrough modules.
 - Windows PowerShell support.
 - Multi-line statuslines.
-- Custom user-local scenes outside the package (e.g., `~/.config/hakcer-statusline/scenes/`).
+- Custom user-local scenes outside the committed JSON (e.g., `~/.config/hakcer-statusline/scenes.json`).
 - Telemetry of any kind.
 - Rust rewrite for sub-10ms speed.
+- Auto-installing Nerd Fonts during `npm install -g hakcer` (user must opt in via `--install-fonts`).
 
 ## 2. Context and prior art
 
 | Project | Stars | Language | What we take from it |
 |---------|-------|----------|----------------------|
-| [stephenleo/cship](https://github.com/stephenleo/cship) | 312 | Rust | Module system, context progress bar concept, warn/critical threshold idea, Claude Code JSON stdin protocol |
-| [levz0r/claude-code-statusline](https://github.com/levz0r/claude-code-statusline) | 1 | Bash | Transcript JSONL tail-read pattern, per-model pricing math (Opus/Sonnet/Haiku), input + cache_read + cache_write + output token decomposition |
-| [epidemian/snake](https://github.com/epidemian/snake) | 1,381 | JS | Constraint model: playable "game" feel in a single-line braille-rendered canvas |
-| [charmbracelet/vhs](https://github.com/charmbracelet/vhs) | — | Go | Terminal demo recording for README / docs GIFs |
+| [stephenleo/cship](https://github.com/stephenleo/cship) | 312 | Rust | Module system, context bar concept, warn/critical thresholds, Claude Code JSON stdin protocol |
+| [levz0r/claude-code-statusline](https://github.com/levz0r/claude-code-statusline) | 1 | Bash | Transcript JSONL tail-read, per-model pricing math, input + cache_read + cache_write + output token decomposition |
+| [epidemian/snake](https://github.com/epidemian/snake) | 1,381 | JS | Constraint model: playable "game" feel in a single-line braille canvas |
+| [charmbracelet/vhs](https://github.com/charmbracelet/vhs) | — | Go | Terminal demo recording for README / GitHub Pages GIFs |
+| [ryanoasis/nerd-fonts](https://github.com/ryanoasis/nerd-fonts) | — | — | Glyph source for font_logos (OS/WM icons) and powerline separators |
 
-**What we do that neither cship nor levz0r does:** animated scenes replace the data readout (scenes *are* the statusline), and the statusline reacts to session state with thematically appropriate scene overrides.
+**What we do that neither cship nor levz0r does:**
+- Animated scenes replace the data readout — scenes *are* the statusline
+- Reactive session-state overrides with pin durations
+- 19-pack retro-hacker culture library (157 scenes spanning 1980s BBS culture to late-90s Napster wars)
+- Declarative JSON content model — contribute a scene by editing JSON
 
 **Existing hakcer assets reused:**
-- [ink/source/effects/](ink/source/effects/) — 11 pure-function effects (matrix, decrypt, glitch, etc.) that already return `{ lines: string[], done: boolean }` per tick. No React/Ink runtime required to call them.
-- [ink/source/themes.ts](ink/source/themes.ts) — 9 canonical themes (matrix, neon, synthwave, amber, ice, fire, cyber, mono, pastel) + 2 new themes (bloodred, kali) added for this project.
-- [ink/source/colors.ts](ink/source/colors.ts) — ANSI helpers.
+- [ink/source/effects/](ink/source/effects/) — 11 pure-function effects that return `{ lines, done }` per tick. Mapped to the 14 statusline effects via the `effects._hakcer_to_statusline_map` in the JSON.
+- [ink/source/themes.ts](ink/source/themes.ts) — referenced as `_existing_hakcer_themes` in the JSON's palettes section.
+- [ink/source/colors.ts](ink/source/colors.ts) — ANSI helper primitives.
 
 ## 3. Architecture
 
@@ -51,88 +70,107 @@ The statusline ships inside the existing `hakcer` Ink package as a second CLI bi
 
 ```
 ink/source/statusline/
-├── cli.ts                 # bin entry — invoked via `npx hakcer-statusline`
-├── main.ts                # orchestrator: parse flags → read stdin → pick scene → render → write → exit
-├── types.ts               # Scene, SceneContext, SessionData, ThemeName, PaintFns
+├── cli.ts                     # bin entry — invoked via `npx hakcer-statusline`
+├── main.ts                    # orchestrator: flags → stdin → scenes.json → pick → render → write → exit
+├── types.ts                   # TS types mirroring the scenes.json schema + engine types
 │
 ├── data/
-│   ├── parse-stdin.ts     # read Claude Code JSON payload from process.stdin (50ms timeout)
-│   ├── transcript.ts      # tail-read transcript .jsonl, extract token usage from last assistant turn
-│   ├── pricing.ts         # per-model cost calc + context window maxes (Opus / Sonnet / Haiku)
-│   ├── git.ts             # branch, ahead/behind, dirty flag via execFile (200ms timeout)
+│   ├── scenes.json            # THE CONTENT LIBRARY (157 scenes, 20 palettes, 19 packs, etc.)
+│   ├── parse-stdin.ts         # Claude Code JSON payload reader (50ms timeout)
+│   ├── transcript.ts          # tail-read .jsonl → token usage from last assistant turn
+│   ├── pricing.ts             # per-model cost calc + context window maxes
+│   ├── git.ts                 # branch / dirty / ahead-behind via execFile (200ms timeout)
+│   ├── resolver.ts            # dotted-path data resolver for data_map templates
 │   └── providers/
-│       ├── index.ts       # codegen'd auto-import of all providers
-│       ├── types.ts       # EventProvider, UpcomingEvent interfaces
-│       ├── _template.ts   # contributor template
-│       └── seckc.ts       # Squarespace JSON scraper for https://www.seckc.org/upcoming-events
+│       ├── index.ts           # codegen'd auto-import of all providers
+│       ├── types.ts           # EventProvider, UpcomingEvent
+│       ├── _template.ts       # contributor template
+│       └── seckc.ts           # Squarespace JSON scraper
 │
 ├── rotation/
-│   ├── select.ts          # scene picker: forced triggers → deterministic time-based pool index
-│   ├── triggers.ts        # event rule evaluation, priority order, pinning logic
-│   └── tick.ts            # deterministic tick from Date.now() / FRAME_MS
+│   ├── select.ts              # scene picker: forced triggers → time-based pool index
+│   ├── triggers.ts            # trigger rules, priority, pinning
+│   ├── pools.ts               # pack filtering, --scenes/--exclude honoring
+│   └── tick.ts                # wall-clock tick derivation
 │
 ├── render/
-│   ├── paint.ts           # paint(text, theme, gradient?) → ANSI string (kleur-backed)
-│   ├── width.ts           # terminal width detection (COLUMNS > tty > 80)
-│   └── compose.ts         # scene.render(ctx) + width clamp + ANSI reset safety net
+│   ├── interpret.ts           # THE SCENE INTERPRETER: scene JSON → ANSI string
+│   ├── palette.ts             # palette resolver (scene.palette → 20 palettes → hex/rgb)
+│   ├── separator.ts           # separator resolver (scene.sep → 18 styles → glyph)
+│   ├── glyph.ts               # glyph registry resolver (icons[] → codepoints)
+│   ├── effects/
+│   │   ├── index.ts
+│   │   ├── scanline.ts
+│   │   ├── typewriter.ts
+│   │   ├── glitch_corrupt.ts
+│   │   ├── phosphor_fade.ts
+│   │   ├── matrix_drip.ts
+│   │   ├── decrypt_reveal.ts
+│   │   ├── color_wave.ts
+│   │   ├── knight_rider.ts
+│   │   ├── crt_boot.ts
+│   │   ├── static_noise.ts
+│   │   ├── segment_slide.ts
+│   │   └── heartbeat.ts
+│   ├── width.ts               # COLUMNS > tty > 80 detection
+│   ├── compose.ts             # interpret() + width clamp + ANSI reset
+│   └── font-detect.ts         # Nerd Font capability sniff + fallback registry
+│
+├── modes/
+│   ├── corruption.ts          # 1-in-N frame SEGFAULT/BSOD/GURU MEDITATION flash
+│   ├── konami.ts              # key buffer + hidden scene unlock
+│   ├── screensaver.ts         # idle timeout → banner + synthgrid/matrix/fireworks
+│   ├── sound.ts               # per-scene sound hooks (spawn `afplay` / `paplay`)
+│   ├── combo.ts               # frame-boundary seam blending
+│   └── motd.ts                # daily rotation source
 │
 ├── cache/
-│   └── events.ts          # ~/.cache/hakcer-statusline/ cache layer + background refresh spawner
+│   └── events.ts              # ~/.cache/hakcer-statusline/ cache + background refresh
 │
-├── scenes/
-│   ├── index.ts           # codegen'd auto-import of all scenes
-│   ├── _template.ts       # contributor template
-│   ├── matrix-rain.ts     # data
-│   ├── decrypt.ts         # data
-│   ├── base64.ts          # data
-│   ├── pcb.ts             # data
-│   ├── port-scan.ts       # data
-│   ├── hakcer-typer.ts    # theater
-│   ├── wardial.ts         # theater
-│   ├── packet.ts          # theater
-│   ├── buffer-overflow.ts # theater
-│   ├── snake.ts           # theater
-│   ├── ms08-067.ts        # theater
-│   ├── kernel-panic.ts    # theater
-│   ├── seckc-upcoming.ts  # event-triggered theater
-│   └── seckc-today.ts     # event-triggered theater
+├── fonts/
+│   └── install.ts             # --install-fonts implementation (download + install Nerd Font)
 │
 └── __tests__/
-    ├── scenes.test.ts
-    ├── rotation.test.ts
-    ├── transcript.test.ts
-    ├── pricing.test.ts
-    ├── cache.test.ts
+    ├── scenes.test.ts         # invariants across all 157 scenes × widths × palettes
+    ├── interpret.test.ts      # scene JSON → rendered output, placeholder substitution
+    ├── rotation.test.ts       # trigger priority, pinning, pack filtering
+    ├── transcript.test.ts     # tail-read against fixture .jsonl files
+    ├── pricing.test.ts        # cost math per model
+    ├── cache.test.ts          # TTL, corruption recovery
+    ├── modes.test.ts          # corruption PRNG, konami key buffer, screensaver idle
     ├── providers/seckc.test.ts
+    ├── font-detect.test.ts
     └── fixtures/
         ├── transcript.jsonl
         ├── seckc.json
         └── stdin.json
 
 ink/statusline/demos/
-├── tapes/                 # VHS .tape files, one per scene + hero + triggers + theme-compare
-├── out/                   # generated GIFs (not committed; see §8.2)
+├── tapes/                     # VHS .tape files, one per pack + hero + triggers
+├── out/                       # generated GIFs (not committed; see §13)
 ├── scripts/
 │   ├── record-all.sh
-│   └── publish.sh         # force-push GIFs to orphan `demos` branch
-└── docs/                  # GitHub Pages source (index.html + css + images)
+│   └── publish.sh             # force-push GIFs to orphan `demos` branch
+└── docs/                      # GitHub Pages source (index.html + css + images)
 ```
+
+**What disappeared from v1**: `scenes/*.ts` (one file per scene) and the `scenes/_template.ts` contributor template. Scenes now live in JSON. TypeScript is only the engine.
 
 ### 3.2 Package wiring
 
-Add a second bin to the existing Ink package:
+Same as v1:
 
 ```json
 // ink/package.json
 {
   "bin": {
-    "hakcer": "dist/cli.js",
+    "hakcer":            "dist/cli.js",
     "hakcer-statusline": "dist/statusline/cli.js"
   }
 }
 ```
 
-Install story in the README:
+Install story:
 
 ```json
 // ~/.claude/settings.json
@@ -146,406 +184,591 @@ Install story in the README:
 
 ### 3.3 Execution model
 
-The statusline path **bypasses Ink entirely**. Ink has ~300–500 ms cold-start overhead and is designed for persistent frame loops, not one-shot prints. The existing effect functions in [ink/source/effects/](ink/source/effects/) are already pure `(config, tick) => { lines, done }` — they were always callable without a React runtime.
+Same as v1 — bypass Ink entirely at statusline runtime. The statusline path is pure TypeScript + `kleur` + `fs`. Cold-start budget < 80 ms on an M1.
 
-Statusline render path on every Claude Code turn:
+Hot path per Claude Code turn:
 
-1. `cli.ts` imports `main.ts` and calls `main(process.argv)`.
-2. `main.ts` parses flags (strict allowlist), reads `process.stdin` with a 50 ms timeout, walks the transcript file, runs git commands, reads the events cache.
-3. Rotation engine picks the active scene.
-4. `compose.ts` calls `scene.render(ctx)` with the resolved context.
-5. `process.stdout.write(line)`.
-6. If events cache is stale AND `--events` is enabled, spawn a detached child to refresh it (fire-and-forget).
-7. Write updated `state.json` (last branch, last model, active override window).
-8. `process.exit(0)`.
+1. `cli.ts` → `main(process.argv)`
+2. Parse flags (strict allowlist)
+3. Read `process.stdin` JSON (50 ms timeout)
+4. Load `scenes.json` (cached in memory across the lifetime of the process — but the process only lives one turn, so it's read once per render)
+5. Walk transcript, run git, read events cache — all parallelized via `Promise.all`
+6. Build `SessionData`
+7. Rotation engine picks the active scene from `scenes.json`
+8. `interpret.ts` renders the scene: template substitution → palette apply → separator resolution → glyph resolution → effect animation frame
+9. `compose.ts` clamps to width and appends ANSI reset
+10. Apply active special modes (corruption can override the frame, konami buffer updates, screensaver idle check)
+11. `process.stdout.write(line)`
+12. Background event refresh if stale (detached child process)
+13. Write `state.json` (last branch, last model, active override, konami buffer state, screensaver timer)
+14. `process.exit(0)`
 
-Cold-start budget: **< 80 ms on an M1, < 150 ms on older hardware.** Hot path never blocks on network.
+## 4. Scene contract (JSON schema)
 
-## 4. Scene contract
+This is now the single most important contract in the project. Contributors edit this shape in `scenes.json`. The TypeScript `Scene` type is derived from it via `tsx` codegen against a JSON Schema definition committed at [ink/source/statusline/data/scenes.schema.json](ink/source/statusline/data/scenes.schema.json).
 
-The single most important interface in the project. This is what contributors copy-paste.
+### 4.1 Scene object
 
-```ts
-// ink/source/statusline/types.ts
-
-export type ThemeName =
-  | 'matrix' | 'neon' | 'synthwave' | 'amber'
-  | 'ice'    | 'fire' | 'cyber'     | 'mono' | 'pastel'
-  | 'bloodred' | 'kali';
-
-export interface SessionData {
-  model:     { id: string; displayName: string };
-  cost:      { totalUsd: number; inputTokens: number; outputTokens: number; cacheRead: number; cacheWrite: number };
-  context:   { used: number; total: number; pct: number };
-  workspace: { dir: string; projectDir: string };
-  git:       { branch: string | null; dirty: boolean; ahead: number; behind: number };
-  session:   { id: string; startedAt: number };
-  events?:   { nextByProvider(id: string): UpcomingEvent | null };
-}
-
-export interface SceneContext {
-  tick:  number;            // monotonic frame index (wall clock / FRAME_MS)
-  width: number;            // terminal columns available
-  data:  SessionData;       // live session state
-  theme: Theme;             // resolved theme (canonical or --theme override)
-  paint: PaintFns;          // helpers: fg, gradient, bold, dim, inverse, glitch
-}
-
-export interface Scene {
-  id: string;               // kebab-case, unique, used by --scene and --preview
-  verb: string;             // uppercase spinner label: 'PWNING', 'DECODING', ...
-  theme: ThemeName;         // canonical theme, overridden by --theme=<x>
-  carriesData: boolean;     // true = data is woven into the scene, false = pure theater
-  durationFrames?: number;  // frames before rotation (default 150 ≈ 18s @ 120ms)
-
-  /** One render call = one frame. Must return a SINGLE line, width ≤ ctx.width, no trailing newline. */
-  render(ctx: SceneContext): string;
+```json
+{
+  "id": "core_matrix_rain",
+  "name": "Matrix Rain + Data",
+  "pack": "core",
+  "type": "data",
+  "verb": "DECODING",
+  "sep": "arrow",
+  "palette": "matrix",
+  "icons": [],
+  "frame": "ｦ8 {model} ｷ {cost} ｲ [{ctx_bar}] {ctx}% ﾑ {git} ﾒ",
+  "data_map": {
+    "model": "model",
+    "cost": "cost",
+    "ctx": "context_pct",
+    "git": "git_branch"
+  },
+  "desc": "Katakana interference sprinkled through real data. Green gradient fall."
 }
 ```
 
-### 4.1 Scene invariants (enforced by test suite)
+### 4.2 Field semantics
 
-Every scene in `scenes/` must satisfy:
+| Field | Required | Type | Meaning |
+|-------|----------|------|---------|
+| `id` | yes | string | Kebab/snake-case unique identifier. Used by `--scene=<id>`, trigger overrides, and `--preview`. |
+| `name` | yes | string | Human-readable display name (used in `--list` output and README). |
+| `pack` | yes | string | Pack id (one of the 19 in `packs`). Enables `--pack=<id>` filtering. |
+| `type` | yes | `"data"` \| `"theater"` | Data scenes weave `{tokens}` from session data into the frame. Theater scenes ignore session data. |
+| `verb` | yes | string | Short uppercase spinner verb: `PWNING`, `DECODING`. Shown in tight modes and as the scene label. |
+| `sep` | no | string | Separator style id (one of the 18 in `separator_map`). Defaults to the pack's `separator_map[pack]` entry. |
+| `palette` | yes | string | Palette id (one of the 20 in `palettes`). Overridden by the global `--palette=<id>` flag. |
+| `icons` | no | string[] | Glyph ids from `glyph_registry`. Resolved to actual codepoints at render time. |
+| `frame` | yes | string | Template string. `{identifier}` placeholders are substituted via `data_map` during render. Theater scenes typically have no placeholders. |
+| `data_map` | no | object | Maps template placeholder names → dotted-path data source keys. Values like `"model"`, `"context_pct"`, `"events.seckc.next.title"`. See §6.5 for resolver. |
+| `desc` | yes | string | One-line description. Shown in `--list` and used in CONTRIBUTING.md gallery. |
+| `effect` | no | string | Optional per-scene effect override (id from `effects`). Default: pack-level effect, then scene's palette-derived effect. |
+| `durationFrames` | no | number | Frames before rotation advances. Defaults to 150 (≈18s at 120ms tick). |
 
-1. `stripAnsi(output).length <= ctx.width` at all tested widths (60, 80, 120, 200).
-2. ANSI escape sequences are balanced — no leaked state bleeds into following output.
-3. No newlines in output.
-4. Deterministic: same `(tick, width, data)` → same output. No `Math.random()` without a seeded PRNG keyed on `tick`.
-5. Renders within **5 ms** per frame on CI hardware.
-6. Returns an empty string only when `carriesData === false` AND the scene has decided this frame should be blank (not permitted for data scenes).
+### 4.3 Invariants enforced by the test suite
 
-### 4.2 Auto-discovery (codegen, not runtime)
+Applied to every scene in `scenes.json` across widths `{60, 80, 120, 200}` and sample `SessionData` fixtures:
 
-`scenes/index.ts` and `data/providers/index.ts` are generated at build time by a tiny `tsx` codegen script that scans the respective folders and emits static `import { scene as <camelName> } from './<file>.js'` lines plus an exported `ALL_SCENES` / `ALL_PROVIDERS` array. Benefits:
+1. `stripAnsi(rendered).length <= width` at every tested width.
+2. ANSI escape sequences are balanced — no leaked state.
+3. No newlines in rendered output.
+4. All placeholders in `frame` are present as keys in `data_map` (data scenes) or absent (theater scenes).
+5. `palette` references an existing entry in `palettes`.
+6. `pack` references an existing entry in `packs`.
+7. `sep`, if set, references an existing entry in `separator_map`.
+8. Every item in `icons`, if set, references an existing glyph id in `glyph_registry`.
+9. `id` is unique across the whole array.
+10. Render time < 5 ms per frame on CI hardware.
+11. Deterministic: same `(scene, tick, width, data)` → byte-identical output.
 
-- Tree-shakable (static imports → esbuild can dead-code-eliminate unused scenes).
-- Fast startup (no `fs.readdir` at runtime).
-- Lint-friendly (no dynamic `import()` expressions).
-- Adding a scene = drop a file + `pnpm build`. Index regenerates automatically.
+The test suite reads `scenes.json` at test startup and parameterizes one test per scene per invariant per width. Approximately 157 × 4 widths × 11 invariants ≈ 7000 assertions, most of them cheap (milliseconds).
 
-### 4.3 Contribution flow
+### 4.4 Contribution flow (no TypeScript required)
 
-Documented in `CONTRIBUTING.md`:
+Documented in [CONTRIBUTING.md](CONTRIBUTING.md):
 
-1. `cp ink/source/statusline/scenes/_template.ts ink/source/statusline/scenes/my-scene.ts`
-2. Fill in `id`, `verb`, `theme`, `carriesData`, `durationFrames`, `render()`.
-3. `pnpm test` — scene test suite validates invariants automatically.
-4. `pnpm build && npx hakcer-statusline --preview --scene=my-scene` — see it animate live in your terminal.
-5. Record a VHS tape at `ink/statusline/demos/tapes/my-scene.tape` (optional but encouraged — CI will generate the GIF on merge).
-6. Open a PR. Security-auditor subagent runs automatically. Merge when green.
+1. Open `ink/source/statusline/data/scenes.json`.
+2. Find the pack where your scene belongs (or add a new pack entry in `packs` first).
+3. Copy an existing scene entry as a template.
+4. Fill in `id` (unique), `name`, `pack`, `type`, `verb`, `palette`, `frame` (with `{placeholders}` if `type: "data"`), `data_map`, `desc`.
+5. `pnpm test -- scenes.test.ts` — invariant suite validates your new scene automatically.
+6. `pnpm build && npx hakcer-statusline --preview --scene=<your-id>` — see it animate live.
+7. Optional: add a VHS tape at `ink/statusline/demos/tapes/<your-id>.tape` — CI will generate the GIF on merge.
+8. Open a PR. `security-auditor` subagent runs on the diff. Merge when green.
 
-## 5. Scene library (v1)
+**Adding a new pack** is a JSON edit too — add an entry to `packs` with `flag` and `desc`, optionally add an entry to `separator_map` for a pack-default separator, done.
 
-Eleven full-time scenes + one event-triggered scene pair, for 13 scene files total.
+## 5. Scene library (current state: 157 scenes, 19 packs)
 
-### 5.1 Data scenes (the session data is the scene content)
+Full library lives in [ink/source/statusline/data/scenes.json](ink/source/statusline/data/scenes.json). This section summarizes the pack catalog and the distribution — do not duplicate individual scene definitions here. The JSON is authoritative.
 
-| # | Scene | Verb | Theme | What it shows |
-|---|-------|------|-------|---------------|
-| 1 | `matrix-rain` | DECODING | matrix | Katakana interference left + right of payload: `ｦ8ｲH opus-4.6ｷ $0.42 ｲ [████░░] 38% ﾑﾒｸ feat/ink-port` |
-| 2 | `decrypt` | DECRYPTING | synthwave | Each data character cycles through cipher glyphs then resolves: `▓p█s-4.▓ $0.▓2 [▓███░░] 38▓ f██t/ink-port` |
-| 3 | `base64` | CRACKING | cyber | Fake b64 prefix → arrow → decoded payload: `$ b64d Zm9vYmFy... → opus-4.6 $0.42 38% feat/ink-port` |
-| 4 | `pcb` | TRACING | neon | Data values as pulsing nodes on a circuit trace: `┌●━opus-4.6━●━$0.42━●━[████░░]━●━38%━●━feat/ink-port━●┐` |
-| 5 | `port-scan` | SCANNING | ice | Data disguised as nmap open ports: `nmap claude.ai [opus-4.6✓ $0.42✓ ctx:38%✓ ink:✓]` |
+### 5.1 Pack catalog
 
-### 5.2 Theater scenes (pure show, session data ignored)
+| Pack | Flag | Scenes | Vibe |
+|------|------|--------|------|
+| `core` | `--pack=core` | 24 | The universal hacker-culture bedrock. Matrix, decrypt, base64, pcb, port-scan, msf, snake, kernel-panic, SecKC events, etc. |
+| `movies` | `--pack=movies` | 15 | Jurassic Park Unix, WarGames WOPR, Hackers "hack the planet," Sneakers, Swordfish |
+| `toys` | `--pack=toys` | 12 | Power Glove boot, Speak & Spell, Tamagotchi, Simon Says |
+| `dos` | `--pack=dos` | 12 | FORMAT C:, DELTREE accidents, BAT file viruses, ATTRIB +H, EDIT.COM |
+| `2600` | `--pack=2600` | 10 | 2600 Magazine, TOTSE, 2600 First Friday meetings, Phrack, CDC |
+| `tv80s` | `--pack=tv80s` | 10 | Knight Rider KITT, A-Team, MacGyver, MASK, TMNT |
+| `trikc` | `--pack=trikc` | 10 | TRIKC-themed: modded Power Glove, NES title screens, TRIKC-branded demo scenes |
+| `arcade` | `--pack=arcade` | 9 | Gauntlet, Mortal Kombat, NBA Jam, Street Fighter, Pac-Man |
+| `early_web` | `--pack=early_web` | 9 | GeoCities, Angelfire marquees, Newgrounds Flash, guestbooks, webrings |
+| `warez` | `--pack=warez` | 8 | NFO headers, keygen music, FTP ratios, nuke, courier, XDCC, greetz |
+| `p2p` | `--pack=p2p` | 7 | Napster downloads, Metallica vs Napster drama, LimeWire malware roulette, Kazaa, Soulseek |
+| `mud` | `--pack=mud` | 7 | MUD login, combat, TradeWars 2002, Circle, LPMud |
+| `phreaking` | `--pack=phreaking` | 6 | Blue box 2600 Hz, red box, beige box, war dialers, pay phone exploits |
+| `aol` | `--pack=aol` | 6 | AOL progz, chat rooms, punters, keywords, "welcome, you've got mail" |
+| `console` | `--pack=console` | 6 | NES cartridge blow, NES glitch crash, SNES mode 7, Genesis blast processing |
+| `bbs` | `--pack=bbs` | 5 | BBS login, WWIV, mIRC channels, ANSI art, fidonet |
+| `cinema` | `--pack=cinema` | — | reserved for future growth |
+| `cartoons` | `--pack=cartoons` | 1 | TMNT sewer HQ (more welcomed) |
+| `all` | `--pack=all` | 157 | Every scene (default if no `--pack` flag) |
 
-| # | Scene | Verb | Theme | Frame progression |
-|---|-------|------|-------|-------------------|
-| 6 | `hakcer-typer` | TYPING | matrix | Fake shell commands streaming: `$ sudo ./exploit.sh --target=pentagon.gov --payload=zeroday█` |
-| 7 | `wardial` | DIALING | amber | Phreaking handshake: `ATDT867-5309...CONNECT 2400...♪♫ HANDSHAKE ♪♫` |
-| 8 | `packet` | HANDSHAKING | neon | TLS 1.3 0-RTT handshake: `[SYN→] [←SYN/ACK] [ACK→] ══ TLS1.3 ══ 0-RTT` |
-| 9 | `buffer-overflow` | OVERFLOWING | fire | Memory addresses scrolling → RIP hijack: `0xDEADBEEF → 0xCAFEBABE → 0x1337C0DE → RIP=0x41414141` |
-| 10 | `snake` | HUNTING | mono | Braille snake eats pellets and grows, wraps edge: `⠄⠠⠐⢀⠠⠐●⠄⠁⠂⠄⠂o⠁⠠⠂⠄⠐` |
-| 11 | `ms08-067` | PWNING | bloodred | msfconsole kill chain (12-frame loop): `msf> use exploit/windows/smb/ms08_067_netapi` → `set RHOST 10.10.10.4` → `exploit` → `[*] Triggering vulnerability...` → `[*] Sending stage (175686 bytes)` → `[+] Meterpreter session 1 opened` → `meterpreter> getuid` → `Server username: NT AUTHORITY\SYSTEM` → `meterpreter> hashdump` |
-| 12 | `kernel-panic` | PANICKING | fire | Linux-style panic scrolling: `*** KERNEL PANIC — not syncing: out of context ***  CPU0: 1  PID: 1337  RIP: 0xC0NT3XT` |
+Totals: **157 scenes** (101 theater + 53 data + 3 event-triggered). Pack counts sum to 157 minus the hidden `konami_winner` scene which sits outside any pack and is only reachable via the konami easter egg.
 
-### 5.3 Event-triggered scenes (opt-in via `--events`)
+### 5.2 Data vs theater split
 
-| # | Scene | Verb | Theme | Fires when |
-|---|-------|------|-------|------------|
-| 13a | `seckc-upcoming` | INCOMING | amber | Next SecKC event within 7 days: `📡 SECKC // APR 2026 // 701 N MONTGALL, KC MO // T-3d` |
-| 13b | `seckc-today` | TONIGHT | amber | Next SecKC event is today: `▓▒░ SECKC TONIGHT ░▒▓ // 701 N MONTGALL KC MO // GO GO GO` |
+| Type | Count | Behavior |
+|------|-------|----------|
+| `data` | 53 | Scene `frame` includes `{placeholders}` resolved from `SessionData` via `data_map`. Content adapts to your live session. |
+| `theater` | 101 | Scene `frame` is static text (with possible tick-based effect animation). Session data is irrelevant. |
+| event-triggered | 3 | `core_kernel_panic`, `events_seckc_upcoming`, `events_seckc_today`. Appear in rotation only when specific conditions are met. |
+
+### 5.3 Special scenes
+
+- `konami_winner` — hidden scene, only reachable by entering the konami code (see §9b.2). Plays a one-off "you win nothing" reveal.
+- `core_kernel_panic` — force-pinned when context ≥ 98 %. Not shown in normal rotation unless the trigger fires.
+- `events_seckc_upcoming` — added to rotation pool only when `--events=seckc` is enabled AND the next SecKC event is within 7 days.
+- `events_seckc_today` — force-pinned when `--events=seckc` enabled AND today is a SecKC event day.
 
 ## 6. Data pipeline
 
 ### 6.1 Source 1: Claude Code stdin JSON
 
-Claude Code pipes a JSON blob to the statusline's stdin on every invocation. Expected shape (schema pinned per Claude Code version, defensively parsed):
-
-```json
-{
-  "session_id": "abc123...",
-  "transcript_path": "/Users/.../.claude/projects/-Users-.../<uuid>.jsonl",
-  "model": { "id": "claude-opus-4-6", "display_name": "Opus 4.6" },
-  "workspace": { "current_dir": "/Users/0xdeadbeef/hakcer-1", "project_dir": "/Users/..." },
-  "version": "...",
-  "output_style": { "name": "default" }
-}
-```
-
-`data/parse-stdin.ts` reads `process.stdin` with a 50 ms timeout. Bad JSON or missing fields → empty `SessionData`, scenes still render (theater scenes are unaffected; data scenes show `—`).
+Same as v1. Claude Code pipes a JSON blob to the statusline on every invocation. Read `process.stdin` with a 50 ms timeout; bad JSON or missing fields → empty `SessionData`, theater scenes still render fine.
 
 ### 6.2 Source 2: transcript JSONL tail-read
 
-Token counts and cost are not in the stdin payload — we compute them from the transcript file. Pattern borrowed from levz0r:
-
-```ts
-// data/transcript.ts
-export async function readTokenUsage(transcriptPath: string): Promise<TokenUsage> {
-  const lastLines = await tailLines(transcriptPath, 50);
-  for (const line of lastLines.reverse()) {
-    const evt = safeJsonParse(line);
-    if (evt?.type === 'assistant' && evt?.message?.usage) {
-      return {
-        input:      evt.message.usage.input_tokens ?? 0,
-        output:     evt.message.usage.output_tokens ?? 0,
-        cacheRead:  evt.message.usage.cache_read_input_tokens ?? 0,
-        cacheWrite: evt.message.usage.cache_creation_input_tokens ?? 0,
-      };
-    }
-  }
-  return { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 };
-}
-```
-
-`tailLines` uses backwards-seeking `fs.read` on a small buffer window. Budget: **< 10 ms even on 100 MB transcripts.** Never reads the whole file.
+Same as v1. Backwards-seeking `fs.read` on a small window to find the most recent `{type: "assistant"}` entry and extract `message.usage` for input/output/cache_read/cache_write token counts. Budget: < 10 ms on 100 MB transcripts.
 
 ### 6.3 Source 3: git via execFile
 
-```ts
-// data/git.ts  — all execFile (not exec), 200 ms timeout per subprocess
-execFile('git', ['rev-parse', '--abbrev-ref', 'HEAD'], { cwd, timeout: 200 });
-execFile('git', ['status', '--porcelain=v1'],          { cwd, timeout: 200 });
-execFile('git', ['rev-list', '--count', '--left-right', '@{u}...HEAD'], { cwd, timeout: 200 });
-```
-
-Not a git repo, no upstream, or timeout → `git: null`. No propagated failures.
+Same as v1. `rev-parse --abbrev-ref HEAD`, `status --porcelain=v1`, `rev-list --count --left-right @{u}...HEAD`. Wrapped in `execFile` with 200 ms timeout. Non-git dir → `git: null`.
 
 ### 6.4 Pricing calculator
 
-`data/pricing.ts`:
+Same as v1. `data/pricing.ts` with a lookup table for Opus 4.6 / Sonnet 4.6 / Haiku 4.5 including context window maxes. Unknown models → Sonnet-rate fallback + stderr warning.
+
+### 6.5 Data resolver (NEW — for scene templates)
+
+The JSON scene contract uses `data_map` to declare how `{placeholders}` in the `frame` template map to session data. Values are dotted paths into a canonical `ResolvedData` tree:
 
 ```ts
-interface ModelPricing {
-  input:      number; // $ / 1M tokens
-  cacheRead:  number;
-  cacheWrite: number;
-  output:     number;
-  contextMax: number; // tokens
+// ResolvedData tree shape — what the resolver walks
+{
+  model: 'opus-4.6',                // scene says "data_map.model": "model"
+  model_id: 'claude-opus-4-6',
+  cost: '$0.42',                    // pre-formatted for display
+  cost_raw: 0.4247,                 // number if the scene wants to do its own formatting
+  context: '38%',
+  context_pct: 38,
+  context_used: 76000,
+  context_total: 200000,
+  ctx_bar: '████░░░░',              // pre-rendered progress bar
+  git: 'feat/ink-port',
+  git_branch: 'feat/ink-port',
+  git_dirty: true,
+  model_partial: '▓p█s-4.▓',        // for the decrypt scene (tick-dependent!)
+  cost_partial: '$0.▓2',
+  ctx_partial: '3▓',
+  git_partial: 'f██t/ink-port',
+  events: {
+    seckc: {
+      next: {
+        title: 'SecKC - April 2026',
+        location: '701 N Montgall KC MO',
+        days_until: 7,
+        time_local: '18:00'
+      }
+    }
+  }
 }
-
-const PRICING: Record<string, ModelPricing> = {
-  'claude-opus-4-6':   { input: 15.00, cacheRead: 1.50, cacheWrite: 18.75, output: 75.00, contextMax: 200_000 },
-  'claude-sonnet-4-6': { input:  3.00, cacheRead: 0.30, cacheWrite:  3.75, output: 15.00, contextMax: 200_000 },
-  'claude-haiku-4-5':  { input:  0.25, cacheRead: 0.03, cacheWrite:  0.30, output:  1.25, contextMax: 200_000 },
-};
-
-// Unknown model → fallback to Sonnet rates + stderr warning (visible via --debug).
 ```
 
-Updates via PR to this file. Documented in `CONTRIBUTING.md`.
+Resolver (`data/resolver.ts`) signature:
 
-### 6.5 Budget
+```ts
+export function resolveDataPath(tree: ResolvedData, path: string): string {
+  // Walks dotted path: 'events.seckc.next.title' → tree.events.seckc.next.title
+  // Missing path → '—' (em-dash as safe placeholder)
+  // Non-string value → String(v)
+}
+
+export function applyDataMap(frame: string, dataMap: Record<string, string>, tree: ResolvedData): string {
+  return frame.replace(/\{(\w+)\}/g, (_, key) => {
+    const path = dataMap[key];
+    if (!path) return `{${key}}`;   // no mapping → leave placeholder visible (contributor bug)
+    return resolveDataPath(tree, path);
+  });
+}
+```
+
+**Tick-dependent fields** like `model_partial` are regenerated on every render as a function of `tick` — that's how the `core_decrypt` scene animates: same scene JSON, but the `{model_partial}` token resolves to a progressively-decrypted string as `tick` advances. The resolver signature gets `tick` as an optional third argument for these.
+
+### 6.6 Budget
 
 Total hot-path budget: **< 40 ms** on a warm filesystem.
 
 | Step | Budget |
 |------|--------|
 | stdin JSON parse | < 2 ms |
-| transcript tail-read + parse | < 10 ms |
-| git (3 subprocesses, parallel) | < 20 ms |
-| pricing calc | < 1 ms |
+| scenes.json load + parse (~85 KB) | < 5 ms (cached after first parse if engine is long-lived; fresh each invocation in practice) |
+| transcript tail-read | < 10 ms |
+| git (3 parallel subprocesses) | < 20 ms |
+| pricing calc + resolved data tree build | < 2 ms |
 | events cache read | < 2 ms |
-| scene render | < 5 ms |
+| rotation select | < 1 ms |
+| scene interpret + effect apply | < 5 ms |
 | stdout write + state.json write | < 2 ms |
 
-All I/O parallelized via `Promise.all` where dependencies allow.
+Cold-start overhead on top (Node + module load): ~40–60 ms on M1. Total wall-clock: < 100 ms typical, < 150 ms worst case.
 
 ## 7. Rotation engine
 
 ### 7.1 Tick derivation
 
-```ts
-// rotation/tick.ts
-const FRAME_MS = 120;                             // 8.3 fps wall-clock pacing
-export const tick = (now = Date.now()) => Math.floor(now / FRAME_MS);
-```
-
-Wall-clock tick means rapid consecutive renders show consecutive frames; a long idle gap is skipped (scene advances as if time kept flowing). Scenes never appear stuck.
+Same as v1. `tick = floor(Date.now() / 120ms)`. Wall-clock pacing.
 
 ### 7.2 Scene selection
 
 ```ts
 // rotation/select.ts
-export function selectScene(ctx: SelectContext): Scene {
-  const forced = evaluateTriggers(ctx);                  // priority-ordered, first match wins
+export function selectScene(ctx: SelectContext, library: SceneLibrary): Scene {
+  // 1. Triggers (first match wins, may pin across invocations)
+  const forced = evaluateTriggers(ctx, library);
   if (forced) return forced;
 
-  const pool = buildPool(ctx);                           // filters by --scenes, --exclude, --events availability
+  // 2. Build pool from library based on config
+  const pool = buildPool(library, {
+    packs:   ctx.enabledPacks,      // --pack=core,warez,...
+    scenes:  ctx.sceneAllowlist,    // --scenes=x,y,z
+    exclude: ctx.sceneExclusions,   // --exclude=x,y
+    events:  ctx.enabledProviders,  // --events=seckc
+    data:    ctx.data,              // needed to check event scene availability
+  });
+  if (pool.length === 0) return library.scenes.find(s => s.id === 'core_matrix_rain')!; // safe fallback
+
+  // 3. Deterministic cycle through pool
   const cycleSeconds = ctx.cycleSeconds ?? 20;
   const index = Math.floor(ctx.now / 1000 / cycleSeconds) % pool.length;
   return pool[index];
 }
 ```
 
-Pool building:
-- Default pool = all 12 full-time scenes from §5.1 and §5.2.
-- `--scenes=matrix-rain,decrypt,msf` → only those in the pool.
-- `--exclude=wardial` → that scene removed.
-- `--events=seckc` AND SecKC within 7 days → `seckc-upcoming` added to the pool.
+### 7.3 Pool building (NEW — pack-aware)
 
-Rotation is **deterministic across processes**: two terminals with Claude Code open render the same scene in sync at the same wall-clock second (modulo local trigger overrides).
+```ts
+// rotation/pools.ts
+export function buildPool(library: SceneLibrary, opts: PoolOpts): Scene[] {
+  let pool = library.scenes;
 
-### 7.3 Triggers
+  // Drop the hidden konami scene — only reachable via the easter egg
+  pool = pool.filter(s => s.id !== 'konami_winner');
+
+  // Pack filter: default is 'all'; otherwise keep only scenes whose pack is enabled
+  if (opts.packs && opts.packs.length > 0 && !opts.packs.includes('all')) {
+    pool = pool.filter(s => opts.packs!.includes(s.pack));
+  }
+
+  // --scenes allowlist
+  if (opts.scenes && opts.scenes.length > 0) {
+    pool = pool.filter(s => opts.scenes!.includes(s.id));
+  }
+
+  // --exclude
+  if (opts.exclude && opts.exclude.length > 0) {
+    pool = pool.filter(s => !opts.exclude!.includes(s.id));
+  }
+
+  // Event-triggered scenes only appear if the provider is enabled AND condition met
+  pool = pool.filter(s => {
+    if (s.id.startsWith('events_seckc_')) {
+      if (!opts.events?.includes('seckc')) return false;
+      const ev = opts.data?.events?.seckc?.next;
+      if (!ev) return false;
+      if (s.id === 'events_seckc_today')    return ev.days_until === 0;
+      if (s.id === 'events_seckc_upcoming') return ev.days_until > 0 && ev.days_until <= 7;
+    }
+    // core_kernel_panic is normally suppressed and only reached via trigger override
+    if (s.id === 'core_kernel_panic') return false;
+    return true;
+  });
+
+  return pool;
+}
+```
+
+### 7.4 Triggers (unchanged behavior, updated scene ids)
 
 ```ts
 // rotation/triggers.ts — priority order, first match wins
 const TRIGGERS: Trigger[] = [
-  // context pressure escalation (most important)
-  { id: 'ctx-critical', when: d => d.context.pct >= 98, force: 'kernel-panic',    durationSeconds: 60 },
-  { id: 'ctx-overflow', when: d => d.context.pct >= 90, force: 'buffer-overflow', durationSeconds: 40 },
-  { id: 'ctx-decrypt',  when: d => d.context.pct >= 75, force: 'decrypt',         durationSeconds: 30 },
-  { id: 'ctx-crack',    when: d => d.context.pct >= 50, force: 'base64',          durationSeconds: 30 },
+  // context pressure escalation
+  { id: 'ctx-critical', when: d => d.context.pct >= 98, force: 'core_kernel_panic',    durationSeconds: 60 },
+  { id: 'ctx-overflow', when: d => d.context.pct >= 90, force: 'core_buffer_overflow', durationSeconds: 40 },
+  { id: 'ctx-decrypt',  when: d => d.context.pct >= 75, force: 'core_decrypt',         durationSeconds: 30 },
+  { id: 'ctx-crack',    when: d => d.context.pct >= 50, force: 'core_base64',          durationSeconds: 30 },
 
   // cost pressure
-  { id: 'cost-pwned',   when: d => d.cost.totalUsd >= 10, force: 'ms08-067',      durationSeconds: 90 },
-  { id: 'cost-warn',    when: d => d.cost.totalUsd >=  5, force: 'ms08-067',      durationSeconds: 30 },
+  { id: 'cost-pwned',   when: d => d.cost.totalUsd >= 10, force: 'core_msf',           durationSeconds: 90 },
+  { id: 'cost-warn',    when: d => d.cost.totalUsd >=  5, force: 'core_msf',           durationSeconds: 30 },
 
   // state change (requires previous-render memory)
-  { id: 'branch-swap',  when: d => branchChanged(d),      force: 'packet',        durationSeconds: 10 },
-  { id: 'model-swap',   when: d => modelChanged(d),       force: 'matrix-rain',   durationSeconds: 10 },
+  { id: 'branch-swap',  when: d => branchChanged(d),     force: 'core_syn_ack',        durationSeconds: 10 },
+  { id: 'model-swap',   when: d => modelChanged(d),      force: 'core_matrix_rain',    durationSeconds: 10 },
 
-  // event proximity (from event providers — only fires if --events enabled)
-  { id: 'seckc-today',  when: d => daysUntilNext(d, 'seckc') === 0, force: 'seckc-today',    durationSeconds: 300 },
-  { id: 'seckc-soon',   when: d => daysUntilNext(d, 'seckc') <= 1,  force: 'seckc-upcoming', durationSeconds: 120 },
+  // event proximity (only fire if --events=seckc enabled)
+  { id: 'seckc-today',  when: d => daysUntilNext(d, 'seckc') === 0, force: 'events_seckc_today',    durationSeconds: 300 },
+  { id: 'seckc-soon',   when: d => daysUntilNext(d, 'seckc') <= 1,  force: 'events_seckc_upcoming', durationSeconds: 120 },
 ];
 ```
 
-**Pinning**: a matched trigger writes `{ triggerId, pinnedUntil }` to `state.json`. Subsequent invocations within the pin window replay the same forced scene, even if the triggering condition is no longer true. This guarantees the scene gets to play out fully instead of flickering on and off.
+**Pinning** is unchanged: matched triggers write `{ triggerId, pinnedUntil }` to `state.json`; subsequent invocations within the pin window replay the forced scene. Scene ids now match the JSON library.
 
-### 7.4 Persistent state
+### 7.5 Persistent state
 
-`~/.cache/hakcer-statusline/state.json`:
+`~/.cache/hakcer-statusline/state.json` schema grows slightly to accommodate special modes:
 
 ```json
 {
   "lastBranch":     "feat/ink-port",
   "lastModel":      "claude-opus-4-6",
-  "activeOverride": { "triggerId": "ctx-overflow", "pinnedUntil": 1776204123456 }
+  "activeOverride": { "triggerId": "ctx-overflow", "pinnedUntil": 1776204123456 },
+  "konamiBuffer":   ["up", "up", "down"],
+  "konamiExpires":  1776204200000,
+  "screensaverIdleSince": 1776204000000,
+  "motdLastRotated":      1776200000000
 }
 ```
-
-Read-modify-write per invocation, < 1 ms. Missing or corrupt → treat as empty, continue normally. No locking (statusline runs serially per Claude Code session).
 
 ## 8. Event providers
 
-Generalized subsystem so SecKC is just the first of many. DEFCON, BSidesKC, local 2600 meetups, etc. drop in the same way.
-
-### 8.1 Provider contract
-
-```ts
-// data/providers/types.ts
-export interface UpcomingEvent {
-  providerId: string;   // 'seckc'
-  title:      string;   // 'SecKC - April 2026'
-  startsAt:   number;   // unix ms
-  endsAt:     number;
-  location:   string;   // '701 N Montgall, KC MO'
-  url:        string;   // https://seckc.org/upcoming-events/seckc-april-2026
-  excerpt?:   string;
-}
-
-export interface EventProvider {
-  id: string;           // kebab-case; also used in --events=<id>
-  name: string;         // display: 'SecKC'
-  ttlHours: number;     // cache freshness window
-  fetchUpcoming(): Promise<UpcomingEvent[]>;
-}
-```
-
-### 8.2 SecKC provider
-
-Validated empirically 2026-04-08 — `https://www.seckc.org/upcoming-events?format=json-pretty` returns `d.upcoming[]` with `title`, `startDate` (unix ms), `endDate`, `location.addressLine1`, `location.addressLine2`, `fullUrl`, `excerpt`. Four events currently listed (April → July 2026). Implementation: plain `fetch`, map each item to `UpcomingEvent`, `ttlHours = 6`.
-
-### 8.3 Cache + background refresh
-
-`~/.cache/hakcer-statusline/events.json`. Rules:
-
-1. **Read-only on the hot path.** Synchronous read at render time, missing → empty array → rotation proceeds with no event-triggered scenes.
-2. **Background refresh after render.** After `process.stdout.write(line)`, if cache age > `ttlHours` for any enabled provider, spawn a detached child process that does the fetch and rewrites the cache. The current invocation finishes immediately; the next one sees fresh data.
-3. **Stale is fine.** 6 h default TTL for SecKC. Events don't change minute-to-minute.
-4. **Failures logged, not thrown.** Child process writes errors to `~/.cache/hakcer-statusline/events.log`. Network outages never break the statusline.
-
-### 8.4 Privacy + opt-in
-
-**Default: zero network calls.** Providers must be explicitly enabled:
-
-- CLI flag: `--events=seckc,defcon`
-- Env var: `HAKCER_STATUSLINE_EVENTS=seckc,defcon`
-- `--events=off` disables even if cache exists; also deletes the cache file
-
-On first enablement, a one-time stderr notice:
-
-```
-hakcer-statusline: enabling event providers [seckc]
-  fetching in background — cache: ~/.cache/hakcer-statusline/events.json
-  disable: --events=off
-```
-
-Fetch uses default User-Agent `hakcer-statusline/<version>`, no query parameters beyond the Squarespace `?format=json-pretty`, no user-identifying headers.
+Unchanged from v1 design. SecKC implementation and background refresh pattern stay the same. The scenes `events_seckc_upcoming` and `events_seckc_today` are now declared in `scenes.json` with `data_map` entries pointing at `events.seckc.next.*` dotted paths, which the resolver (§6.5) walks.
 
 ## 9. Render pipeline
 
-### 9.1 Paint utilities
+The scene interpreter is the central new component in v2.
 
-`render/paint.ts` — kleur-backed, truecolor-aware.
+### 9.1 Interpreter (`render/interpret.ts`)
 
 ```ts
-export function makePaint(theme: Theme): PaintFns {
-  return {
-    fg:       (s, colorKey) => kleur.rgb(...theme[colorKey])(s),
-    gradient: (s, kind = 'head') => paintGradient(s, theme.gradientStops, kind),
-    bold:     kleur.bold,
-    dim:      kleur.dim,
-    inverse:  kleur.inverse,
-    glitch:   (s, intensity) => applyGlitchChars(s, intensity),
-  };
+export function interpretScene(scene: Scene, ctx: RenderContext, library: SceneLibrary): string {
+  // 1. Substitute {tokens} in frame from data_map
+  const substituted = applyDataMap(scene.frame, scene.data_map ?? {}, ctx.resolvedData, ctx.tick);
+
+  // 2. Resolve separator (scene.sep or pack default)
+  const sepChar = resolveSeparator(scene, library);
+
+  // 3. Resolve icons/glyphs (scene.icons → codepoints with font fallback)
+  const withIcons = injectGlyphs(substituted, scene.icons ?? [], ctx.fontCaps);
+
+  // 4. Apply palette coloring
+  const palette = library.palettes[scene.palette];
+  const colored = applyPalette(withIcons, palette, ctx.tick);
+
+  // 5. Pick effect (scene.effect → pack default → library default)
+  const effectId = scene.effect ?? library.packs[scene.pack].effect ?? 'scanline';
+  const effectFn = library.effects[effectId];
+  const animated = applyEffect(colored, effectFn, ctx.tick);
+
+  return animated;
 }
 ```
 
-`paintGradient` walks each visible character, interpolates between theme gradient stops, emits truecolor `\x1b[38;2;r;g;bm` codes. `applyGlitchChars` randomly (seeded by tick) replaces a fraction of chars with visual-noise glyphs. Both are ~20 lines each.
+### 9.2 Palette resolution (`render/palette.ts`)
 
-**Dependency**: add [`kleur`](https://github.com/lukeed/kleur) if not already a transitive dep of the Ink package. 1 KB, MIT, zero runtime deps.
+Each palette in `scenes.json` has `bg`, `fg`, `accent`, and pack-specific extras (`glow`, `highlight`, `frost`, `top`, `leo`/`raph`/`donnie`/`mikey` for TMNT, etc.). The resolver:
 
-### 9.2 Width detection
+1. Looks up the scene's `palette` in `library.palettes`.
+2. If `--palette=<override>` is set, uses that instead.
+3. Builds a `PaintFns` closure (`fg`, `accent`, `gradient`, `bold`, `dim`, `inverse`, `glitch`) bound to the resolved colors.
+4. Palette colors are strings — either hex (`#00ff41`) or ANSI256 (`48`). The resolver handles both.
 
-```ts
-// render/width.ts
-export function getWidth(): number {
-  const envCols = parseInt(process.env['COLUMNS'] ?? '', 10);
-  if (envCols > 0) return envCols;
-  if (process.stdout.isTTY) return process.stdout.columns ?? 80;
-  return 80;
-}
-```
+### 9.3 Separator resolution (`render/separator.ts`)
 
-Claude Code sets `COLUMNS` when piping to statusline commands. Fallback chain is tty → 80 cols.
-
-### 9.3 Compose (safety net)
+Scenes reference `sep: "arrow"`. The library's `separator_map` maps `"arrow"` to a powerline glyph or fallback char. The resolver returns the actual character based on font capability:
 
 ```ts
-// render/compose.ts
-export function composeScene(scene: Scene, ctx: SceneContext): string {
-  let line = scene.render(ctx);
-  if (stripAnsi(line).length > ctx.width) {
-    line = truncateToVisibleWidth(line, ctx.width);
-  }
-  return line + ANSI_RESET;
-}
+// separator_map entries + glyph_registry.powerline_separators are joined here
+const SEP_CHARS = {
+  arrow:    { nerd: '\ue0b0', fallback: '>' },
+  arrow_thin: { nerd: '\ue0b1', fallback: '>' },
+  round:    { nerd: '\ue0b4', fallback: ')' },
+  diagonal: { nerd: '\ue0bc', fallback: '/' },
+  pixel:    { nerd: '█',      fallback: '█' },    // block is always safe
+  hexagon:  { nerd: '\ue0b6', fallback: '<' },
+  flame:    { nerd: '\ue0c0', fallback: '~' },
+  lego:     { nerd: '⬛',     fallback: '■' },
+  // ...
+};
 ```
 
-A misbehaving contributor scene cannot break the user's terminal: width is clamped, ANSI state is always reset at end.
+### 9.4 Glyph injection (`render/glyph.ts`)
+
+Scene `icons` refer to `glyph_registry` entries (`branch`, `padlock`, `terminal`, `download`, etc.). The injector replaces an optional `{icon:<id>}` token in the frame OR prepends the icons to the output. Missing glyphs (no Nerd Font) fall back to ASCII text replacements.
+
+### 9.5 Effect engine (`render/effects/*.ts`)
+
+Each of the 14 effects is a pure function:
+
+```ts
+export type EffectFn = (input: string, tick: number, params?: EffectParams) => string;
+```
+
+| Effect | Transformation |
+|--------|----------------|
+| `scanline` | Horizontal sweep with a bright-line cursor moving across the text |
+| `typewriter` | Reveal characters left-to-right, one per N ticks |
+| `glitch_corrupt` | Randomly (tick-seeded) replace a fraction of chars with glitch glyphs |
+| `phosphor_fade` | Slow color fade on the trailing chars simulating CRT persistence |
+| `matrix_drip` | Insert katakana chars between visible chars at random positions |
+| `decrypt_reveal` | Cycle chars through cipher glyphs before settling on the final char |
+| `color_wave` | Hue rotation across the line, phase shifts with tick |
+| `knight_rider` | KITT-style bouncing scanner highlight |
+| `crt_boot` | Compressed scanline sweep + a beep indicator |
+| `static_noise` | Overlay TV static chars (`░`, `▒`, `▓`) at low density |
+| `segment_slide` | Segments (between separators) slide in from the right |
+| `heartbeat` | Line pulses bright/dim on a 60 BPM cycle |
+
+**Hakcer effect bridge**: the JSON includes `effects._hakcer_to_statusline_map` mapping the 11 existing hakcer Ink effects (`decrypt`, `colorshift`, `print`, `slide`, `wipe`, `errorcorrect`) to the 14 statusline effects. This lets us reuse existing hakcer effect math where possible; the rest are implemented fresh.
+
+### 9.6 Width handling (unchanged)
+
+`COLUMNS` env > tty columns > 80 fallback.
+
+### 9.7 Compose (safety net, unchanged)
+
+`composeScene` clamps width, guarantees ANSI reset, and never lets a misbehaving scene break the terminal.
+
+## 9b. Special modes (NEW)
+
+Six special modes layer on top of the normal render path. All are opt-in or auto-triggered; none run by default unless enabled.
+
+### 9b.1 Corruption mode (`--corrupt`)
+
+Every Nth frame (default 1 in 50) the output is replaced with one of six glitch messages for exactly one frame, then snaps back. Messages from `special_modes.corruption.messages`:
+
+- `SEGFAULT`
+- `KERNEL PANIC - NOT SYNCING`
+- `STACK SMASHING DETECTED`
+- `GURU MEDITATION`
+- `BSOD`
+- `ABORT TRAP 6`
+
+Implementation in `modes/corruption.ts`: seeded PRNG keyed on `(session_id, tick)`, advances per invocation, fires when `prng() < 1/50`. Selected message written over the full width with bright red background.
+
+### 9b.2 Konami easter egg
+
+Sequence: `up up down down left right left right b a`.
+
+Implementation:
+- The statusline process itself can't read keys (it's a render, not an input loop). Instead, we watch for a **marker file** `~/.cache/hakcer-statusline/konami.trigger` that the user creates by running `hakcer-statusline --konami` in any terminal.
+- When the marker is detected, we pin `konami_winner` scene for 60 seconds.
+- Alternative trigger (preview mode): if `hakcer-statusline --preview` is running and detects the actual key sequence via stdin raw mode, it sets the trigger file.
+
+State stored in `state.json` as `konamiBuffer[]` and `konamiExpires` timestamp.
+
+### 9b.3 Sound mode (`--sound`)
+
+Opt-in. Each scene can declare a `sound` field (not in v1 scenes, but the schema allows it) or inherit from `special_modes.sound_mode.scene_sounds`. On render, the sound is played via:
+
+- macOS: `afplay <file>` spawned detached
+- Linux: `paplay <file>` spawned detached
+- Other: no-op
+
+Default: **OFF.** Sound in a statusline is a hostile act — opt-in only. Additional guard: rate-limit to at most one sound per 5 seconds.
+
+### 9b.4 Combo frames (`--combo`)
+
+Smooths the seam when a scene rotates to the next. Instead of a hard swap, the final N frames of scene A blend into the opening N frames of scene B via an overlap/fade. Default off (no combo).
+
+### 9b.5 Screensaver mode (auto, configurable)
+
+Triggers after idle timeout (default 300 s since last render). Behavior from `special_modes.screensaver`:
+
+- Replace statusline with a random banner from `haKCAssets/banners/*.txt` (or a built-in fallback if assets aren't installed)
+- Apply one of `[synthgrid, matrix, fireworks, blackhole]` effects
+- Snap back to normal rendering on the next render (which implicitly happens when Claude Code calls us again)
+
+Idle tracking uses the delta between `Date.now()` and the last `state.json.lastRenderAt` timestamp. If the delta exceeds the timeout, screensaver mode is active for this render. Disable with `--no-screensaver`.
+
+### 9b.6 MOTD rotation (auto, daily)
+
+From `special_modes.motd_rotation`: a message of the day rotates daily, sourced from a fixed list. Used as a fallback scene when the rotation pool is somehow empty, or when a contributor wants to ship a dated "today in hacker history" fact. Out of scope for v1 implementation — the field is read but no-op unless a source is specified.
+
+### 9b.7 Mode ordering
+
+Modes are applied in the render pipeline in this order:
+
+1. Normal scene render (via `interpretScene`)
+2. `combo` blending with previous frame (if enabled)
+3. `screensaver` override (if idle)
+4. `corruption` override (if enabled and PRNG fires)
+5. `konami` force-pin (if marker file is active)
+6. `compose` width clamp + reset
+
+Corruption can override combo output; konami can override corruption. Konami wins.
+
+## 9c. Font policy (NEW)
+
+Nerd Fonts are recommended but not required.
+
+### 9c.1 Capability detection (`render/font-detect.ts`)
+
+At startup, check in this order:
+1. Env var `HAKCER_STATUSLINE_NERD_FONT=1` → assume Nerd Font support
+2. Env var `TERM_PROGRAM=iTerm.app|Alacritty|kitty|WezTerm` → high confidence
+3. Env var `LC_TERMINAL=iTerm2` → confidence
+4. Otherwise → conservative fallback mode (no Nerd Font glyphs)
+
+Detection result stored in `ctx.fontCaps` and consulted by `separator.ts`, `glyph.ts`, and `font_logos` resolution.
+
+### 9c.2 Fallback registry
+
+Every glyph has an ASCII fallback. When `fontCaps.nerdFont === false`:
+
+| Glyph | Nerd | Fallback |
+|-------|------|----------|
+| OS logo (Alpine) | `\uf300` | `[alpine]` |
+| OS logo (Arch)   | `\uf303` | `[arch]` |
+| WM (awesome)     | `\uf354` | `[wm]` |
+| powerline arrow  | `\ue0b0` | `>` |
+| powerline branch | `\ue0a0` | `⌥` or `B:` |
+
+Fallbacks defined alongside the glyph registry in `scenes.json` (a new `fallback` key per glyph).
+
+### 9c.3 `--install-fonts` command
+
+```
+hakcer-statusline --install-fonts
+```
+
+Implementation in `fonts/install.ts`:
+1. Check current font capability. If already enabled, say "Nerd Font already detected" and exit.
+2. Detect OS (macOS / Linux).
+3. Offer to install **JetBrains Mono Nerd Font** (MIT license, widely compatible, default choice).
+4. On macOS: `brew install --cask font-jetbrains-mono-nerd-font` if Homebrew exists, else download from the ryanoasis/nerd-fonts GitHub release to `~/Library/Fonts/`.
+5. On Linux: download to `~/.local/share/fonts/` and run `fc-cache -f`.
+6. Print next steps: "Set your terminal font to JetBrains Mono Nerd Font and reload your statusline."
+
+Requires explicit user invocation. Not a post-install script. Not automatic. Not silent.
+
+### 9c.4 README guidance
+
+```markdown
+## Fonts
+
+hakcer-statusline looks best with a Nerd Font. It works without one
+(glyphs fall back to ASCII), but you'll miss out on OS logos, powerline
+separators, and icon glyphs.
+
+Install the recommended font:
+
+    hakcer-statusline --install-fonts
+
+Or manually:
+
+    # macOS
+    brew install --cask font-jetbrains-mono-nerd-font
+
+    # Linux (arch)
+    yay -S ttf-jetbrains-mono-nerd
+```
 
 ## 10. CLI surface
 
@@ -553,234 +776,232 @@ A misbehaving contributor scene cannot break the user's terminal: width is clamp
 Usage:
   hakcer-statusline [options]                       # normal mode (Claude Code calls this)
   hakcer-statusline --preview [scene]               # dev: tight loop, clears + redraws
-  hakcer-statusline --list                          # list all scene ids + verbs + themes
+  hakcer-statusline --list [--pack <id>]            # list all scene ids + verbs + themes
+  hakcer-statusline --list-packs                    # list all 19 packs with scene counts
+  hakcer-statusline --list-palettes                 # list all 20 palettes
   hakcer-statusline --explain                       # dump stdin JSON payload (debug)
   hakcer-statusline --debug                         # normal mode + stderr timing/diagnostics
+  hakcer-statusline --install-fonts                 # download + install JetBrains Mono Nerd Font
+  hakcer-statusline --konami                        # trigger the konami easter egg
 
-Flags:
-  --theme <name>         Override canonical theme
-                         (matrix|neon|synthwave|amber|ice|fire|cyber|mono|pastel|bloodred|kali)
-  --scenes <csv>         Only use these scenes in rotation
-  --exclude <csv>        Exclude these scenes from rotation
+Filter flags:
+  --pack <csv>           Enable only these packs (default: all).
+                         Example: --pack=core,warez,phreaking,2600
+  --scenes <csv>         Only use these scene ids in rotation
+  --exclude <csv>        Exclude these scene ids
+  --palette <id>         Override scene's canonical palette (one of 20)
+  --events <csv>         Enable event providers: seckc (default: none; 'off' to disable+purge)
   --cycle-seconds <n>    Rotation cadence (default 20)
-  --events <csv>         Enable event providers (default: none; 'off' to disable+purge)
-  --no-git               Skip git subprocesses (saves ~15ms in non-git dirs)
+
+Effect & behavior flags:
   --scene <id>           Pin one scene, no rotation (for screenshots)
+  --effect <id>          Override the scene's effect (one of 14)
+  --no-git               Skip git subprocesses (saves ~15ms in non-git dirs)
   --width <n>            Force width (default: detect from COLUMNS/tty/80)
+
+Special modes:
+  --corrupt              Enable corruption mode (1-in-50 frame glitch flash)
+  --sound                Enable per-scene sound mode (opt-in)
+  --combo                Enable combo frame blending across scene boundaries
+  --no-screensaver       Disable idle-timeout screensaver
+  --konami-off           Disable the konami easter egg
+
+Info:
   --version              Print version
   --help                 Print this text
 ```
 
-### 10.1 Preview mode
-
-Critical for development and contributor onboarding. Without it, debugging a scene means triggering Claude Code statusline refreshes one at a time.
-
-```ts
-// main.ts — --preview path runs until Ctrl-C
-setInterval(() => {
-  process.stdout.write('\x1b[2K\r');                      // clear line + carriage return
-  process.stdout.write(composeScene(scene, ctx));
-  ctx.tick++;
-}, FRAME_MS);
-```
-
-Three preview sub-modes:
-- `--preview` → cycles through all scenes, 5 s each
-- `--preview <scene-id>` → single scene looped forever
-- `--preview --all` → tall grid of all scenes side-by-side (terminal height permitting)
-
 ## 11. Testing strategy
 
-Vitest (matches what the Ink package already uses).
+### 11.1 Library integrity tests
 
-### 11.1 Scene invariants suite
+`__tests__/library.test.ts` — runs once per test suite startup:
 
-`__tests__/scenes.test.ts` runs a matrix test: every scene × ticks `{ 0, 50, 150, 300 }` × widths `{ 60, 80, 120, 200 }` × sample `SessionData` fixtures × all themes. For each combination it asserts:
+1. Parses `scenes.json` with a strict schema validator (`ajv` against [scenes.schema.json](ink/source/statusline/data/scenes.schema.json)).
+2. Every scene `id` is unique.
+3. Every scene's `pack`, `palette`, and `sep` reference an existing entry.
+4. Every `icons` entry references an existing glyph.
+5. Every `data_map` key resolves to a non-empty dotted path.
+6. Every placeholder in `frame` (matching `/\{(\w+)\}/`) has a `data_map` entry (for data scenes) or the scene is theater.
 
-1. `stripAnsi(output).length <= width`
+### 11.2 Scene invariant matrix
+
+`__tests__/scenes.test.ts` — parameterized over all 157 scenes × widths `{60, 80, 120, 200}` × ticks `{0, 50, 150, 300}`:
+
+1. `stripAnsi(rendered).length <= width`
 2. No `\n` in output
-3. ANSI sequences balanced (no unterminated escapes)
+3. ANSI sequences balanced
 4. No `NaN`, `undefined`, `[object Object]` substrings
-5. Render time < 5 ms (soft warning at 5 ms, hard fail at 20 ms)
-6. Determinism: rendering the same args twice yields byte-identical output
+5. Render < 5 ms (warning), hard fail at 20 ms
+6. Deterministic: same `(scene, tick, width, data)` → identical output
 
-Any contributor scene PR runs through this suite automatically.
+Approximately 157 × 4 × 4 = 2512 scene cells; each cell checks 6 invariants → ~15k assertions. Runs in CI in < 5 s because each assertion is a pure function call.
 
-### 11.2 Rotation suite
+### 11.3 Interpreter tests
 
-`__tests__/rotation.test.ts`:
-- Trigger priority ordering (ctx-critical beats ctx-overflow beats cost-pwned, etc.)
-- Pin duration respected across sequential calls
-- `buildPool` filtering by `--scenes`, `--exclude`, `--events`
-- Cycle determinism across fixed timestamps
-- Branch/model change detection via `state.json` round-trip
+`__tests__/interpret.test.ts`:
+- Template substitution (placeholders → data)
+- Dotted-path resolver with nested objects
+- Missing-data fallback to em-dash
+- Palette resolution for every palette in `palettes`
+- Separator fallback when `fontCaps.nerdFont === false`
 
-### 11.3 Data suite
+### 11.4 Rotation tests
 
-- `transcript.test.ts` — tail-reads fixture JSONL files of varying sizes, asserts correct usage extraction
-- `pricing.test.ts` — cost math for every known model + Sonnet-fallback for unknowns
-- `cache.test.ts` — TTL staleness, corrupt-cache recovery, concurrent-write safety
+Same matrix as v1 — trigger priority, pinning, pool filtering — plus:
+- Pack filtering (`--pack=warez` excludes non-warez scenes)
+- Event scene filtering (`events_seckc_*` gated on `--events=seckc` AND data availability)
+- Konami marker file detection
+- Screensaver idle timeout
 
-### 11.4 Provider suite
+### 11.5 Mode tests
 
-- `providers/seckc.test.ts` — parses committed `fixtures/seckc.json` → `UpcomingEvent[]`, verifies timestamp conversion, handles missing/empty fields, asserts schema mismatch errors are descriptive
+`__tests__/modes.test.ts`:
+- Corruption PRNG fires at expected rate (statistical: 10,000 ticks → ~200 corruption frames ± tolerance)
+- Konami key buffer matches partial sequences
+- Screensaver idle detection
+- Mode ordering (konami beats corruption beats screensaver beats combo)
 
-### 11.5 Integration smoke test
+### 11.6 Data suite (unchanged from v1)
 
-One test that wires the full `main()` with mocked stdin, fixture transcript, no git, `--scene=matrix-rain`, asserts the output is a single styled line ≤ 120 chars.
+Transcript tail-read, pricing, cache TTL, provider JSON parsing.
+
+### 11.7 Font detection tests
+
+`__tests__/font-detect.test.ts` — parameterized env fixtures:
+- `TERM_PROGRAM=iTerm.app` → nerdFont=true
+- `TERM_PROGRAM=Terminal.app` → nerdFont=false
+- `HAKCER_STATUSLINE_NERD_FONT=1` → always true (override)
+
+### 11.8 Integration smoke test
+
+One test wires the full `main()` with mocked stdin, fixture transcript, `--scene=core_matrix_rain`, asserts the output is a single styled line ≤ 120 chars.
 
 ## 12. Security & privacy
 
-This is a CLI that runs on every Claude Code turn. Posture matters.
+Unchanged from v1 except:
 
-**Data handling:**
-- **Transcript file**: read-only tail access. Never logged, never transmitted. Parsed for token counts only; no message content is extracted.
-- **Stdin JSON**: contains `session_id`, paths, model info. Never logged unless `--explain` is explicitly passed.
-- **Git output**: branch name, dirty flag. Never transmitted.
-- **Pricing calc**: pure local math.
+**Special mode additions:**
+- `--sound` spawns `afplay`/`paplay` as detached children. Only triggers on whitelisted scene sound file paths embedded in the library; no user-supplied paths. Sound files (if any) live in the `hakcer` package and are shipped with it.
+- `--konami` writes to `~/.cache/hakcer-statusline/konami.trigger` (a timestamp file). Read-only to the statusline render path.
+- `--install-fonts` is the only network action other than event providers. Downloads from `github.com/ryanoasis/nerd-fonts/releases/` — a well-known source. User must explicitly invoke; never automatic.
 
-**Network posture:**
-- Default: **zero network calls.**
-- `--events=<provider>` enables opt-in background fetches. Fetches happen in detached child processes after render completes — never on the hot path.
-- No telemetry. No error reporting service. Nothing phones home.
-
-**Input validation:**
-- Stdin JSON: `safeJsonParse` wrapper, treat parse failures as empty object
-- Transcript lines: same pattern, skip malformed lines
-- Provider responses: validated against `UpcomingEvent` schema before cache write; malformed payloads logged and discarded
-- User flags: strict allowlist for `--theme`, `--scene`, `--events`; unknown values → exit 2 + help text
-
-**File system:**
-- Writes only to `~/.cache/hakcer-statusline/` (`state.json`, `events.json`, `events.log`)
-- Cache dir created with 0700 perms
-- Never writes to project directory
-
-**Process model:**
-- No shell = no injection. Git subprocesses via `execFile`, not `exec`.
-- No `eval`, no `Function()`, no dynamic imports of user-controlled paths.
-- Background fetch runs as detached child; stdout/stderr piped to the log file.
-
-**Security review gate:** because this code touches the transcript file and can make network calls, the implementation PR **must** pass the `security-auditor` subagent before merge, per [CLAUDE.md](CLAUDE.md) §Security Rules.
+**Security-auditor review gate** remains mandatory before merge, per [CLAUDE.md](CLAUDE.md) §Security Rules.
 
 ## 13. Demo page + README showcase
 
-Demos are the marketing and part of the product.
+Pivot from per-scene to per-pack tapes because 157 scenes × individual tapes is absurd.
 
-### 13.1 Recording: VHS
+### 13.1 Required VHS tapes
 
-`.tape` files in `ink/statusline/demos/tapes/`, one per scene plus hero and triggers. Example:
-
-```tape
-# ink/statusline/demos/tapes/matrix-rain.tape
-Output out/matrix-rain.gif
-Set FontSize 14
-Set Width 1200
-Set Height 40
-Set Theme "Catppuccin Mocha"
-Hide
-Type "hakcer-statusline --preview --scene=matrix-rain --width=100"
-Enter
-Show
-Sleep 6s
-Ctrl+C
+```
+ink/statusline/demos/tapes/
+├── _hero.tape                 # 19-pack carousel, 2s each pack → 38s hero loop
+├── pack_core.tape             # all 24 core scenes cycling
+├── pack_warez.tape            # all 8 warez scenes cycling
+├── pack_phreaking.tape        # all 6 phreaking scenes cycling
+├── pack_aol.tape              # all 6 aol scenes cycling
+├── pack_p2p.tape              # all 7 p2p scenes cycling
+├── pack_bbs.tape              # all 5 bbs scenes cycling
+├── pack_2600.tape             # all 10 2600 scenes cycling
+├── pack_mud.tape              # all 7 mud scenes cycling
+├── pack_movies.tape           # all 15 movies scenes cycling
+├── pack_toys.tape             # all 12 toys scenes cycling
+├── pack_arcade.tape           # all 9 arcade scenes cycling
+├── pack_console.tape          # all 6 console scenes cycling
+├── pack_dos.tape              # all 12 dos scenes cycling
+├── pack_early_web.tape        # all 9 early_web scenes cycling
+├── pack_trikc.tape            # all 10 trikc scenes cycling
+├── pack_tv80s.tape            # all 10 tv80s scenes cycling
+├── trigger_ctx_overflow.tape  # buffer-overflow scene triggered by ctx ≥ 90%
+├── trigger_cost_pwned.tape    # msf scene triggered by cost ≥ $5
+├── trigger_kernel_panic.tape  # kernel-panic triggered by ctx ≥ 98%
+├── mode_corruption.tape       # corruption flash demonstration
+├── mode_konami.tape            # konami_winner reveal
+├── mode_screensaver.tape       # idle timeout screensaver
+├── palette_showcase.tape       # one reference scene through all 20 palettes
+└── event_seckc.tape           # events_seckc_upcoming scene
 ```
 
-Required tapes:
-- `_hero-rotation.tape` — all 12 scenes, 2 s each (24 s hero loop)
-- Per-scene tape for every scene in §5
-- `trigger-ctx-overflow.tape` — shows buffer-overflow trigger firing at 90 % ctx
-- `trigger-cost-pwned.tape` — shows ms08-067 firing at $5 cost
-- `themes-compare.tape` — one reference scene rendered across all 9 themes
+Per-pack tapes are cheap: each runs `hakcer-statusline --preview --pack=<name>` and lets the rotation cycle through the pack's scenes for 30–60 s.
 
-### 13.2 GIF hosting: orphan `demos` branch
+### 13.2 README structure
 
-Main branch stays lean. CI regenerates GIFs on every merge to main that touches `ink/source/statusline/**` or `ink/statusline/demos/tapes/**`, then force-pushes them to a `demos` orphan branch. README references them via `https://raw.githubusercontent.com/<user>/hakcer/demos/<scene>.gif`. Clones of main never download the GIFs unless the user opts in.
-
-### 13.3 README structure
-
-- Hero GIF at the top (rotation through all 12 scenes)
-- Install snippet (npm + `settings.json`)
-- Scenes table with per-scene GIF thumbnails
+- Hero GIF (pack carousel)
+- Install snippet (npm + settings.json)
+- Pack gallery: 19 packs, each with a link to its dedicated GIF and a one-line description
 - Reactive triggers table with trigger-demo GIFs
-- Themes section with the comparison grid
-- Event providers section (opt-in) with SecKC scene GIF
-- Contributing link to `CONTRIBUTING.md`
+- Special modes section with mode-demo GIFs
+- Palette showcase
+- Event providers (opt-in)
+- Nerd Font recommendation + `--install-fonts`
+- Contributing link
 
-### 13.4 Standalone demo page
+### 13.3 GIF hosting, CI, pages site
 
-Lives at `ink/statusline/demos/docs/index.html`, served via GitHub Pages from that path. v1 implementation: plain HTML + CSS + static GIFs (same assets as README). Features: hero animation, pick-a-scene selector, install snippet with one-click copy, link to repo + contributing guide. Starting domain: `https://<user>.github.io/hakcer/`. No custom domain until traction warrants it.
-
-**Out of scope for v1:** live JS browser recreation of scenes (separate codebase), 108-GIF theme × scene grid, asciinema player embeds.
-
-### 13.5 CI workflow
-
-New `.github/workflows/demos.yml`:
-
-```yaml
-name: Generate demo GIFs
-on:
-  push:
-    branches: [main]
-    paths:
-      - 'ink/source/statusline/**'
-      - 'ink/statusline/demos/tapes/**'
-jobs:
-  vhs:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - run: pnpm install && pnpm build
-      - uses: charmbracelet/vhs-action@v2
-        with:
-          path: 'ink/statusline/demos/tapes'
-      - run: ./ink/statusline/demos/scripts/publish.sh
-```
-
-`publish.sh` creates or checks out the `demos` orphan branch, copies GIFs in, commits with the main branch SHA as the message, force-pushes. No hand-maintained GIFs.
+Unchanged from v1: orphan `demos` branch, VHS-action CI workflow, plain HTML + static GIFs at `/docs/`.
 
 ## 14. Risks + open questions
 
-1. **Claude Code statusline JSON schema drift.** Field names change between Claude Code versions. **Mitigation:** defensive parsing with sensible fallbacks, `--explain` flag to help users debug, comments in `parse-stdin.ts` linking to the official Claude Code statusline docs.
+1. **scenes.json size growth.** 85 KB today with 157 scenes. Linear growth per contribution. At 500 scenes it's ~250 KB — still fine for a one-time read per invocation. If/when it becomes a problem, we split by pack into `scenes/<pack>.json` files. Not pre-optimizing.
 
-2. **Cold-start time on slow filesystems.** Node startup + module load ~40–80 ms on an M1, could hit 150 ms on older hardware. **Mitigation:** not pre-optimizing. If users complain, migrate hot-path modules to a single bundled file via `esbuild` to shave ~30 ms off import resolution.
+2. **Template format freezing.** The `{placeholder}` + `data_map` dotted path format is now a public contract. Breaking changes require a JSON schema version bump (`meta.schema_version`) and a migration script for contributor forks.
 
-3. **Scene library balance.** 12 scenes × 20 s cycle = 4-minute full rotation. Most sessions hit every scene. **Mitigation:** tune post-launch based on feedback; add `--favorites` flag if needed.
+3. **Nerd Font detection reliability.** Our env-based sniff is a heuristic. It may say "yes" when the user's chosen font doesn't actually have Nerd glyphs, producing box-drawing garbage. Mitigation: `HAKCER_STATUSLINE_NERD_FONT=0` override for users, and a one-liner in `--debug` output: *"font capability: nerd (iTerm), override with HAKCER_STATUSLINE_NERD_FONT=0"*.
 
-4. **kleur dependency.** May not already be in the Ink package tree. **Mitigation:** add directly — 1 KB, MIT, no transitive deps. If even that is unwanted, we can hand-roll a ~30-line ANSI helper.
+4. **Effect animation quality.** 14 effects is a lot to implement well. Some are easy (`typewriter`, `scanline`), others are hard (`phosphor_fade`, `matrix_drip`). **Mitigation:** implement the easy ones first and ship v1 with 5–6 working effects, stub the others as pass-through until v1.1. Every scene still renders (just without the specific effect animation).
 
-5. **Transcript path format assumption.** We assume Claude Code writes `{type: "assistant", message: {usage: {...}}}` in JSONL. **Mitigation:** ship a fixture transcript captured from the current Claude Code version; contract test fails loudly if the format changes.
+5. **Konami detection mechanism.** The marker-file approach works but is clunky. It only triggers when the user runs `hakcer-statusline --konami` in a separate shell. Proper key detection would require an always-on daemon, which is out of scope. We accept the limitation.
 
-6. **SecKC site / Squarespace JSON endpoint.** Undocumented; could be disabled or rate-limited. **Mitigation:** 6 h cache TTL means ≤4 fetches/day/user. Stale cache persists on fetch failure. If the endpoint dies, the trigger simply never fires and rotation continues normally.
+6. **Screensaver idle timeout.** 300 s since last render is approximate — Claude Code might not call us often in a slow session, and we can't distinguish "user idle" from "Claude thinking." Mitigation: tune the timeout post-launch based on feedback; start at 300 s.
 
-7. **License compatibility.** hakcer is MIT (to verify in `package.json`). kleur is MIT. VHS is MIT. No GPL contamination.
+7. **Sound mode legal/privacy.** Playing sounds during a dev tool could be disruptive in shared spaces. **Mitigation:** off by default, opt-in only, rate-limited. README warns explicitly.
 
-8. **Unknown model pricing.** New Claude models will be released; pricing table lags. **Mitigation:** Sonnet-rate fallback + `--debug` stderr warning. Pricing updates are trivial PRs.
+8. **Unknown model pricing** — same as v1.
+
+9. **License: scenes.json** — pure data, MIT-licensed as part of the hakcer package. No scene content is copyrighted (short references, parody, fair use).
+
+10. **Content review.** Some scenes reference real brands/people (Metallica, Lars Ulrich, etc.) as parody. If any party objects, the scene in question is removed by JSON PR. No code change required.
+
+11. **Claude Code JSON schema drift** — same as v1.
+
+12. **Cold-start time** — same as v1.
 
 ## 15. v1 scope summary
 
 **In:**
 - `hakcer-statusline` bin in the existing Ink package
 - Full `ink/source/statusline/` tree per §3.1
-- 12 scenes from §5 + 2 SecKC event scenes
-- Event provider infrastructure + SecKC provider (opt-in)
-- Rotation engine with all triggers from §7.3
-- Preview mode, `--list`, `--explain`, `--debug`
+- `ink/source/statusline/data/scenes.json` — 157 scenes, 19 packs, 20 palettes, 14 effects, 6 special modes (already committed as [9eb0fad](https://github.com/NoDataFound/hakcer/commit/9eb0fad))
+- Scene JSON schema + validator (`scenes.schema.json` + `ajv` at test time)
+- Scene interpreter (`render/interpret.ts`) with template substitution, palette apply, separator resolution, glyph injection
+- Effect engine with **at minimum 6 working effects** in v1: `typewriter`, `scanline`, `glitch_corrupt`, `color_wave`, `matrix_drip`, `static_noise`. Remaining 8 effects stub as pass-through with a test-suite exclusion comment. v1.1 fills them in.
+- Data pipeline (stdin, transcript, git, pricing, dotted-path resolver, events cache)
+- Rotation engine with pack filtering + all triggers
+- Special modes: `corruption`, `screensaver`, `konami` (via marker file). `sound`, `combo`, `motd` stubbed but disabled — hooks exist, no implementation, flag errors out with "not yet implemented in v1."
+- Event providers: SecKC (opt-in)
+- CLI surface per §10
+- Preview mode, `--list`, `--list-packs`, `--list-palettes`, `--explain`, `--debug`, `--install-fonts`
+- Font detection + fallback registry
 - Full test suite per §11
-- `CONTRIBUTING.md` sections for scenes and providers
-- README showcase per §13.3
-- Plain HTML demo page per §13.4
-- CI workflow for VHS GIF regeneration per §13.5
+- `CONTRIBUTING.md` sections for adding scenes, packs, palettes, and providers (all JSON edits)
+- README showcase per §13.2
+- Plain HTML demo page at `/docs/`
+- CI workflow for VHS GIF regeneration (per-pack tapes)
 - Pricing table for Opus 4.6 / Sonnet 4.6 / Haiku 4.5
 
 **Out:**
+- 8 of 14 effects (stubbed, deliver in v1.1)
+- `sound` mode (flag errors; v1.1)
+- `combo` mode (flag errors; v1.1)
+- `motd` rotation source (stub; v1.1 or later)
 - TOML / YAML config
 - Starship passthrough
-- Windows PowerShell support
+- Windows PowerShell
 - Multi-line statuslines
-- User-local scenes outside the package
+- User-local `~/.config/hakcer-statusline/scenes.json` override
 - Additional event providers beyond SecKC (welcomed as contributions post-merge)
-- Live JS browser recreation of scenes on the demo page
+- Live JS browser recreation on the demo page
 - Custom domain
 - Telemetry
 - Rust rewrite
@@ -788,11 +1009,82 @@ jobs:
 ## 16. Success criteria
 
 1. `hakcer-statusline` installs with `npm i -g hakcer` and works via one line in `settings.json`.
-2. Cold-start render time < 150 ms on an M1 (target < 80 ms).
-3. All 12 scenes pass the invariant suite across every width/tick/theme combination.
-4. Adding a new scene is a single TypeScript file PR that passes CI without human review of the scene's rendering mechanics.
-5. `--events=seckc` produces a background-cached `events.json` on first run and fires `seckc-upcoming` when an event is within 7 days.
-6. Trigger system fires correctly for all seven rules in §7.3, verified by rotation test suite.
-7. README renders GIFs from the `demos` branch on GitHub.
-8. `security-auditor` subagent sign-off on the implementation PR.
-9. Zero network calls unless `--events` is passed.
+2. Cold-start render time < 150 ms on an M1 (target < 100 ms with the full JSON load).
+3. All 157 scenes pass the library integrity suite (`library.test.ts`) and the scene invariant matrix (`scenes.test.ts`).
+4. All 19 packs can be selected individually via `--pack=<id>`, producing a non-empty rotation pool filtered to that pack.
+5. Adding a new scene is a single JSON object edit with zero TypeScript changes, and CI validates the addition automatically.
+6. `--events=seckc` produces a cached `events.json` on first run and fires `events_seckc_upcoming` when an event is within 7 days (verified by manual test with fixture data).
+7. All trigger rules in §7.4 fire correctly (verified by rotation test suite).
+8. At least 6 of 14 effects render distinguishable output (verified by snapshot diff between `--effect=typewriter` and `--effect=scanline` on the same scene).
+9. `corruption`, `screensaver`, and `konami` modes work end-to-end.
+10. Nerd Font detection correctly falls back on a vanilla Terminal.app and renders without `?` boxes.
+11. README renders GIFs from the `demos` branch on GitHub.
+12. `security-auditor` subagent sign-off on the implementation PR.
+13. Zero network calls in the default configuration.
+
+---
+
+## Appendix A — scenes.json top-level shape (canonical reference)
+
+```json
+{
+  "meta": {
+    "name": "hakcer-statusline-master",
+    "version": "1.0.0",
+    "description": "Complete scene library...",
+    "scene_count": 157,
+    "pack_count": 19,
+    "theme_count": 28,
+    "effect_count": 12
+  },
+  "glyph_registry": {
+    "powerline_separators": { ... },
+    "powerline_symbols":    { ... },
+    "nerd_font_icons":      { ... },
+    "block_elements":       { ... },
+    "box_drawing":          { ... }
+  },
+  "font_logos": {
+    "auto_detect_os": { "method": "...", "position": "leftmost_segment", "map": { "alpine": "0xF300", ... } },
+    "auto_detect_wm": { "method": "...", "map": { "awesome": "0xF354", ... } },
+    "scene_overrides": { "msf_*": "0xF327", ... }
+  },
+  "palettes": {
+    "_existing_hakcer_themes": [ ... ],
+    "amber_crt":     { "bg": "...", "fg": "...", "accent": "...", "glow": "..." },
+    "green_phosphor":{ ... },
+    "kali_red":      { ... },
+    ...  // 20 total
+  },
+  "separator_map": {
+    "core": "arrow", "warez": "pixel", "phreaking": "hexagon", ...  // 18 total
+  },
+  "effects": {
+    "scanline":      { "type": "...", "speed": "...", "desc": "..." },
+    "typewriter":    { ... },
+    ...  // 14 total
+    "_hakcer_to_statusline_map": { "decrypt": "...", "colorshift": "...", ... },
+    "_no_statusline_translation": [ ... ]
+  },
+  "special_modes": {
+    "corruption":        { "flag": "--corrupt", "frequency": "1 in 50 frames", "messages": [ ... ] },
+    "konami_easter_egg": { "trigger": "up up down down left right left right b a", "hidden_scene_id": "konami_winner" },
+    "sound_mode":        { "flag": "--sound", ... },
+    "combo_frames":      { ... },
+    "screensaver":       { "trigger": "idle_timeout", "timeout_seconds": 300, "banner_source": "...", "effects": [ ... ] },
+    "motd_rotation":     { ... }
+  },
+  "packs": {
+    "core":       { "flag": "--pack=core",       "desc": "..." },
+    "warez":      { "flag": "--pack=warez",      "desc": "NFO, keygen, FTP ratio, nuke, courier, XDCC" },
+    "phreaking":  { "flag": "--pack=phreaking",  "desc": "..." },
+    ...  // 19 total
+  },
+  "scenes": [
+    { "id": "core_matrix_rain", "name": "...", "pack": "core", ... },
+    ...  // 157 total
+  ]
+}
+```
+
+All engine modules treat this shape as the canonical source of truth. Schema enforced via [scenes.schema.json](ink/source/statusline/data/scenes.schema.json) and validated in CI.
