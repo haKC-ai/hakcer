@@ -1,0 +1,3540 @@
+{
+  "meta": {
+    "name": "hakcer-statusline-master",
+    "version": "1.0.0",
+    "description": "Complete scene library, glyph registry, themes, effects, and special modes for hakcer statusline",
+    "scene_count": 167,
+    "pack_count": 20,
+    "theme_count": 28,
+    "effect_count": 12
+  },
+  "glyph_registry": {
+    "powerline_separators": {
+      "arrow_right": {
+        "hex": "U+E0B0"
+      },
+      "arrow_right_thin": {
+        "hex": "U+E0B1"
+      },
+      "arrow_left": {
+        "hex": "U+E0B2"
+      },
+      "arrow_left_thin": {
+        "hex": "U+E0B3"
+      },
+      "round_right": {
+        "hex": "U+E0B4"
+      },
+      "round_right_thin": {
+        "hex": "U+E0B5"
+      },
+      "round_left": {
+        "hex": "U+E0B6"
+      },
+      "round_left_thin": {
+        "hex": "U+E0B7"
+      },
+      "diag_lower_right": {
+        "hex": "U+E0B8"
+      },
+      "diag_lower_right_thin": {
+        "hex": "U+E0B9"
+      },
+      "diag_upper_right": {
+        "hex": "U+E0BA"
+      },
+      "diag_upper_right_thin": {
+        "hex": "U+E0BB"
+      },
+      "diag_upper_left": {
+        "hex": "U+E0BC"
+      },
+      "diag_upper_left_thin": {
+        "hex": "U+E0BD"
+      },
+      "diag_lower_left": {
+        "hex": "U+E0BE"
+      },
+      "diag_lower_left_thin": {
+        "hex": "U+E0BF"
+      },
+      "flame_right": {
+        "hex": "U+E0C0"
+      },
+      "flame_right_thin": {
+        "hex": "U+E0C1"
+      },
+      "flame_left": {
+        "hex": "U+E0C2"
+      },
+      "flame_left_thin": {
+        "hex": "U+E0C3"
+      },
+      "pixel_right": {
+        "hex": "U+E0C4"
+      },
+      "pixel_right_thin": {
+        "hex": "U+E0C5"
+      },
+      "pixel_left": {
+        "hex": "U+E0C6"
+      },
+      "pixel_left_thin": {
+        "hex": "U+E0C7"
+      },
+      "hex_right": {
+        "hex": "U+E0CC"
+      },
+      "hex_right_thin": {
+        "hex": "U+E0CD"
+      },
+      "hex_left": {
+        "hex": "U+E0CE"
+      },
+      "hex_left_thin": {
+        "hex": "U+E0CF"
+      },
+      "lego_right": {
+        "hex": "U+E0D1"
+      },
+      "lego_thin": {
+        "hex": "U+E0D2"
+      }
+    },
+    "powerline_symbols": {
+      "branch": {
+        "hex": "U+E0A0"
+      },
+      "line_num": {
+        "hex": "U+E0A1"
+      },
+      "padlock": {
+        "hex": "U+E0A2"
+      }
+    },
+    "nerd_font_icons": {
+      "terminal": {
+        "hex": "U+F489",
+        "set": "devicons"
+      },
+      "folder": {
+        "hex": "U+F115",
+        "set": "fa"
+      },
+      "folder_open": {
+        "hex": "U+F07C",
+        "set": "fa"
+      },
+      "file": {
+        "hex": "U+F15B",
+        "set": "fa"
+      },
+      "download": {
+        "hex": "U+F019",
+        "set": "fa"
+      },
+      "upload": {
+        "hex": "U+F093",
+        "set": "fa"
+      },
+      "cloud": {
+        "hex": "U+F0C2",
+        "set": "fa"
+      },
+      "lock": {
+        "hex": "U+F023",
+        "set": "fa"
+      },
+      "unlock": {
+        "hex": "U+F09C",
+        "set": "fa"
+      },
+      "key": {
+        "hex": "U+F084",
+        "set": "fa"
+      },
+      "shield": {
+        "hex": "U+F132",
+        "set": "fa"
+      },
+      "bug": {
+        "hex": "U+F188",
+        "set": "fa"
+      },
+      "skull": {
+        "hex": "U+F54C",
+        "set": "fa5"
+      },
+      "bolt": {
+        "hex": "U+F0E7",
+        "set": "fa"
+      },
+      "fire": {
+        "hex": "U+F06D",
+        "set": "fa"
+      },
+      "bomb": {
+        "hex": "U+F1E2",
+        "set": "fa"
+      },
+      "warning": {
+        "hex": "U+F071",
+        "set": "fa"
+      },
+      "info": {
+        "hex": "U+F05A",
+        "set": "fa"
+      },
+      "check": {
+        "hex": "U+F00C",
+        "set": "fa"
+      },
+      "cross": {
+        "hex": "U+F00D",
+        "set": "fa"
+      },
+      "star": {
+        "hex": "U+F005",
+        "set": "fa"
+      },
+      "heart": {
+        "hex": "U+F004",
+        "set": "fa"
+      },
+      "gamepad": {
+        "hex": "U+F11B",
+        "set": "fa"
+      },
+      "music": {
+        "hex": "U+F001",
+        "set": "fa"
+      },
+      "film": {
+        "hex": "U+F008",
+        "set": "fa"
+      },
+      "tv": {
+        "hex": "U+F26C",
+        "set": "fa"
+      },
+      "globe": {
+        "hex": "U+F0AC",
+        "set": "fa"
+      },
+      "phone": {
+        "hex": "U+F095",
+        "set": "fa"
+      },
+      "envelope": {
+        "hex": "U+F0E0",
+        "set": "fa"
+      },
+      "comment": {
+        "hex": "U+F075",
+        "set": "fa"
+      },
+      "clock": {
+        "hex": "U+F017",
+        "set": "fa"
+      },
+      "hourglass": {
+        "hex": "U+F251",
+        "set": "fa"
+      },
+      "spinner": {
+        "hex": "U+F110",
+        "set": "fa"
+      },
+      "gear": {
+        "hex": "U+F013",
+        "set": "fa"
+      },
+      "gears": {
+        "hex": "U+F085",
+        "set": "fa"
+      },
+      "wrench": {
+        "hex": "U+F0AD",
+        "set": "fa"
+      },
+      "plug": {
+        "hex": "U+F1E6",
+        "set": "fa"
+      },
+      "server": {
+        "hex": "U+F233",
+        "set": "fa"
+      },
+      "database": {
+        "hex": "U+F1C0",
+        "set": "fa"
+      },
+      "wifi": {
+        "hex": "U+F1EB",
+        "set": "fa"
+      },
+      "signal": {
+        "hex": "U+F012",
+        "set": "fa"
+      },
+      "microchip": {
+        "hex": "U+F2DB",
+        "set": "fa"
+      },
+      "hdd": {
+        "hex": "U+F0A0",
+        "set": "fa"
+      },
+      "usb": {
+        "hex": "U+F287",
+        "set": "fa"
+      },
+      "power": {
+        "hex": "U+23FB",
+        "set": "iec"
+      },
+      "linux": {
+        "hex": "U+F31B",
+        "set": "font-logos"
+      },
+      "apple": {
+        "hex": "U+F302",
+        "set": "font-logos"
+      },
+      "windows": {
+        "hex": "U+F17A",
+        "set": "fa"
+      },
+      "git_branch": {
+        "hex": "U+F418",
+        "set": "octicons"
+      },
+      "github": {
+        "hex": "U+F09B",
+        "set": "fa"
+      },
+      "eye": {
+        "hex": "U+F06E",
+        "set": "fa"
+      },
+      "eye_slash": {
+        "hex": "U+F070",
+        "set": "fa"
+      },
+      "chart": {
+        "hex": "U+F080",
+        "set": "fa"
+      },
+      "archive": {
+        "hex": "U+F187",
+        "set": "fa"
+      },
+      "save": {
+        "hex": "U+F0C7",
+        "set": "fa"
+      },
+      "trash": {
+        "hex": "U+F1F8",
+        "set": "fa"
+      },
+      "user": {
+        "hex": "U+F007",
+        "set": "fa"
+      },
+      "users": {
+        "hex": "U+F0C0",
+        "set": "fa"
+      },
+      "user_secret": {
+        "hex": "U+F21B",
+        "set": "fa"
+      },
+      "rocket": {
+        "hex": "U+F135",
+        "set": "fa"
+      },
+      "flag": {
+        "hex": "U+F024",
+        "set": "fa"
+      },
+      "trophy": {
+        "hex": "U+F091",
+        "set": "fa"
+      },
+      "magic": {
+        "hex": "U+F0D0",
+        "set": "fa"
+      },
+      "search": {
+        "hex": "U+F002",
+        "set": "fa"
+      },
+      "play": {
+        "hex": "U+F04B",
+        "set": "fa"
+      },
+      "pause": {
+        "hex": "U+F04C",
+        "set": "fa"
+      },
+      "stop": {
+        "hex": "U+F04D",
+        "set": "fa"
+      },
+      "volume_up": {
+        "hex": "U+F028",
+        "set": "fa"
+      },
+      "volume_off": {
+        "hex": "U+F026",
+        "set": "fa"
+      },
+      "floppy": {
+        "hex": "U+F0C7",
+        "set": "fa"
+      },
+      "compact_disc": {
+        "hex": "U+F51F",
+        "set": "fa5"
+      },
+      "book": {
+        "hex": "U+F02D",
+        "set": "fa"
+      },
+      "paint": {
+        "hex": "U+F1FC",
+        "set": "fa"
+      },
+      "image": {
+        "hex": "U+F1C5",
+        "set": "fa"
+      },
+      "antenna": {
+        "hex": "U+F0A1",
+        "set": "fa"
+      },
+      "satellite": {
+        "hex": "U+F7BF",
+        "set": "fa5"
+      }
+    },
+    "block_elements": {
+      "full": "█",
+      "dark_shade": "▓",
+      "medium_shade": "▒",
+      "light_shade": "░",
+      "upper_half": "▀",
+      "lower_half": "▄",
+      "left_half": "▌",
+      "right_half": "▐",
+      "bars": [
+        "▁",
+        "▂",
+        "▃",
+        "▄",
+        "▅",
+        "▆",
+        "▇",
+        "█"
+      ]
+    },
+    "box_drawing": {
+      "h": "─",
+      "v": "│",
+      "tl": "┌",
+      "tr": "┐",
+      "bl": "└",
+      "br": "┘",
+      "h_heavy": "━",
+      "v_heavy": "┃",
+      "h_double": "═",
+      "v_double": "║"
+    }
+  },
+  "font_logos": {
+    "auto_detect_os": {
+      "method": "Read /etc/os-release ID field or platform.system()",
+      "position": "leftmost_segment",
+      "map": {
+        "alpine": "0xF300",
+        "apple": "0xF302",
+        "archlinux": "0xF303",
+        "centos": "0xF304",
+        "debian": "0xF306",
+        "docker": "0xF308",
+        "elementary": "0xF309",
+        "fedora": "0xF30A",
+        "freebsd": "0xF30C",
+        "gentoo": "0xF30D",
+        "kali": "0xF327",
+        "linuxmint": "0xF30E",
+        "manjaro": "0xF312",
+        "nixos": "0xF313",
+        "opensuse": "0xF314",
+        "pop": "0xF32A",
+        "raspberry": "0xF315",
+        "redhat": "0xF316",
+        "rocky": "0xF32B",
+        "slackware": "0xF318",
+        "ubuntu": "0xF31B",
+        "void": "0xF32E",
+        "windows": "0xF17A"
+      },
+      "fallback": "0xF31A"
+    },
+    "auto_detect_wm": {
+      "method": "Read $XDG_CURRENT_DESKTOP or $DESKTOP_SESSION",
+      "map": {
+        "awesome": "0xF354",
+        "bspwm": "0xF355",
+        "budgie": "0xF320",
+        "cinnamon": "0xF35F",
+        "dwm": "0xF356",
+        "gnome": "0xF321",
+        "hyprland": "0xF359",
+        "i3": "0xF35A",
+        "kde": "0xF332",
+        "mate": "0xF35E",
+        "qtile": "0xF35B",
+        "sway": "0xF35C",
+        "xfce": "0xF323"
+      }
+    },
+    "scene_overrides": {
+      "msf_*": "0xF327",
+      "raspberry_*": "0xF315",
+      "docker_*": "0xF308",
+      "arduino_*": "0xF34B",
+      "freebsd_*": "0xF30C"
+    }
+  },
+  "palettes": {
+    "_existing_hakcer_themes": [
+      "synthwave",
+      "neon",
+      "tokyo_night",
+      "tokyo_storm",
+      "cyberpunk",
+      "matrix",
+      "dracula",
+      "nord",
+      "gruvbox"
+    ],
+    "amber_crt": {
+      "bg": "#000000",
+      "fg": "#FFB000",
+      "accent": "#FFC800",
+      "glow": "#FFD44F"
+    },
+    "green_phosphor": {
+      "bg": "#000000",
+      "fg": "#33FF33",
+      "accent": "#00FF00",
+      "glow": "#66FF66"
+    },
+    "kali_red": {
+      "bg": "#000000",
+      "fg": "#FF0000",
+      "accent": "#00FF00",
+      "highlight": "#FFFFFF"
+    },
+    "bbs_ansi": {
+      "bg": "#000000",
+      "fg": "#AAAAAA",
+      "accent": "#55FFFF",
+      "note": "Full 16-color ANSI cycling"
+    },
+    "c64_blue": {
+      "bg": "#4040E0",
+      "fg": "#A0A0FF",
+      "accent": "#FFFFFF"
+    },
+    "gameboy_green": {
+      "darkest": "#0F380F",
+      "dark": "#306230",
+      "light": "#8BAC0F",
+      "lightest": "#9BBC0F"
+    },
+    "aol_blue": {
+      "bg": "#003399",
+      "fg": "#FFFFFF",
+      "accent": "#FFCC00"
+    },
+    "tmnt_green": {
+      "bg": "#000000",
+      "fg": "#00CC00",
+      "accent": "#FF6600",
+      "leo": "#0000FF",
+      "raph": "#FF0000",
+      "donnie": "#800080",
+      "mikey": "#FF8C00"
+    },
+    "fire_red": {
+      "bg": "#000000",
+      "fg": "#FF0000",
+      "accent": "#FF6600",
+      "top": "#FFCC00"
+    },
+    "ice_blue": {
+      "bg": "#000011",
+      "fg": "#00CCFF",
+      "accent": "#FFFFFF",
+      "frost": "#AADDFF"
+    },
+    "warez_green": {
+      "bg": "#000000",
+      "fg": "#00FF00",
+      "accent": "#33FF33"
+    },
+    "phreaker_blue": {
+      "bg": "#000055",
+      "fg": "#5555FF",
+      "accent": "#FFFFFF"
+    },
+    "2600_red": {
+      "bg": "#000000",
+      "fg": "#FF0000",
+      "accent": "#FFFF00"
+    },
+    "napster_gray": {
+      "bg": "#333333",
+      "fg": "#FFFFFF",
+      "accent": "#FF6600"
+    },
+    "kazaa_gold": {
+      "bg": "#1A1A1A",
+      "fg": "#FFD700",
+      "accent": "#FF4500"
+    },
+    "irc_black": {
+      "bg": "#000000",
+      "fg": "#C0C0C0",
+      "accent": "#00FFFF"
+    },
+    "nes_gray": {
+      "bg": "#BCBCBC",
+      "fg": "#000000",
+      "accent": "#FC0000"
+    },
+    "gremlins_glow": {
+      "bg": "#000000",
+      "fg": "#33FF00",
+      "accent": "#FF3300"
+    },
+    "gpk_pink": {
+      "bg": "#FF69B4",
+      "fg": "#000000",
+      "accent": "#FFFF00"
+    }
+  },
+  "separator_map": {
+    "2600": "flame",
+    "core": "arrow",
+    "warez": "pixel",
+    "phreaking": "hexagon",
+    "aol": "rounded",
+    "p2p": "diagonal",
+    "bbs": "pixel",
+    "cartoons": "lego",
+    "movies": "arrow",
+    "toys": "lego",
+    "arcade": "pixel",
+    "early_web": "rounded",
+    "dos": "pixel",
+    "console": "pixel",
+    "hardware": "hexagon",
+    "mud": "pixel",
+    "trikc": "pixel",
+    "tv80s": "lego"
+  },
+  "effects": {
+    "scanline": {
+      "type": "per_frame",
+      "speed": "fast",
+      "desc": "Bright bar sweeps L->R revealing/refreshing chars"
+    },
+    "typewriter": {
+      "type": "per_frame",
+      "speed": "medium",
+      "desc": "Chars appear one at a time with blinking cursor"
+    },
+    "glitch_corrupt": {
+      "type": "per_frame",
+      "speed": "fast",
+      "desc": "5% of chars randomly swap to block elements for 2 frames"
+    },
+    "phosphor_fade": {
+      "type": "on_change",
+      "speed": "medium",
+      "desc": "Old chars fade with phosphor afterglow, new chars fade in"
+    },
+    "matrix_drip": {
+      "type": "per_frame",
+      "speed": "medium",
+      "desc": "Katakana cycling before settling on real chars"
+    },
+    "decrypt_reveal": {
+      "type": "per_frame",
+      "speed": "fast",
+      "desc": "Chars cycle random ASCII then lock L->R staggered"
+    },
+    "color_wave": {
+      "type": "per_frame",
+      "speed": "fast",
+      "desc": "Sine-wave gradient sweeps across static text"
+    },
+    "knight_rider": {
+      "type": "per_frame",
+      "speed": "fast",
+      "desc": "Bright spot bounces L<->R with fading trail"
+    },
+    "crt_boot": {
+      "type": "on_init",
+      "speed": "fast",
+      "desc": "CRT turn-on: center point expands outward"
+    },
+    "static_noise": {
+      "type": "on_init",
+      "speed": "fast",
+      "desc": "3 frames of random block chars then snap to real content"
+    },
+    "segment_slide": {
+      "type": "on_init",
+      "speed": "medium",
+      "desc": "Powerline segments slide in from alternating directions"
+    },
+    "heartbeat": {
+      "type": "per_frame",
+      "speed": "slow",
+      "desc": "Brightness pulses at 72 BPM sinusoidal"
+    },
+    "_hakcer_to_statusline_map": {
+      "decrypt": "decrypt_reveal",
+      "colorshift": "color_wave",
+      "print": "typewriter",
+      "slide": "segment_slide",
+      "wipe": "scanline",
+      "errorcorrect": "glitch_corrupt",
+      "vhstape": "static_noise+glitch_corrupt",
+      "matrix": "matrix_drip",
+      "burn": "crt_boot",
+      "rain": "matrix_drip",
+      "overflow": "glitch_corrupt_high_rate",
+      "scattered": "decrypt_reveal_random_order"
+    },
+    "_no_statusline_translation": [
+      "blackhole",
+      "bouncyballs",
+      "fireworks",
+      "orbittingvolley",
+      "rings",
+      "spotlights",
+      "swarm",
+      "synthgrid"
+    ]
+  },
+  "special_modes": {
+    "corruption": {
+      "flag": "--corrupt",
+      "desc": "Every Nth frame renders as SEGFAULT or KERNEL PANIC for exactly 1 frame then snaps back",
+      "frequency": "1 in 50 frames",
+      "messages": [
+        "SEGFAULT",
+        "KERNEL PANIC - NOT SYNCING",
+        "STACK SMASHING DETECTED",
+        "GURU MEDITATION",
+        "BSOD",
+        "ABORT TRAP 6"
+      ]
+    },
+    "konami_easter_egg": {
+      "trigger": "up up down down left right left right b a",
+      "behavior": "Rapid-cycle all scenes at 100ms each, land on hidden scene that says 'you win nothing'",
+      "hidden_scene_id": "konami_winner"
+    },
+    "sound_mode": {
+      "flag": "--audio",
+      "desc": "Pipes to say/espeak for scene-specific sounds",
+      "scene_sounds": {
+        "wardial": "DTMF tones",
+        "matrix_rain": "digital rain ambient",
+        "modem": "56K handshake screech",
+        "aol": "You've Got Mail",
+        "aim": "door open/close"
+      }
+    },
+    "combo_frames": {
+      "desc": "Two scenes rendered simultaneously on split halves, bleeding into each other at the seam",
+      "seam_behavior": "Mixed glyphs from both scenes at center point",
+      "example": "Left=matrix_rain, Right=msf_exploit, center=mixed"
+    },
+    "screensaver": {
+      "trigger": "idle_timeout",
+      "timeout_seconds": 300,
+      "behavior": "Replace statusline with random haKCAssets banner + hakcer slow effect. Keypress snaps back.",
+      "banner_source": "haKCAssets/banners/*.txt",
+      "effects": [
+        "synthgrid",
+        "matrix",
+        "fireworks",
+        "blackhole"
+      ]
+    },
+    "motd_rotation": {
+      "source": "haKCAssets MOTD collection (101+ messages)",
+      "rotation": "1 per session or per hour",
+      "scene_type": "theater",
+      "separator": "pixel"
+    }
+  },
+  "packs": {
+    "2600": {
+      "flag": "--pack=2600",
+      "desc": "Magazine, meetings, TOTSE, Phrack, manifesto, Free Kevin, L0pht, BO2K, Sub7, DEF CON"
+    },
+    "core": {
+      "flag": "--pack=core",
+      "desc": "Original 11 hakcer statusline scenes"
+    },
+    "warez": {
+      "flag": "--pack=warez",
+      "desc": "NFO, keygen, FTP ratio, nuke, courier, XDCC"
+    },
+    "phreaking": {
+      "flag": "--pack=phreaking",
+      "desc": "Blue/red/beige box, wardialing, VMB, 2600Hz"
+    },
+    "aol": {
+      "flag": "--pack=aol",
+      "desc": "AOL progz, chat, AIM, keywords, free hours CDs"
+    },
+    "p2p": {
+      "flag": "--pack=p2p",
+      "desc": "Napster, LimeWire, Kazaa, eDonkey, DC++, Soulseek"
+    },
+    "bbs": {
+      "flag": "--pack=bbs",
+      "desc": "BBS login, ANSI art, IRC/mIRC"
+    },
+    "mud": {
+      "flag": "--pack=mud",
+      "desc": "MUD login/combat/who, MOO, TW2002, LORD, BRE, MajorMUD, GemStone"
+    },
+    "movies": {
+      "flag": "--pack=movies",
+      "desc": "JP Unix, WarGames, Hackers, Matrix, TRON, Sneakers, Alien, etc"
+    },
+    "cartoons": {
+      "flag": "--pack=cartoons",
+      "desc": "TMNT, Voltron, ThunderCats, Captain N, Knight Rider, A-Team, etc"
+    },
+    "toys": {
+      "flag": "--pack=toys",
+      "desc": "Power Glove, Speak & Spell, Tiger LCD, Tamagotchi, Furby, GPK, Pogs, etc"
+    },
+    "arcade": {
+      "flag": "--pack=arcade",
+      "desc": "Gauntlet, Double Dragon, MK, NBA Jam, Metal Slug, Frogger, Tapper"
+    },
+    "console": {
+      "flag": "--pack=console",
+      "desc": "NES, Game Boy, GameShark, Pokemon, Rad Racer"
+    },
+    "dos": {
+      "flag": "--pack=dos",
+      "desc": "FORMAT C:, DELTREE, defrag, Winamp, screensavers, Encarta, Oregon Trail"
+    },
+    "early_web": {
+      "flag": "--pack=early_web",
+      "desc": "GeoCities, Angelfire, BonziBuddy, Newgrounds, YTMND, RealPlayer, NetZero"
+    },
+    "trikc": {
+      "flag": "--pack=trikc",
+      "desc": "TriKC 0x01 talk scenes: NES title, Max Headroom, ALF, Goonies, Bill&Ted, Power Glove build"
+    },
+    "tv80s": {
+      "flag": "--pack=tv80s",
+      "desc": "Knight Rider, A-Team, MacGyver, Voltron, ThunderCats, SBTB, Reading Rainbow, Quantum Leap"
+    },
+    "cinema": {
+      "flag": "--pack=cinema",
+      "desc": "All movie scenes"
+    },
+    "all": {
+      "flag": "--pack=all",
+      "desc": "Everything"
+    },
+    "cartoon_flipbook": {
+      "flag": "--pack cartoon_flipbook",
+      "desc": "One-line flipbook ASCII cartoons. Raw frames, no color effects."
+    }
+  },
+  "scenes": [
+    {
+      "id": "core_matrix_rain",
+      "name": "Matrix Rain + Data",
+      "pack": "core",
+      "type": "data",
+      "verb": "DECODING",
+      "sep": "arrow",
+      "palette": "matrix",
+      "icons": [],
+      "frame": "ｦ8 {model} ｷ {cost} ｲ [{ctx_bar}] {ctx}% ﾑ {git} ﾒ",
+      "data_map": {
+        "model": "model",
+        "cost": "cost",
+        "ctx": "context_pct",
+        "git": "git_branch"
+      },
+      "desc": "Katakana interference sprinkled through real data. Green gradient fall."
+    },
+    {
+      "id": "core_decrypt",
+      "name": "Decrypt Cipher",
+      "pack": "core",
+      "type": "data",
+      "verb": "DECRYPTING",
+      "sep": "arrow",
+      "palette": "ice_blue",
+      "icons": [],
+      "frame": "▓{model_partial} {cost_partial} [▓{ctx_bar}] {ctx_partial} {git_partial}",
+      "data_map": {
+        "model": "model",
+        "cost": "cost",
+        "ctx": "context_pct",
+        "git": "git_branch"
+      },
+      "desc": "Data with chars mid-decrypt, resolves across frames."
+    },
+    {
+      "id": "core_base64",
+      "name": "Base64 Crack",
+      "pack": "core",
+      "type": "data",
+      "verb": "CRACKING",
+      "sep": "arrow",
+      "palette": "green_phosphor",
+      "icons": [],
+      "frame": "b64d Zm9vYmFy... -> {model} {cost} [{ctx_bar}] {ctx}%",
+      "data_map": {
+        "model": "model",
+        "cost": "cost",
+        "ctx": "context_pct"
+      },
+      "desc": "Data presented as decoded output of a fake b64 exploit."
+    },
+    {
+      "id": "core_pcb_trace",
+      "name": "PCB Trace",
+      "pack": "core",
+      "type": "data",
+      "verb": "TRACING",
+      "sep": "hexagon",
+      "palette": "neon",
+      "icons": [],
+      "frame": "┌●━{model}━●━{cost}━●━[{ctx_bar}]━●━{ctx}%━●┐",
+      "data_map": {
+        "model": "model",
+        "cost": "cost",
+        "ctx": "context_pct"
+      },
+      "desc": "Data nodes connected by circuit traces, nodes pulse."
+    },
+    {
+      "id": "core_port_scan",
+      "name": "Port Scan",
+      "pack": "core",
+      "type": "data",
+      "verb": "SCANNING",
+      "sep": "arrow",
+      "palette": "ice_blue",
+      "icons": [],
+      "frame": "nmap claude.ai [{model}✓ {cost}✓ ctx:{ctx}%✓ {git}✓]",
+      "data_map": {
+        "model": "model",
+        "cost": "cost",
+        "ctx": "context_pct",
+        "git": "git_branch"
+      },
+      "desc": "Data disguised as nmap scan results, ports open one by one."
+    },
+    {
+      "id": "core_hakcer_typer",
+      "name": "Hakcer Typer",
+      "pack": "core",
+      "type": "theater",
+      "verb": "TYPING",
+      "sep": "arrow",
+      "palette": "matrix",
+      "icons": [],
+      "frame": "$ sudo ./exploit.sh --target=pentagon.gov --payload=zeroday█",
+      "data_map": null,
+      "desc": "Fake shell typing, cursor at end."
+    },
+    {
+      "id": "core_wardial",
+      "name": "Wardial Handshake",
+      "pack": "core",
+      "type": "theater",
+      "verb": "DIALING",
+      "sep": "hexagon",
+      "palette": "phreaker_blue",
+      "icons": [],
+      "frame": "ATDT867-5309...CONNECT 2400...HANDSHAKE COMPLETE",
+      "data_map": null,
+      "desc": "Phreaking aesthetic, data revealed after handshake."
+    },
+    {
+      "id": "core_syn_ack",
+      "name": "Packet SYN/ACK",
+      "pack": "core",
+      "type": "theater",
+      "verb": "HANDSHAKING",
+      "sep": "arrow",
+      "palette": "neon",
+      "icons": [],
+      "frame": "[SYN->] [<-SYN/ACK] [ACK->] == TLS1.3 == 0-RTT",
+      "data_map": null,
+      "desc": "TCP handshake + TLS negotiation."
+    },
+    {
+      "id": "core_buffer_overflow",
+      "name": "Buffer Overflow",
+      "pack": "core",
+      "type": "theater",
+      "verb": "OVERFLOWING",
+      "sep": "flame",
+      "palette": "fire_red",
+      "icons": [],
+      "frame": "0xDEADBEEF -> 0xCAFEBABE -> 0x1337C0DE -> RIP=0x41414141",
+      "data_map": null,
+      "desc": "Hex addresses overwriting, classic smash the stack."
+    },
+    {
+      "id": "core_snake",
+      "name": "Snake Braille",
+      "pack": "core",
+      "type": "theater",
+      "verb": "HUNTING",
+      "sep": "arrow",
+      "palette": "green_phosphor",
+      "icons": [],
+      "frame": "⠄⠠⠐⢀⠠⠐●⠄⠁⠂⠄⠂o⠁⠠⠂⠄⠐",
+      "data_map": null,
+      "desc": "Snake eats dots, grows, wraps. Braille characters."
+    },
+    {
+      "id": "core_msf",
+      "name": "MSF MS08-067",
+      "pack": "core",
+      "type": "theater",
+      "verb": "PWNING",
+      "sep": "flame",
+      "palette": "kali_red",
+      "icons": [],
+      "frame": "msf> use exploit/windows/smb/ms08_067_netapi -> [+] Meterpreter session 1 opened -> NT AUTHORITY\\SYSTEM",
+      "data_map": null,
+      "desc": "Metasploit kill chain. Red/green Kali colors. 12 frames per full run."
+    },
+    {
+      "id": "brainstorm_dns_exfil",
+      "name": "DNS Exfil",
+      "pack": "core",
+      "type": "theater",
+      "verb": "EXFILTRATING",
+      "sep": "arrow",
+      "palette": "green_phosphor",
+      "icons": [],
+      "frame": "dig TXT opus-4.6.cost.0.42.ctx.38.c2.darkcode.ai",
+      "data_map": null,
+      "desc": "Data encoded as subdomain queries scrolling by."
+    },
+    {
+      "id": "brainstorm_eicar",
+      "name": "EICAR Test String",
+      "pack": "core",
+      "type": "theater",
+      "verb": "DETECTING",
+      "sep": "flame",
+      "palette": "2600_red",
+      "icons": [],
+      "frame": "X5O!P%@AP[4\\PZX54(P^)7CC)7}$EICAR-STANDARD...morphing into real data",
+      "data_map": null,
+      "desc": "EICAR string slowly morphs into actual statusline data."
+    },
+    {
+      "id": "brainstorm_git_blame",
+      "name": "Git Blame Archaeology",
+      "pack": "core",
+      "type": "theater",
+      "verb": "BLAMING",
+      "sep": "arrow",
+      "palette": "amber_crt",
+      "icons": [],
+      "frame": "blame -L 1337,1337 exploit.c | Author: root Date: 1999-12-31 '// TODO: fix before Y2K'",
+      "data_map": null,
+      "desc": "Increasingly cursed git blame outputs from fictional commits."
+    },
+    {
+      "id": "brainstorm_stuxnet_plc",
+      "name": "Stuxnet PLC Ladder",
+      "pack": "core",
+      "type": "theater",
+      "verb": "CONTROLLING",
+      "sep": "hexagon",
+      "palette": "amber_crt",
+      "icons": [],
+      "frame": "--| |--[MOT1]--( )--[RPM:1410]--[FREQ:1064Hz]--",
+      "data_map": null,
+      "desc": "Ladder logic diagram. Rungs closing and opening. Industrial control."
+    },
+    {
+      "id": "brainstorm_nfo_ticker",
+      "name": "NFO ANSI Art Ticker",
+      "pack": "warez",
+      "type": "theater",
+      "verb": "SCROLLING",
+      "sep": "pixel",
+      "palette": "warez_green",
+      "icons": [],
+      "frame": "▄█▀ ▄▄█▀▀ hAKCer ▀▀█▄▄ ▀█▄",
+      "data_map": null,
+      "desc": "Warez NFO top-border compressed to one row, scrolling."
+    },
+    {
+      "id": "brainstorm_rubber_ducky",
+      "name": "Rubber Ducky Script",
+      "pack": "core",
+      "type": "theater",
+      "verb": "INJECTING",
+      "sep": "hexagon",
+      "palette": "kali_red",
+      "icons": [],
+      "frame": "DELAY 500 STRING powershell -w hidden -enc SQBFAFgA...",
+      "data_map": null,
+      "desc": "USB payload deploy. Keystroke injection aesthetic."
+    },
+    {
+      "id": "brainstorm_cve_roulette",
+      "name": "CVE Roulette",
+      "pack": "core",
+      "type": "data",
+      "verb": "SCORING",
+      "sep": "flame",
+      "palette": "2600_red",
+      "icons": [],
+      "frame": "CVE-2025-2492 CVSS:9.8 ASUS CRITICAL [{ctx_bar}] PATCH:NO",
+      "data_map": {
+        "ctx": "cvss_bar"
+      },
+      "desc": "Random real CVE ID scored per refresh."
+    },
+    {
+      "id": "brainstorm_hashcat",
+      "name": "Hashcat Mask Attack",
+      "pack": "core",
+      "type": "theater",
+      "verb": "CRACKING",
+      "sep": "arrow",
+      "palette": "green_phosphor",
+      "icons": [],
+      "frame": "?u?l?l?l?d?d?d?d -> P@ss1234 -> CRACKED [14.2 GH/s] rockyou.txt",
+      "data_map": null,
+      "desc": "Mask cycling through permutations until crack."
+    },
+    {
+      "id": "brainstorm_wireshark",
+      "name": "Wireshark Hex Dump",
+      "pack": "core",
+      "type": "theater",
+      "verb": "CAPTURING",
+      "sep": "arrow",
+      "palette": "ice_blue",
+      "icons": [],
+      "frame": "0x0000: 4500 003c 1c46 4000 4006 b1e6 ac10 0a63 (real data hidden in ASCII column)",
+      "data_map": null,
+      "desc": "Raw packet hex scrolling, actual data in ASCII decode column."
+    },
+    {
+      "id": "brainstorm_bbs_door",
+      "name": "BBS Door Game Stats",
+      "pack": "core",
+      "type": "data",
+      "verb": "PLAYING",
+      "sep": "pixel",
+      "palette": "bbs_ansi",
+      "icons": [],
+      "frame": "[TradeWars 2002] Sector 1337 - Fuel: 42 - Shields: {ctx}% - Credits: ${cost}",
+      "data_map": {
+        "ctx": "shields_pct",
+        "cost": "credits"
+      },
+      "desc": "Real data mapped onto TW2002 ship stats."
+    },
+    {
+      "id": "warez_nfo",
+      "name": "Warez NFO Header",
+      "pack": "warez",
+      "type": "theater",
+      "verb": "CRACKING",
+      "sep": "pixel",
+      "palette": "warez_green",
+      "icons": [
+        "lock",
+        "unlock"
+      ],
+      "frame": "▄█▀ DARKCODE ▀█▄ PRESENTS 100% WORKING KEYGEN GREETZ: SecKC",
+      "data_map": null,
+      "desc": "NFO header scrolling. Group credits and greetz."
+    },
+    {
+      "id": "warez_keygen",
+      "name": "Keygen Music Player",
+      "pack": "warez",
+      "type": "theater",
+      "verb": "GENERATING",
+      "sep": "pixel",
+      "palette": "warez_green",
+      "icons": [
+        "music",
+        "key"
+      ],
+      "frame": "KEYGEN v3.7 SERIAL: A7F3-B9C1-D4E2-???? GENERATING...",
+      "data_map": null,
+      "desc": "Serial reveals char by char. Chiptune viz bars. 6 frames."
+    },
+    {
+      "id": "warez_ratio",
+      "name": "FTP Ratio Site",
+      "pack": "warez",
+      "type": "data",
+      "verb": "UPLOADING",
+      "sep": "pixel",
+      "palette": "warez_green",
+      "icons": [
+        "upload",
+        "server"
+      ],
+      "frame": "RATIO SITE UL: {cost} GB RATIO: 1:{ctx} CREDITS: {cost}",
+      "data_map": {
+        "cost": "upload_gb",
+        "ctx": "ratio"
+      },
+      "desc": "Upload before you download."
+    },
+    {
+      "id": "warez_nuke",
+      "name": "Release Nuked",
+      "pack": "warez",
+      "type": "theater",
+      "verb": "NUKING",
+      "sep": "flame",
+      "palette": "2600_red",
+      "icons": [
+        "bomb",
+        "warning"
+      ],
+      "frame": "NUKED! RLS: hakcer.v1.0-RELOADED REASON: BAD.CRC -100GB",
+      "data_map": null,
+      "desc": "Nuke/unnuke cycle. Drama in text form."
+    },
+    {
+      "id": "warez_courier",
+      "name": "Courier Race",
+      "pack": "warez",
+      "type": "data",
+      "verb": "RACING",
+      "sep": "pixel",
+      "palette": "warez_green",
+      "icons": [
+        "rocket",
+        "trophy"
+      ],
+      "frame": "RACE: hakcer.v2.0 1st: DarkCode 0:{ctx} 2nd: RZR 0:{cost}",
+      "data_map": {
+        "ctx": "first_time",
+        "cost": "second_time"
+      },
+      "desc": "Who uploads to the most topsites fastest."
+    },
+    {
+      "id": "warez_xdcc",
+      "name": "IRC XDCC Transfer",
+      "pack": "warez",
+      "type": "data",
+      "verb": "TRANSFERRING",
+      "sep": "pixel",
+      "palette": "warez_green",
+      "icons": [
+        "download",
+        "server"
+      ],
+      "frame": "XDCC BOT #38: hakcer.v2.0.zip 42MB {ctx}% {cost} KB/s",
+      "data_map": {
+        "ctx": "transfer_pct",
+        "cost": "speed_kbps"
+      },
+      "desc": "IRC XDCC file serving. DCC SEND/RECV."
+    },
+    {
+      "id": "warez_sub7",
+      "name": "Sub7 RAT",
+      "pack": "warez",
+      "type": "theater",
+      "verb": "CONTROLLING",
+      "sep": "flame",
+      "palette": "2600_red",
+      "icons": [
+        "eye",
+        "skull"
+      ],
+      "frame": "SUB7 v2.2 TARGET: CONNECTED [CD TRAY: OPEN/CLOSE] [FLIP SCREEN] [SWAP MOUSE]",
+      "data_map": null,
+      "desc": "Sub7/NetBus RAT. CD tray trolling. Script kiddie power trip circa 1999."
+    },
+    {
+      "id": "phreak_bluebox",
+      "name": "Blue Box 2600Hz",
+      "pack": "phreaking",
+      "type": "theater",
+      "verb": "PHREAKING",
+      "sep": "hexagon",
+      "palette": "phreaker_blue",
+      "icons": [
+        "phone",
+        "music"
+      ],
+      "frame": "BLUE BOX TONE: 2600Hz TRUNK: SEIZED OPERATOR: BYPASSED CALL: FREE",
+      "data_map": null,
+      "desc": "2600Hz trunk seizure. MF tones route the call. Cap'n Crunch whistle."
+    },
+    {
+      "id": "phreak_redbox",
+      "name": "Red Box Payphone",
+      "pack": "phreaking",
+      "type": "theater",
+      "verb": "DEPOSITING",
+      "sep": "hexagon",
+      "palette": "phreaker_blue",
+      "icons": [
+        "phone"
+      ],
+      "frame": "RED BOX *BOOP* *BOOP* COIN ACCEPTED TOTAL: $0.42 CALL CONNECTED",
+      "data_map": null,
+      "desc": "Modified Radio Shack DTMF dialer. 6.5MHz crystal mod."
+    },
+    {
+      "id": "phreak_beigebox",
+      "name": "Beige Box Lineman",
+      "pack": "phreaking",
+      "type": "theater",
+      "verb": "TAPPING",
+      "sep": "hexagon",
+      "palette": "phreaker_blue",
+      "icons": [
+        "phone",
+        "plug"
+      ],
+      "frame": "BEIGE BOX ALLIGATOR CLIPS: GREEN/RED TARGET: NEIGHBOR LINE: ACTIVE",
+      "data_map": null,
+      "desc": "Phone handset with alligator clips on neighbor's line. Ordering pizza."
+    },
+    {
+      "id": "phreak_wardial",
+      "name": "ToneLoc Wardialing",
+      "pack": "phreaking",
+      "type": "data",
+      "verb": "DIALING",
+      "sep": "hexagon",
+      "palette": "phreaker_blue",
+      "icons": [
+        "phone",
+        "server"
+      ],
+      "frame": "TONELOC RANGE: 816-555-0000-9999 DIALED: {cost} CARRIERS: {ctx}",
+      "data_map": {
+        "cost": "numbers_dialed",
+        "ctx": "carriers_found"
+      },
+      "desc": "ToneLoc/THC-SCAN wardialing. Scanning for carriers."
+    },
+    {
+      "id": "phreak_vmb",
+      "name": "VMB Hacking",
+      "pack": "phreaking",
+      "type": "data",
+      "verb": "SCANNING",
+      "sep": "hexagon",
+      "palette": "phreaker_blue",
+      "icons": [
+        "phone",
+        "key"
+      ],
+      "frame": "VMB SCANNER AUDIX TRYING: 0000...1111...1234... BOXES: {cost} DEFAULT PINS: {ctx}",
+      "data_map": {
+        "cost": "boxes_found",
+        "ctx": "default_pins"
+      },
+      "desc": "Voicemail box scanning. Default PINs."
+    },
+    {
+      "id": "phreak_conference",
+      "name": "Alliance Teleconference",
+      "pack": "phreaking",
+      "type": "theater",
+      "verb": "CONFERENCING",
+      "sep": "hexagon",
+      "palette": "phreaker_blue",
+      "icons": [
+        "phone",
+        "users"
+      ],
+      "frame": "ALLIANCE TELECONFERENCE BRIDGE: 0700-456-1337 CALLERS: 38 SOMEONE IS EATING",
+      "data_map": null,
+      "desc": "Hacked AT&T Alliance bridge. 38 phreakers on the line."
+    },
+    {
+      "id": "aol_progz",
+      "name": "AOL Progz",
+      "pack": "aol",
+      "type": "theater",
+      "verb": "PUNTING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [
+        "bomb",
+        "users"
+      ],
+      "frame": "AOL PROGZ v4.0 FATE X [PUNT] [PHISH] [SCROLL] TARGET: OFFLINE PWNED",
+      "data_map": null,
+      "desc": "Fate X, AOHell. IM bombing, getting TOS'd, switching screen names."
+    },
+    {
+      "id": "aol_chatroom",
+      "name": "AOL Chat Room",
+      "pack": "aol",
+      "type": "theater",
+      "verb": "CHATTING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [
+        "comment",
+        "users"
+      ],
+      "frame": "PEOPLE CONNECTION ROOM: HACKING 23/23 FULL a/s/l?",
+      "data_map": null,
+      "desc": "AOL People Connection chat room circa 1996. Always full."
+    },
+    {
+      "id": "aol_keyword",
+      "name": "AOL Keyword",
+      "pack": "aol",
+      "type": "data",
+      "verb": "CONNECTING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [
+        "globe",
+        "envelope"
+      ],
+      "frame": "WELCOME YOU'VE GOT MAIL KEYWORD: {model} MAIL: {ctx}% BUDDIES: {cost}",
+      "data_map": {
+        "model": "keyword",
+        "ctx": "mail_pct",
+        "cost": "buddy_count"
+      },
+      "desc": "AOL keyword navigation."
+    },
+    {
+      "id": "aol_aim",
+      "name": "AIM Buddy List",
+      "pack": "aol",
+      "type": "data",
+      "verb": "MESSAGING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [
+        "comment",
+        "user"
+      ],
+      "frame": "AIM haKCer: ONLINE AWAY: 'brb hacking' BUDDIES: {cost} WARNED: {ctx}%",
+      "data_map": {
+        "cost": "buddy_count",
+        "ctx": "warn_level"
+      },
+      "desc": "AIM buddy list. Warn levels."
+    },
+    {
+      "id": "aol_cd",
+      "name": "AOL Free Hours CD",
+      "pack": "aol",
+      "type": "theater",
+      "verb": "INSTALLING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [
+        "compact_disc"
+      ],
+      "frame": "AOL 3.0 FREE CD 1000 HOURS! DIALING...*SCREECH* MOM PICKED UP PHONE *DISCONNECT*",
+      "data_map": null,
+      "desc": "Install, dial, mom picks up phone, disconnect. Every 90s kid."
+    },
+    {
+      "id": "aol_hotmail",
+      "name": "Hotmail 'Hacking'",
+      "pack": "aol",
+      "type": "theater",
+      "verb": "HACKING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [
+        "envelope",
+        "key"
+      ],
+      "frame": "TO: password-recovery@hotmail.com SUBJ: LOST PASSWORD 'MY PASSWORD IS: hunter2'",
+      "data_map": null,
+      "desc": "The Hotmail hack where you email your own password. Age: 13. Confidence: 100%."
+    },
+    {
+      "id": "p2p_napster",
+      "name": "Napster Download",
+      "pack": "p2p",
+      "type": "data",
+      "verb": "DOWNLOADING",
+      "sep": "diagonal",
+      "palette": "napster_gray",
+      "icons": [
+        "music",
+        "download"
+      ],
+      "frame": "NAPSTER linkin_park_in_the_end.mp3 {ctx}% 56K: {cost} KB/s ETA: 4h",
+      "data_map": {
+        "ctx": "download_pct",
+        "cost": "speed_kbps"
+      },
+      "desc": "Napster at 56K. That progress bar that barely moved."
+    },
+    {
+      "id": "p2p_napster_metallica",
+      "name": "Napster vs Metallica",
+      "pack": "p2p",
+      "type": "theater",
+      "verb": "SEARCHING",
+      "sep": "diagonal",
+      "palette": "napster_gray",
+      "icons": [
+        "warning",
+        "music"
+      ],
+      "frame": "METALLICA HAS ENTERED THE CHAT LARS: 'THIS IS STEALING' metallica_enter_sandman_REAL.mp3.exe SIZE: 240KB",
+      "data_map": null,
+      "desc": "Metallica drama. Files that are definitely not viruses at 240KB."
+    },
+    {
+      "id": "p2p_limewire",
+      "name": "LimeWire Roulette",
+      "pack": "p2p",
+      "type": "theater",
+      "verb": "INFECTING",
+      "sep": "diagonal",
+      "palette": "kazaa_gold",
+      "icons": [
+        "bug",
+        "warning"
+      ],
+      "frame": "LIMEWIRE harry_potter_DVDRIP.avi.exe -> bonzi_buddy_installer.exe POPUPS: 38 DAD GONNA KILL ME",
+      "data_map": null,
+      "desc": "Is it the movie? Always a virus. RIP family computer."
+    },
+    {
+      "id": "p2p_kazaa",
+      "name": "Kazaa SuperNode",
+      "pack": "p2p",
+      "type": "data",
+      "verb": "SHARING",
+      "sep": "diagonal",
+      "palette": "kazaa_gold",
+      "icons": [
+        "users",
+        "upload"
+      ],
+      "frame": "KAZAA LITE K++ NODE: SUPER SHARED: {cost} FILES USERS: {ctx}K",
+      "data_map": {
+        "cost": "shared_files",
+        "ctx": "connected_users_k"
+      },
+      "desc": "Kazaa Lite K++ without spyware (theoretically)."
+    },
+    {
+      "id": "p2p_edonkey",
+      "name": "eDonkey2000 Queue",
+      "pack": "p2p",
+      "type": "data",
+      "verb": "HASHING",
+      "sep": "diagonal",
+      "palette": "napster_gray",
+      "icons": [
+        "download",
+        "clock"
+      ],
+      "frame": "eDONKEY office_2003_full.iso SOURCES: {cost} {ctx}% QUEUE: 4287 ETA: 3 DAYS",
+      "data_map": {
+        "cost": "sources",
+        "ctx": "download_pct"
+      },
+      "desc": "Queue position 4,287. Low ID. 3 day ETAs."
+    },
+    {
+      "id": "p2p_dc",
+      "name": "DC++ Hub",
+      "pack": "p2p",
+      "type": "data",
+      "verb": "LEECHING",
+      "sep": "diagonal",
+      "palette": "napster_gray",
+      "icons": [
+        "server",
+        "warning"
+      ],
+      "frame": "DC++ HUB: DARKCODE-ELITE MIN SHARE: 50GB YOUR SHARE: {cost}GB KICKED: LOW SHARE",
+      "data_map": {
+        "cost": "share_gb"
+      },
+      "desc": "DC++ with minimum share requirements. Fake share lists."
+    },
+    {
+      "id": "p2p_soulseek",
+      "name": "Soulseek Rare Find",
+      "pack": "p2p",
+      "type": "theater",
+      "verb": "SEARCHING",
+      "sep": "diagonal",
+      "palette": "napster_gray",
+      "icons": [
+        "music",
+        "star"
+      ],
+      "frame": "SOULSEEK 'boards of canada unreleased' RESULTS: 1 USER: OFFLINE QUEUED: #38",
+      "data_map": null,
+      "desc": "The P2P for music nerds. That one user who's never online. 2 KB/s."
+    },
+    {
+      "id": "h2600_magazine",
+      "name": "2600 Magazine",
+      "pack": "2600",
+      "type": "theater",
+      "verb": "READING",
+      "sep": "flame",
+      "palette": "2600_red",
+      "icons": [
+        "book",
+        "phone"
+      ],
+      "frame": "2600: THE HACKER QUARTERLY VOL.38 NO.4 $0.42 AT BARNES & NOBLE",
+      "data_map": null,
+      "desc": "The magazine. First Fridays. The payphone cover."
+    },
+    {
+      "id": "h2600_meeting",
+      "name": "2600 First Friday",
+      "pack": "2600",
+      "type": "data",
+      "verb": "MEETING",
+      "sep": "flame",
+      "palette": "2600_red",
+      "icons": [
+        "users",
+        "clock"
+      ],
+      "frame": "2600 MEETING FIRST FRIDAY FOOD COURT ATTENDEES: {cost}",
+      "data_map": {
+        "cost": "attendees"
+      },
+      "desc": "First Friday meeting. Food court. Laptops out. Wardriving after."
+    },
+    {
+      "id": "h2600_totse",
+      "name": "TOTSE",
+      "pack": "2600",
+      "type": "theater",
+      "verb": "READING",
+      "sep": "flame",
+      "palette": "2600_red",
+      "icons": [
+        "bolt"
+      ],
+      "frame": "TOTSE.COM TEMPLE OF THE SCREAMING ELECTRON EST. 1989 TEXT FILES: 42,000 RIP: 2009",
+      "data_map": null,
+      "desc": "The text file archive. Beedog forum. RIP 2009."
+    },
+    {
+      "id": "h2600_phrack",
+      "name": "Phrack Magazine",
+      "pack": "2600",
+      "type": "theater",
+      "verb": "PUBLISHING",
+      "sep": "flame",
+      "palette": "2600_red",
+      "icons": [
+        "book"
+      ],
+      "frame": "PHRACK ISSUE #38 SMASHING THE STACK FOR FUN AND PROFIT ==Phrack Inc.==",
+      "data_map": null,
+      "desc": "Phrack. Smashing the Stack. The ASCII art header."
+    },
+    {
+      "id": "h2600_manifesto",
+      "name": "Hacker Manifesto",
+      "pack": "2600",
+      "type": "theater",
+      "verb": "MANIFESTING",
+      "sep": "flame",
+      "palette": "2600_red",
+      "icons": [
+        "bolt"
+      ],
+      "frame": "'THIS IS OUR WORLD NOW' 'MY CRIME IS THAT OF CURIOSITY' 'YOU CAN'T STOP US ALL'",
+      "data_map": null,
+      "desc": "The Mentor. January 8, 1986. Phrack Vol 1 Issue 7."
+    },
+    {
+      "id": "h2600_free_kevin",
+      "name": "Free Kevin",
+      "pack": "2600",
+      "type": "theater",
+      "verb": "FREEING",
+      "sep": "flame",
+      "palette": "2600_red",
+      "icons": [
+        "lock",
+        "unlock"
+      ],
+      "frame": "FREE KEVIN MITNICK: IMPRISONED 'COULD START NUCLEAR WAR BY WHISTLING' RIP 2023",
+      "data_map": null,
+      "desc": "Free Kevin movement. Most famous hacker. RIP 2023."
+    },
+    {
+      "id": "h2600_l0pht",
+      "name": "L0pht Senate Testimony",
+      "pack": "2600",
+      "type": "theater",
+      "verb": "TESTIFYING",
+      "sep": "flame",
+      "palette": "2600_red",
+      "icons": [
+        "shield",
+        "users"
+      ],
+      "frame": "L0PHT HEAVY INDUSTRIES US SENATE 1998 'WE COULD TAKE DOWN THE INTERNET IN 30 MINUTES'",
+      "data_map": null,
+      "desc": "7 hackers vs Congress. Peak hacker energy."
+    },
+    {
+      "id": "h2600_bo2k",
+      "name": "Back Orifice 2000",
+      "pack": "2600",
+      "type": "theater",
+      "verb": "BACKDOORING",
+      "sep": "flame",
+      "palette": "2600_red",
+      "icons": [
+        "skull",
+        "key"
+      ],
+      "frame": "BACK ORIFICE 2000 cDc PORT: 31337 STEALTH: ACTIVE DEF CON 7",
+      "data_map": null,
+      "desc": "Cult of the Dead Cow. Port 31337. Made Microsoft lose it."
+    },
+    {
+      "id": "h2600_defcon",
+      "name": "DEF CON Badge",
+      "pack": "2600",
+      "type": "data",
+      "verb": "HACKING",
+      "sep": "flame",
+      "palette": "2600_red",
+      "icons": [
+        "microchip",
+        "trophy"
+      ],
+      "frame": "DEF CON {ctx} BADGE: ELECTRONIC CHALLENGE: {cost} FLAGS LINECON: 4HR",
+      "data_map": {
+        "ctx": "defcon_number",
+        "cost": "ctf_flags"
+      },
+      "desc": "DEF CON badge challenge."
+    },
+    {
+      "id": "h2600_anarchist",
+      "name": "Anarchist Cookbook TXT",
+      "pack": "2600",
+      "type": "theater",
+      "verb": "DISCLAIMING",
+      "sep": "flame",
+      "palette": "2600_red",
+      "icons": [
+        "warning"
+      ],
+      "frame": "DISCLAIMER: EDUCATIONAL ONLY FOUND ON: EVERY BBS PRINTED ON DOT MATRIX HIDDEN IN: TRAPPER KEEPER",
+      "data_map": null,
+      "desc": "The text file everyone had. Felt like a criminal at 14."
+    },
+    {
+      "id": "bbs_login",
+      "name": "BBS Login",
+      "pack": "bbs",
+      "type": "theater",
+      "verb": "CONNECTING",
+      "sep": "pixel",
+      "palette": "bbs_ansi",
+      "icons": [
+        "phone",
+        "server"
+      ],
+      "frame": "ATDT 816-555-1337 CONNECT 14400 DARKCODE BBS SYSOP: haKCer NODE 1/2 WWIV",
+      "data_map": null,
+      "desc": "BBS dial-up. ATDT, modem handshake, WWIV banner."
+    },
+    {
+      "id": "bbs_ansi",
+      "name": "BBS ANSI Art",
+      "pack": "bbs",
+      "type": "theater",
+      "verb": "RENDERING",
+      "sep": "pixel",
+      "palette": "bbs_ansi",
+      "icons": [
+        "paint"
+      ],
+      "frame": "▄█▀ ACiD PRODUCTIONS █▓▒░ iCE aDVERTiSiNG ▀▄▀▄▀ RAZOR 1911",
+      "data_map": null,
+      "desc": "ACiD, iCE, Razor 1911 art group headers."
+    },
+    {
+      "id": "bbs_irc",
+      "name": "mIRC Channel",
+      "pack": "bbs",
+      "type": "data",
+      "verb": "JOINING",
+      "sep": "pixel",
+      "palette": "irc_black",
+      "icons": [
+        "comment",
+        "users"
+      ],
+      "frame": "mIRC /join #darkcode USERS: {cost} +o haKCer TOPIC: DON'T ASK TO ASK",
+      "data_map": {
+        "cost": "channel_users"
+      },
+      "desc": "mIRC on EFnet. XDCC bots. Channel ops banning kids."
+    },
+    {
+      "id": "bbs_modem",
+      "name": "56K Modem Handshake",
+      "pack": "bbs",
+      "type": "data",
+      "verb": "CONNECTING",
+      "sep": "hexagon",
+      "palette": "phreaker_blue",
+      "icons": [
+        "phone",
+        "signal"
+      ],
+      "frame": "DIALING...*SCREEEECH* *BONG BONG* CONNECT {cost} V.90 LINE: {ctx}%",
+      "data_map": {
+        "cost": "connect_speed",
+        "ctx": "line_quality"
+      },
+      "desc": "The screech. Mom picking up the phone. NO CARRIER."
+    },
+    {
+      "id": "bbs_bonzi",
+      "name": "BonziBuddy",
+      "pack": "bbs",
+      "type": "theater",
+      "verb": "INFECTING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [
+        "bug",
+        "warning"
+      ],
+      "frame": "BONZIBUDDY 'HI!' TOOLBAR: ADDED SPYWARE: 38 INSTANCES 'DAISY DAISY...' UNINSTALL: FAILED",
+      "data_map": null,
+      "desc": "Purple gorilla spyware. Can't uninstall. Dad reformats."
+    },
+    {
+      "id": "mud_login",
+      "name": "MUD Login",
+      "pack": "mud",
+      "type": "theater",
+      "verb": "CONNECTING",
+      "sep": "pixel",
+      "palette": "bbs_ansi",
+      "icons": [],
+      "frame": "By what name? haKCer MOTD: Server reset 3am [42 players] Midgaard Temple",
+      "data_map": null,
+      "desc": "DikuMUD/CircleMUD connect sequence."
+    },
+    {
+      "id": "mud_combat",
+      "name": "MUD Combat",
+      "pack": "mud",
+      "type": "theater",
+      "verb": "FIGHTING",
+      "sep": "pixel",
+      "palette": "bbs_ansi",
+      "icons": [],
+      "frame": "You swing at a goblin [OBLITERATE] goblin is DEAD! 42 XP Your swords skill improved!",
+      "data_map": null,
+      "desc": "Combat spam scrolling."
+    },
+    {
+      "id": "mud_tw2002",
+      "name": "TradeWars 2002",
+      "pack": "mud",
+      "type": "data",
+      "verb": "TRADING",
+      "sep": "pixel",
+      "palette": "bbs_ansi",
+      "icons": [],
+      "frame": "SECTOR 1337 ORE:042 ORG:038 EQP:099 FIGHTERS: 500 [TRADE] [MOVE]",
+      "data_map": {
+        "cost": "ore",
+        "ctx": "org"
+      },
+      "desc": "BBS door space trading. Data scene."
+    },
+    {
+      "id": "mud_lord",
+      "name": "Legend of the Red Dragon",
+      "pack": "mud",
+      "type": "theater",
+      "verb": "FLIRTING",
+      "sep": "pixel",
+      "palette": "bbs_ansi",
+      "icons": [],
+      "frame": "RED DRAGON INN SETH ABLE walks in 'What'll it be?' [V]iolet [B]ard CHARM: 38 GOLD: 42",
+      "data_map": null,
+      "desc": "BBS door RPG."
+    },
+    {
+      "id": "mud_bre",
+      "name": "Barren Realms Elite",
+      "pack": "mud",
+      "type": "data",
+      "verb": "CONQUERING",
+      "sep": "pixel",
+      "palette": "bbs_ansi",
+      "icons": [],
+      "frame": "BARREN REALMS ELITE REGION 7: haKCer's Domain POP: 38K ARMY: 4200 GOLD: ${cost}M",
+      "data_map": {
+        "cost": "gold_m"
+      },
+      "desc": "BBS strategy door. Data scene."
+    },
+    {
+      "id": "mud_ook",
+      "name": "Operation Overkill",
+      "pack": "mud",
+      "type": "theater",
+      "verb": "SURVIVING",
+      "sep": "pixel",
+      "palette": "bbs_ansi",
+      "icons": [],
+      "frame": "WASTELAND SECTOR 38 RADS: HIGH HYDRITES APPROACHING WEAPON: Laser Rifle AMMO: 42",
+      "data_map": null,
+      "desc": "Post-apocalyptic BBS door."
+    },
+    {
+      "id": "mud_gemstone",
+      "name": "GemStone III",
+      "pack": "mud",
+      "type": "theater",
+      "verb": "CASTING",
+      "sep": "pixel",
+      "palette": "bbs_ansi",
+      "icons": [],
+      "frame": "[Wehnimer's Landing, North Ring Road] exits: n,s,e 42 adventurers nearby >PREP 906",
+      "data_map": null,
+      "desc": "GS3 prompt with spell prep."
+    },
+    {
+      "id": "mov_jurassic",
+      "name": "Jurassic Park Unix",
+      "pack": "movies",
+      "type": "theater",
+      "verb": "ACCESSING",
+      "sep": "arrow",
+      "palette": "green_phosphor",
+      "icons": [],
+      "frame": "ah ah ah you didn't say the magic word... ACCESS: MAIN SECURITY GRID",
+      "data_map": null,
+      "desc": "Nedry's lockout cycling then system unlocks."
+    },
+    {
+      "id": "mov_wargames",
+      "name": "WOPR Launch Codes",
+      "pack": "movies",
+      "type": "theater",
+      "verb": "LAUNCHING",
+      "sep": "arrow",
+      "palette": "amber_crt",
+      "icons": [],
+      "frame": "SHALL WE PLAY A GAME? GLOBAL THERMONUCLEAR WAR CPE 1704 TKS DEFCON 1",
+      "data_map": null,
+      "desc": "Launch code brute forcing."
+    },
+    {
+      "id": "mov_hackers",
+      "name": "Hack the Planet",
+      "pack": "movies",
+      "type": "theater",
+      "verb": "HACKING",
+      "sep": "arrow",
+      "palette": "neon",
+      "icons": [],
+      "frame": "hack the planet RISC architecture gonna change everything TYPE COOKIE YOU STRUMPET",
+      "data_map": null,
+      "desc": "Hackers (1995) rapid fire quotes."
+    },
+    {
+      "id": "mov_matrix",
+      "name": "Architect Terminal",
+      "pack": "movies",
+      "type": "theater",
+      "verb": "CHOOSING",
+      "sep": "arrow",
+      "palette": "matrix",
+      "icons": [],
+      "frame": "CHOICE. THE PROBLEM IS CHOICE. CONCORDANCE: 99.9% ANOMALY: SYSTEMIC RELOAD: Y/N",
+      "data_map": null,
+      "desc": "Green phosphor. Slow reveal."
+    },
+    {
+      "id": "mov_tron",
+      "name": "ENCOM Mainframe",
+      "pack": "movies",
+      "type": "theater",
+      "verb": "OVERRIDING",
+      "sep": "arrow",
+      "palette": "ice_blue",
+      "icons": [],
+      "frame": "ENCOM 511 MCP OVERRIDE I/O TOWER LINK IDENTITY: PROGRAM DISC: ARMED",
+      "data_map": null,
+      "desc": "CRT blue glow."
+    },
+    {
+      "id": "mov_sneakers",
+      "name": "Sneakers Decrypt",
+      "pack": "movies",
+      "type": "theater",
+      "verb": "DECRYPTING",
+      "sep": "arrow",
+      "palette": "green_phosphor",
+      "icons": [],
+      "frame": "SETEC ASTRONOMY TOO MANY SECRETS COOTYS RAT SEMEN DECRYPTING...",
+      "data_map": null,
+      "desc": "Anagram solver cycling through permutations."
+    },
+    {
+      "id": "mov_alien",
+      "name": "Alien MOTD",
+      "pack": "movies",
+      "type": "theater",
+      "verb": "ALERTING",
+      "sep": "arrow",
+      "palette": "amber_crt",
+      "icons": [],
+      "frame": "INTERFACE 2037 READY NOSTROMO 180286 SPECIAL ORDER 937 CREW EXPENDABLE",
+      "data_map": null,
+      "desc": "Amber CRT. Slow character print."
+    },
+    {
+      "id": "mov_bladerunner",
+      "name": "Voight-Kampff",
+      "pack": "movies",
+      "type": "data",
+      "verb": "TESTING",
+      "sep": "arrow",
+      "palette": "amber_crt",
+      "icons": [],
+      "frame": "V-K TEST EMPATHY: 0.{ctx} PUPIL: 0.{cost}mm RESULT: [INCONCLUSIVE]",
+      "data_map": {
+        "ctx": "empathy",
+        "cost": "dilation"
+      },
+      "desc": "Data mapped to replicant test metrics."
+    },
+    {
+      "id": "mov_mnemonic",
+      "name": "Johnny Mnemonic Upload",
+      "pack": "movies",
+      "type": "data",
+      "verb": "UPLOADING",
+      "sep": "arrow",
+      "palette": "neon",
+      "icons": [],
+      "frame": "STORAGE: {ctx}% 320GB LOADED SEEPAGE DETECTED COURIER: J. MNEMONIC",
+      "data_map": {
+        "ctx": "brain_storage"
+      },
+      "desc": "Context % = brain storage."
+    },
+    {
+      "id": "mov_shortcircuit",
+      "name": "Johnny 5 Boot",
+      "pack": "movies",
+      "type": "theater",
+      "verb": "BOOTING",
+      "sep": "hexagon",
+      "palette": "amber_crt",
+      "icons": [],
+      "frame": "NOVA ROBOTICS S.A.I.N.T. #5 BOOT: OK TREADS: OK STATUS: ALIVE INPUT! NEED INPUT!",
+      "data_map": null,
+      "desc": "Johnny 5 boot sequence. Military hardware -> curiosity."
+    },
+    {
+      "id": "mov_bttf",
+      "name": "DeLorean Time Circuits",
+      "pack": "movies",
+      "type": "data",
+      "verb": "TRAVELING",
+      "sep": "rounded",
+      "palette": "neon",
+      "icons": [],
+      "frame": "DESTINATION: OCT 21 2015 PRESENT: {current_time} LAST: NOV 05 1955 88 MPH",
+      "data_map": {
+        "current_time": "actual_time"
+      },
+      "desc": "Three LED readouts. Present = actual time."
+    },
+    {
+      "id": "mov_gremlins",
+      "name": "Gremlins Rules",
+      "pack": "movies",
+      "type": "theater",
+      "verb": "WARNING",
+      "sep": "flame",
+      "palette": "gremlins_glow",
+      "icons": [
+        "warning",
+        "fire"
+      ],
+      "frame": "RULE 1: NO LIGHT RULE 2: NO WATER RULE 3: NEVER FEED AFTER MIDNIGHT OH NO",
+      "data_map": null,
+      "desc": "Rules cycling. Rule 3 breaks. Chaos."
+    },
+    {
+      "id": "mov_goonies",
+      "name": "Goonies Treasure",
+      "pack": "movies",
+      "type": "data",
+      "verb": "SEARCHING",
+      "sep": "rounded",
+      "palette": "amber_crt",
+      "icons": [],
+      "frame": "GOONIES NEVER SAY DIE MAP: COPPER BONES TRAPS: {ctx} BOOTY: ${cost}M ONE EYED WILLY",
+      "data_map": {
+        "ctx": "traps",
+        "cost": "booty"
+      },
+      "desc": "Pirate treasure stats. Data scene."
+    },
+    {
+      "id": "mov_billandted",
+      "name": "Phone Booth Time",
+      "pack": "movies",
+      "type": "theater",
+      "verb": "TRAVELING",
+      "sep": "rounded",
+      "palette": "neon",
+      "icons": [],
+      "frame": "CIRCUITS OF TIME DESTINATION: 2688 CURRENT: 1989 WYLD STALLYNS EXCELLENT!",
+      "data_map": null,
+      "desc": "Phone booth display. Year cycling."
+    },
+    {
+      "id": "mov_ironman",
+      "name": "Iron Man HUD",
+      "pack": "movies",
+      "type": "data",
+      "verb": "TARGETING",
+      "sep": "arrow",
+      "palette": "neon",
+      "icons": [],
+      "frame": "J.A.R.V.I.S. SUIT: {ctx}% POWER: ${cost} THREAT: {model} TARGETING...",
+      "data_map": {
+        "ctx": "integrity",
+        "cost": "power",
+        "model": "threat"
+      },
+      "desc": "Stats as suit telemetry."
+    },
+    {
+      "id": "tv_tmnt_sewer",
+      "name": "TMNT Sewer HQ",
+      "pack": "cartoons",
+      "type": "data",
+      "verb": "ORDERING",
+      "sep": "lego",
+      "palette": "tmnt_green",
+      "icons": [
+        "fire"
+      ],
+      "frame": "COWABUNGA! LEO: READY RAPH: ANGRY DONNIE: HACKING MIKEY: PIZZA? SHREDDER: {ctx}% HP",
+      "data_map": {
+        "ctx": "shredder_hp"
+      },
+      "desc": "Donnie's the hacker turtle. Pizza orders."
+    },
+    {
+      "id": "tv_tmnt_dam",
+      "name": "TMNT NES Dam Level",
+      "pack": "console",
+      "type": "data",
+      "verb": "SWIMMING",
+      "sep": "pixel",
+      "palette": "tmnt_green",
+      "icons": [
+        "warning"
+      ],
+      "frame": "TMNT NES DAM LEVEL SEAWEED: ELECTRIC TIME: {ctx} BOMBS: {cost}/8 EVERYONE HATED THIS",
+      "data_map": {
+        "ctx": "time",
+        "cost": "bombs"
+      },
+      "desc": "The dam level. Electric seaweed. Core trauma."
+    },
+    {
+      "id": "tv_knightrider",
+      "name": "Knight Rider KITT",
+      "pack": "tv80s",
+      "type": "data",
+      "verb": "SCANNING",
+      "sep": "hexagon",
+      "palette": "kali_red",
+      "icons": [],
+      "frame": "K.I.T.T. TURBO BOOST: READY PURSUIT MODE ████░░░░████ MICHAEL?",
+      "data_map": null,
+      "desc": "Scanner bar bouncing L/R. Data scene."
+    },
+    {
+      "id": "tv_ateam",
+      "name": "A-Team Plan",
+      "pack": "tv80s",
+      "type": "theater",
+      "verb": "WELDING",
+      "sep": "flame",
+      "palette": "fire_red",
+      "icons": [],
+      "frame": "I LOVE IT WHEN A PLAN COMES TOGETHER STEP 1: WELD STEP 2: MOUNT GUN BA: I AIN'T GETTIN ON NO PLANE",
+      "data_map": null,
+      "desc": "Montage sequence."
+    },
+    {
+      "id": "tv_macgyver",
+      "name": "MacGyver Build",
+      "pack": "tv80s",
+      "type": "theater",
+      "verb": "BUILDING",
+      "sep": "hexagon",
+      "palette": "amber_crt",
+      "icons": [],
+      "frame": "INVENTORY: PAPERCLIP + GUM + WATCH BATTERY BUILDING... RESULT: EMP DEVICE TIME: 38 SEC",
+      "data_map": null,
+      "desc": "MacGyver builds from inventory."
+    },
+    {
+      "id": "tv_voltron",
+      "name": "Voltron Form",
+      "pack": "tv80s",
+      "type": "theater",
+      "verb": "FORMING",
+      "sep": "flame",
+      "palette": "fire_red",
+      "icons": [],
+      "frame": "FORM BLAZING SWORD! RIGHT ARM: CONNECTED LEFT ARM: CONNECTED LEGS: LOCKED VOLTRON: FORMED",
+      "data_map": null,
+      "desc": "Mecha assembly. Each limb per frame."
+    },
+    {
+      "id": "tv_thundercats",
+      "name": "ThunderCats Call",
+      "pack": "tv80s",
+      "type": "theater",
+      "verb": "CALLING",
+      "sep": "flame",
+      "palette": "fire_red",
+      "icons": [],
+      "frame": "THUNDER THUNDER THUNDER THUNDERCATS HOOOOO!",
+      "data_map": null,
+      "desc": "Each THUNDER gets bigger per frame."
+    },
+    {
+      "id": "tv_maxheadroom",
+      "name": "Max Headroom",
+      "pack": "tv80s",
+      "type": "theater",
+      "verb": "STUTTERING",
+      "sep": "diagonal",
+      "palette": "neon",
+      "icons": [],
+      "frame": "M-M-MAX HEADROOM I-I-I MADE A G-G-GIANT MASTERPIECE CATCH THE WAVE",
+      "data_map": null,
+      "desc": "Stutter text. Diagonal separators for torn signal."
+    },
+    {
+      "id": "tv_maxheadroom_hijack",
+      "name": "WTTW Signal Intrusion",
+      "pack": "tv80s",
+      "type": "theater",
+      "verb": "HIJACKING",
+      "sep": "diagonal",
+      "palette": "neon",
+      "icons": [],
+      "frame": "CH:11 WTTW *SIGNAL OVERRIDE* PIRATE BROADCAST YOUR LOVE IS FADING *STATIC*",
+      "data_map": null,
+      "desc": "Nov 22, 1987. Still unsolved."
+    },
+    {
+      "id": "tv_quantumleap",
+      "name": "Quantum Leap",
+      "pack": "tv80s",
+      "type": "data",
+      "verb": "LEAPING",
+      "sep": "rounded",
+      "palette": "neon",
+      "icons": [],
+      "frame": "LEAPING... DATE: {current_date} LOCATION: OVERLAND PARK, KS OH BOY",
+      "data_map": {
+        "current_date": "actual_date"
+      },
+      "desc": "Uses your actual date and location."
+    },
+    {
+      "id": "tv_alf",
+      "name": "ALF Melmac",
+      "pack": "tv80s",
+      "type": "theater",
+      "verb": "TRANSMITTING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [],
+      "frame": "MELMAC SUBSPACE FREQ 42.038 SIGNAL: WEAK 'HA! I KILL ME!' CAT SCAN: NEGATIVE",
+      "data_map": null,
+      "desc": "ALF trying to phone home."
+    },
+    {
+      "id": "tv_captainn",
+      "name": "Captain N",
+      "pack": "tv80s",
+      "type": "theater",
+      "verb": "WARPING",
+      "sep": "pixel",
+      "palette": "nes_gray",
+      "icons": [],
+      "frame": "VIDEOLAND POWER PAD: ACTIVE ZAPPER: CHARGED GAME BOY: PRESENT MOTHER BRAIN: 38% HP",
+      "data_map": null,
+      "desc": "Captain N Game Master."
+    },
+    {
+      "id": "toy_powerglove",
+      "name": "Power Glove Boot",
+      "pack": "toys",
+      "type": "theater",
+      "verb": "CALIBRATING",
+      "sep": "pixel",
+      "palette": "nes_gray",
+      "icons": [
+        "gamepad"
+      ],
+      "frame": "I LOVE THE POWER GLOVE IT'S SO BAD [FLEX] [FLEX] CALIBRATING... P1 READY",
+      "data_map": null,
+      "desc": "The Wizard (1989). Lucas."
+    },
+    {
+      "id": "toy_powerglove_mod",
+      "name": "Power Glove Modded Boot",
+      "pack": "trikc",
+      "type": "data",
+      "verb": "BOOTING",
+      "sep": "hexagon",
+      "palette": "kali_red",
+      "icons": [
+        "microchip"
+      ],
+      "frame": "POWERGLOVE v2.0 RPi: OK ARDUINO: OK BENDSENSORS: 5/5 ALFA: SCANNING LED[51]: READY",
+      "data_map": null,
+      "desc": "Cory's modded Power Glove from TriKC. Real hardware components."
+    },
+    {
+      "id": "toy_powerglove_wifi",
+      "name": "Power Glove WiFi Attack",
+      "pack": "trikc",
+      "type": "theater",
+      "verb": "ATTACKING",
+      "sep": "hexagon",
+      "palette": "kali_red",
+      "icons": [
+        "wifi"
+      ],
+      "frame": "ALFA AWUS036ACH MODE: MONITOR CH: 6 TARGETS: 38 DEAUTH: ARMED FLEX TO FIRE",
+      "data_map": null,
+      "desc": "The glove IS the attack platform."
+    },
+    {
+      "id": "toy_speakspell",
+      "name": "Speak & Spell",
+      "pack": "toys",
+      "type": "theater",
+      "verb": "SPELLING",
+      "sep": "lego",
+      "palette": "amber_crt",
+      "icons": [],
+      "frame": "SPEAK & SPELL SPELL: H-A-K-C-E-R THAT IS CORRECT NOW SPELL: EXPLOIT",
+      "data_map": null,
+      "desc": "Orange/brown TI aesthetic. Phonetic sounding out."
+    },
+    {
+      "id": "toy_tamagotchi",
+      "name": "Tamagotchi",
+      "pack": "toys",
+      "type": "data",
+      "verb": "FEEDING",
+      "sep": "lego",
+      "palette": "nes_gray",
+      "icons": [],
+      "frame": "AGE:{ctx} HUNGER:████░░ HAPPY:██░░░░ {model} IS CALLING [FEED] [PLAY] [PUNISH]",
+      "data_map": {
+        "ctx": "age",
+        "model": "pet_name"
+      },
+      "desc": "Model = your pet. Data scene."
+    },
+    {
+      "id": "toy_furby",
+      "name": "Furby Wake",
+      "pack": "toys",
+      "type": "theater",
+      "verb": "WAKING",
+      "sep": "lego",
+      "palette": "gremlins_glow",
+      "icons": [],
+      "frame": "dah boh-bay ME HUNGRY *eyes open* kah a-tay AGAIN! AGAIN! *WILL NOT SLEEP*",
+      "data_map": null,
+      "desc": "Increasingly unsettling Furbish. 3AM energy."
+    },
+    {
+      "id": "toy_gpk",
+      "name": "Garbage Pail Kids",
+      "pack": "toys",
+      "type": "theater",
+      "verb": "COLLECTING",
+      "sep": "lego",
+      "palette": "gpk_pink",
+      "icons": [],
+      "frame": "GARBAGE PAIL KIDS SERIES 38 #42a: HACKIN' HARRY #42b: CRACKIN' CORY ADAM BOMB MINT",
+      "data_map": null,
+      "desc": "Custom hacker-themed card names. a/b convention."
+    },
+    {
+      "id": "toy_simon",
+      "name": "Simon Says",
+      "pack": "toys",
+      "type": "theater",
+      "verb": "MEMORIZING",
+      "sep": "lego",
+      "palette": "neon",
+      "icons": [],
+      "frame": "SIMON SAYS: RED GREEN RED RED BLUE YELLOW RED GREEN SPEED+++ FAIL",
+      "data_map": null,
+      "desc": "Colors flash in sequence. Gets faster. Eventually errors."
+    },
+    {
+      "id": "toy_creepycrawlers",
+      "name": "Creepy Crawlers Oven",
+      "pack": "toys",
+      "type": "theater",
+      "verb": "BAKING",
+      "sep": "lego",
+      "palette": "gremlins_glow",
+      "icons": [],
+      "frame": "CREEPY CRAWLERS OVEN: 375F MOLD: SPIDER GOOP: GREEN DO NOT TOUCH TOUCHED BURN: YES",
+      "data_map": null,
+      "desc": "The goop. The burn. The spider."
+    },
+    {
+      "id": "toy_boptit",
+      "name": "Bop It",
+      "pack": "toys",
+      "type": "theater",
+      "verb": "BOPPING",
+      "sep": "lego",
+      "palette": "neon",
+      "icons": [],
+      "frame": "BOP IT! TWIST IT! PULL IT! *faster* BOP-TWIST-PULL-BOP ELIMINATED",
+      "data_map": null,
+      "desc": "Commands speed up per frame until failure."
+    },
+    {
+      "id": "toy_supersoaker",
+      "name": "Super Soaker 50",
+      "pack": "toys",
+      "type": "data",
+      "verb": "PUMPING",
+      "sep": "lego",
+      "palette": "aol_blue",
+      "icons": [],
+      "frame": "SUPER SOAKER 50 PRESSURE: ████░░░░ TANK: {ctx}% RANGE: 42 FT PUMP PUMP FIRE",
+      "data_map": {
+        "ctx": "tank_pct"
+      },
+      "desc": "Pressure builds per frame. Data scene."
+    },
+    {
+      "id": "toy_teddyruxpin",
+      "name": "Teddy Ruxpin",
+      "pack": "toys",
+      "type": "theater",
+      "verb": "READING",
+      "sep": "lego",
+      "palette": "amber_crt",
+      "icons": [],
+      "frame": "TEDDY RUXPIN TAPE: SIDE A 'COME DREAM WITH ME' JAW: SYNCED BATTERY: 38%",
+      "data_map": null,
+      "desc": "Mouth opens/closes via text animation."
+    },
+    {
+      "id": "toy_rob",
+      "name": "R.O.B.",
+      "pack": "toys",
+      "type": "theater",
+      "verb": "COMMANDING",
+      "sep": "pixel",
+      "palette": "nes_gray",
+      "icons": [],
+      "frame": "ROBOTIC OPERATING BUDDY TEST CLOSE OPEN SPIN RIGHT SPIN LEFT READY PLAYER 2",
+      "data_map": null,
+      "desc": "R.O.B. cycling through its 5 actual commands."
+    },
+    {
+      "id": "toy_bigtrak",
+      "name": "Big Trak",
+      "pack": "toys",
+      "type": "theater",
+      "verb": "PROGRAMMING",
+      "sep": "lego",
+      "palette": "amber_crt",
+      "icons": [],
+      "frame": "BIG TRAK FWD 15 RT 90 FWD 10 FIRE LT 45 FWD 20 CLR GO",
+      "data_map": null,
+      "desc": "Programming the tank toy."
+    },
+    {
+      "id": "arc_gauntlet",
+      "name": "Gauntlet",
+      "pack": "arcade",
+      "type": "data",
+      "verb": "EATING",
+      "sep": "pixel",
+      "palette": "nes_gray",
+      "icons": [],
+      "frame": "WARRIOR NEEDS FOOD BADLY WARRIOR IS ABOUT TO DIE HP: {ctx} SHOT: 42 INSERT COIN",
+      "data_map": {
+        "ctx": "hp"
+      },
+      "desc": "Gauntlet voice callouts. Data scene."
+    },
+    {
+      "id": "arc_mk",
+      "name": "Mortal Kombat",
+      "pack": "arcade",
+      "type": "theater",
+      "verb": "FINISHING",
+      "sep": "flame",
+      "palette": "fire_red",
+      "icons": [],
+      "frame": "MORTAL KOMBAT FIGHT! FINISH HIM! FATALITY FLAWLESS VICTORY TOASTY!",
+      "data_map": null,
+      "desc": "Flame separators. Blood red."
+    },
+    {
+      "id": "arc_nbajam",
+      "name": "NBA Jam",
+      "pack": "arcade",
+      "type": "theater",
+      "verb": "FIRING",
+      "sep": "flame",
+      "palette": "fire_red",
+      "icons": [],
+      "frame": "HE'S ON FIRE! BOOMSHAKALAKA! FROM DOWNTOWN! IS IT THE SHOES? HEATING UP",
+      "data_map": null,
+      "desc": "Tim Kitzrow voice callouts."
+    },
+    {
+      "id": "arc_metalslug",
+      "name": "Metal Slug",
+      "pack": "arcade",
+      "type": "theater",
+      "verb": "RESCUING",
+      "sep": "pixel",
+      "palette": "nes_gray",
+      "icons": [],
+      "frame": "HEAVY MACHINEGUN ROCKET LAWNCHAIR THANK YOU MISSION COMPLETE POW: RESCUED",
+      "data_map": null,
+      "desc": "Weapon pickup announcements."
+    },
+    {
+      "id": "arc_frogger",
+      "name": "Frogger",
+      "pack": "arcade",
+      "type": "data",
+      "verb": "CROSSING",
+      "sep": "pixel",
+      "palette": "green_phosphor",
+      "icons": [],
+      "frame": "FROGGER ===TRUCK===CAR=== LIVES: 3 SCORE: {cost} SPLAT",
+      "data_map": {
+        "cost": "score"
+      },
+      "desc": "Traffic scrolling. Frog dodging."
+    },
+    {
+      "id": "arc_pacman",
+      "name": "Pac-Man",
+      "pack": "arcade",
+      "type": "data",
+      "verb": "EATING",
+      "sep": "pixel",
+      "palette": "neon",
+      "icons": [],
+      "frame": "WAKA WAKA WAKA ....*.....*... READY! SCORE: {cost} LEVEL: {ctx}",
+      "data_map": {
+        "cost": "score",
+        "ctx": "level"
+      },
+      "desc": "Dots as pellets. Ghost chase."
+    },
+    {
+      "id": "arc_tmnt",
+      "name": "TMNT Arcade",
+      "pack": "arcade",
+      "type": "data",
+      "verb": "FIGHTING",
+      "sep": "pixel",
+      "palette": "tmnt_green",
+      "icons": [],
+      "frame": "TMNT ARCADE SELECT TURTLE LEO/RAPH/DONNIE/MIKEY CREDITS: {cost} STAGE: {ctx}",
+      "data_map": {
+        "cost": "credits",
+        "ctx": "stage"
+      },
+      "desc": "4-player cabinet at the pizza place."
+    },
+    {
+      "id": "arc_doubledragon",
+      "name": "Double Dragon",
+      "pack": "arcade",
+      "type": "theater",
+      "verb": "FIGHTING",
+      "sep": "pixel",
+      "palette": "nes_gray",
+      "icons": [],
+      "frame": "DOUBLE DRAGON MISSION 1 *gut punch* MARIAN KIDNAPPED [FIGHT]",
+      "data_map": null,
+      "desc": "The opening punch."
+    },
+    {
+      "id": "arc_dragonlair",
+      "name": "Dragon's Lair",
+      "pack": "arcade",
+      "type": "theater",
+      "verb": "DYING",
+      "sep": "pixel",
+      "palette": "amber_crt",
+      "icons": [],
+      "frame": "MOVE LEFT! [SIZZLE] SWORD! [CLANG] RIGHT! TOO LATE INSERT COIN",
+      "data_map": null,
+      "desc": "QTE prompts. Mostly dying. Laserdisc."
+    },
+    {
+      "id": "con_nes_boot",
+      "name": "NES Cartridge Blow",
+      "pack": "console",
+      "type": "theater",
+      "verb": "BLOWING",
+      "sep": "pixel",
+      "palette": "nes_gray",
+      "icons": [],
+      "frame": "CARTRIDGE DETECTED READ ERROR *BLOW* READ ERROR *BLOW HARDER* OK",
+      "data_map": null,
+      "desc": "Failed reads, blows, gray screen, finally boots."
+    },
+    {
+      "id": "con_nes_crash",
+      "name": "NES Glitch Crash",
+      "pack": "console",
+      "type": "theater",
+      "verb": "CRASHING",
+      "sep": "pixel",
+      "palette": "nes_gray",
+      "icons": [],
+      "frame": "▓█▒░▓ NMI FAULT ░▒█▓ PPU OVERFLOW ▓█▒░ CHR BANK CORRUPT",
+      "data_map": null,
+      "desc": "Actual NES crash screen. Tile corruption. Color bleed."
+    },
+    {
+      "id": "con_pokemon",
+      "name": "Pokemon Battle",
+      "pack": "console",
+      "type": "data",
+      "verb": "BATTLING",
+      "sep": "pixel",
+      "palette": "gameboy_green",
+      "icons": [],
+      "frame": "WILD {model} APPEARED! HP: {ctx_bar} {ctx}% COST used PAY DAY! ${cost} SUPER EFFECTIVE!",
+      "data_map": {
+        "model": "pokemon_name",
+        "ctx": "hp_pct",
+        "cost": "payday"
+      },
+      "desc": "Data scene. Model = pokemon."
+    },
+    {
+      "id": "con_gameshark",
+      "name": "GameShark Codes",
+      "pack": "console",
+      "type": "data",
+      "verb": "CHEATING",
+      "sep": "pixel",
+      "palette": "nes_gray",
+      "icons": [],
+      "frame": "GAMESHARK PRO CODE: 01FF16D0 INFINITE MONEY GAME: POKEMON CODES: {cost} TOO MANY CRASHING",
+      "data_map": {
+        "cost": "codes_active"
+      },
+      "desc": "Too many codes. Game crashes. Sprites corrupted."
+    },
+    {
+      "id": "con_link_cable",
+      "name": "Pokemon Link Cable",
+      "pack": "console",
+      "type": "theater",
+      "verb": "TRADING",
+      "sep": "pixel",
+      "palette": "gameboy_green",
+      "icons": [],
+      "frame": "LINK CABLE CONNECTED OFFERING: GEODUDE RECEIVING: MISSINGNO LVL:255 SAVE: CORRUPTED WORTH IT",
+      "data_map": null,
+      "desc": "MissingNo. Save corruption. First exploit most kids ran."
+    },
+    {
+      "id": "dos_format",
+      "name": "FORMAT C:",
+      "pack": "dos",
+      "type": "theater",
+      "verb": "FORMATTING",
+      "sep": "pixel",
+      "palette": "amber_crt",
+      "icons": [
+        "warning",
+        "hdd"
+      ],
+      "frame": "FORMAT C: ALL DATA WILL BE LOST ████░░░░ 38% SISTER'S HOMEWORK: GONE GROUNDED: YES",
+      "data_map": null,
+      "desc": "FORMAT C: on the family computer."
+    },
+    {
+      "id": "dos_deltree",
+      "name": "DELTREE Accident",
+      "pack": "dos",
+      "type": "theater",
+      "verb": "DELETING",
+      "sep": "pixel",
+      "palette": "amber_crt",
+      "icons": [
+        "trash"
+      ],
+      "frame": "DELTREE /Y C:\\WINDOWS -> BAD COMMAND OR FILE NAME -> WHAT HAVE I DONE",
+      "data_map": null,
+      "desc": "We all did it at least once."
+    },
+    {
+      "id": "dos_bat",
+      "name": "BAT File Virus",
+      "pack": "dos",
+      "type": "theater",
+      "verb": "INFECTING",
+      "sep": "pixel",
+      "palette": "amber_crt",
+      "icons": [
+        "bug"
+      ],
+      "frame": "virus.bat @ECHO OFF ECHO YOU HAVE BEEN HACKED SENT VIA FLOPPY DELETED: NOTHING FELT: POWERFUL",
+      "data_map": null,
+      "desc": "The .BAT virus at age 12. Did nothing. Felt like a god."
+    },
+    {
+      "id": "dos_defrag",
+      "name": "DOS Defrag Screen",
+      "pack": "dos",
+      "type": "data",
+      "verb": "DEFRAGGING",
+      "sep": "pixel",
+      "palette": "amber_crt",
+      "icons": [],
+      "frame": "OPTIMIZING DRIVE C: █░░█████░░██░█ {ctx}% BLOCK {cost} OF 1337",
+      "data_map": {
+        "ctx": "defrag_pct",
+        "cost": "current_block"
+      },
+      "desc": "The defrag screen everyone watched for hours."
+    },
+    {
+      "id": "dos_soundblaster",
+      "name": "SoundBlaster Config",
+      "pack": "dos",
+      "type": "theater",
+      "verb": "CONFIGURING",
+      "sep": "pixel",
+      "palette": "amber_crt",
+      "icons": [],
+      "frame": "SET BLASTER=A220 I5 D1 T4 TESTING... *static* DETECTED IRQ CONFLICT HIMEM.SYS REQUIRED",
+      "data_map": null,
+      "desc": "autoexec.bat hell."
+    },
+    {
+      "id": "dos_norton",
+      "name": "Norton Commander",
+      "pack": "dos",
+      "type": "theater",
+      "verb": "BROWSING",
+      "sep": "pixel",
+      "palette": "bbs_ansi",
+      "icons": [],
+      "frame": "C:\\HACK\\*.* exploit.exe 42kb readme.nfo 38kb keygen.com 1kb [F5]Copy [F8]Delete",
+      "data_map": null,
+      "desc": "Dual-pane blue/cyan file manager."
+    },
+    {
+      "id": "dos_win95",
+      "name": "Windows 95 Install",
+      "pack": "dos",
+      "type": "data",
+      "verb": "INSTALLING",
+      "sep": "pixel",
+      "palette": "aol_blue",
+      "icons": [],
+      "frame": "WINDOWS 95 DISK {cost} OF 13 EST: {ctx} MIN INSERT NEXT DISK",
+      "data_map": {
+        "cost": "disk_number",
+        "ctx": "est_minutes"
+      },
+      "desc": "Disk swap cycling. Eternal install."
+    },
+    {
+      "id": "dos_winamp",
+      "name": "Winamp + MilkDrop",
+      "pack": "dos",
+      "type": "data",
+      "verb": "VISUALIZING",
+      "sep": "rounded",
+      "palette": "napster_gray",
+      "icons": [
+        "music",
+        "play"
+      ],
+      "frame": "WINAMP linkin_park.mp3 ▁▂▃▅▆▇▆▅▃▂ MILKDROP VOL: {ctx}% TRACKS: {cost}",
+      "data_map": {
+        "ctx": "volume",
+        "cost": "playlist_count"
+      },
+      "desc": "It really whips the llama's ass."
+    },
+    {
+      "id": "dos_screensaver",
+      "name": "Windows Screensaver",
+      "pack": "dos",
+      "type": "theater",
+      "verb": "NAVIGATING",
+      "sep": "pixel",
+      "palette": "green_phosphor",
+      "icons": [],
+      "frame": "3D MAZE: DEAD END FLYING WINDOWS: WARP PIPES: TEAPOT WAITING... THERE IT IS",
+      "data_map": null,
+      "desc": "Maze, Stars, Pipes. Waiting for the teapot."
+    },
+    {
+      "id": "dos_encarta",
+      "name": "Encarta MindMaze",
+      "pack": "dos",
+      "type": "data",
+      "verb": "QUESTING",
+      "sep": "pixel",
+      "palette": "amber_crt",
+      "icons": [
+        "book",
+        "trophy"
+      ],
+      "frame": "ENCARTA MINDMAZE FLOOR: {ctx} SCORE: {cost} Q: 'WHAT YEAR DID...' GUESS: C",
+      "data_map": {
+        "ctx": "floor",
+        "cost": "score"
+      },
+      "desc": "The only reason to open the encyclopedia."
+    },
+    {
+      "id": "dos_oregon",
+      "name": "Oregon Trail",
+      "pack": "dos",
+      "type": "data",
+      "verb": "DYING",
+      "sep": "pixel",
+      "palette": "green_phosphor",
+      "icons": [
+        "skull"
+      ],
+      "frame": "OREGON TRAIL PACE: GRUELING haKCer HAS DYSENTERY MILES: {cost} TOMBSTONE: 'PEPPERONI'",
+      "data_map": {
+        "cost": "miles"
+      },
+      "desc": "Dysentery. Fording rivers. Tombstone messages."
+    },
+    {
+      "id": "dos_floppy",
+      "name": "3.5 Floppy Disk",
+      "pack": "dos",
+      "type": "data",
+      "verb": "SAVING",
+      "sep": "pixel",
+      "palette": "amber_crt",
+      "icons": [
+        "save"
+      ],
+      "frame": "3.5\" HD FLOPPY 1.44MB USED: {ctx}% LABEL: 'GAMES (DO NOT FORMAT)' WRITE PROTECT: {cost}",
+      "data_map": {
+        "ctx": "used_pct",
+        "cost": "wp_status"
+      },
+      "desc": "The 3.5 floppy. Sharpie label. Sliding tab."
+    },
+    {
+      "id": "web_geocities",
+      "name": "GeoCities",
+      "pack": "early_web",
+      "type": "theater",
+      "verb": "BUILDING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [
+        "globe",
+        "wrench"
+      ],
+      "frame": "GEOCITIES AREA51/VAULT/31337 UNDER CONSTRUCTION SIGN GUESTBOOK WEBRING NEXT MIDI: ON",
+      "data_map": null,
+      "desc": "Under construction GIF. Guestbook. Webring. MIDI autoplay."
+    },
+    {
+      "id": "web_angelfire",
+      "name": "Angelfire Marquee",
+      "pack": "early_web",
+      "type": "theater",
+      "verb": "SCROLLING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [],
+      "frame": "<MARQUEE>WELCOME</MARQUEE> <BLINK>COOL</BLINK> BG: STARS.GIF CURSOR: SPARKLE FONT: COMIC SANS",
+      "data_map": null,
+      "desc": "Marquee tags. Blink tags. Star background. Comic Sans."
+    },
+    {
+      "id": "web_newgrounds",
+      "name": "Newgrounds Flash",
+      "pack": "early_web",
+      "type": "data",
+      "verb": "LOADING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [
+        "play",
+        "star"
+      ],
+      "frame": "NEWGROUNDS FLASH PORTAL LOADING... {ctx}% SCORE: {cost}/5 FRONTPAGED!",
+      "data_map": {
+        "ctx": "load_pct",
+        "cost": "score"
+      },
+      "desc": "Loading bar. User reviews. RIP Flash."
+    },
+    {
+      "id": "web_realplayer",
+      "name": "RealPlayer Buffering",
+      "pack": "early_web",
+      "type": "data",
+      "verb": "BUFFERING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [
+        "spinner"
+      ],
+      "frame": "REALPLAYER 8 BUFFERING... {ctx}% QUALITY: POTATO AUDIO: UNDERWATER REBUFFERING...",
+      "data_map": {
+        "ctx": "buffer_pct"
+      },
+      "desc": "Eternal buffering. 3 seconds of video. Rebuffer."
+    },
+    {
+      "id": "web_netzero",
+      "name": "NetZero Free Internet",
+      "pack": "early_web",
+      "type": "data",
+      "verb": "CONNECTING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [
+        "globe",
+        "warning"
+      ],
+      "frame": "NETZERO FREE AD: [PUNCH THE MONKEY] HOURS: {ctx}/40 SPEED: 56K (LOL 42K)",
+      "data_map": {
+        "ctx": "hours_used"
+      },
+      "desc": "Uncloseable ad bar. 40 hours/month."
+    },
+    {
+      "id": "web_toolbar",
+      "name": "Toolbar Hell",
+      "pack": "early_web",
+      "type": "theater",
+      "verb": "INSTALLING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [
+        "bug"
+      ],
+      "frame": "COMET CURSOR ALSO: ASK TOOLBAR ALSO: WEATHERBUG ALSO: GATOR TOOLBARS: 38 VIEWPORT: 200x150px",
+      "data_map": null,
+      "desc": "IE6 with so many toolbars 3 lines of actual webpage remain."
+    },
+    {
+      "id": "web_ebaumsworld",
+      "name": "eBaum's World",
+      "pack": "early_web",
+      "type": "theater",
+      "verb": "STEALING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [
+        "film"
+      ],
+      "frame": "EBAUMSWORLD FLASH: LOADING STOLEN FROM: NEWGROUNDS CREDIT: NONE WATERMARK: EBAUM'S",
+      "data_map": null,
+      "desc": "Stealing content from Newgrounds since 2001."
+    },
+    {
+      "id": "web_ytmnd",
+      "name": "YTMND",
+      "pack": "early_web",
+      "type": "theater",
+      "verb": "TILING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [
+        "music"
+      ],
+      "frame": "YTMND YOU'RE THE MAN NOW DOG TILED IMAGE + LOOP NEDM MAX VOLUME SPEAKERS: DESTROYED",
+      "data_map": null,
+      "desc": "NEDM. Sean Connery. Loudest websites of the 2000s."
+    },
+    {
+      "id": "web_stickdeath",
+      "name": "StickDeath / Joe Cartoon",
+      "pack": "early_web",
+      "type": "theater",
+      "verb": "ANIMATING",
+      "sep": "rounded",
+      "palette": "aol_blue",
+      "icons": [
+        "film"
+      ],
+      "frame": "STICKDEATH.COM STICK FIGURES: FIGHTING JOE CARTOON FROG IN BLENDER TEACHER: WALKING OVER",
+      "data_map": null,
+      "desc": "Flash animations in the computer lab."
+    },
+    {
+      "id": "trikc_title",
+      "name": "NES Title Screen",
+      "pack": "trikc",
+      "type": "theater",
+      "verb": "BOOTING",
+      "sep": "pixel",
+      "palette": "nes_gray",
+      "icons": [
+        "gamepad"
+      ],
+      "frame": "RESETTING INTO NOSTALGIA MODE (c) TRIKC 0x01 PRESS START",
+      "data_map": null,
+      "desc": "NES title card from slide 1. Flashing PRESS START."
+    },
+    {
+      "id": "trikc_nintendo_power",
+      "name": "Nintendo Power Tips",
+      "pack": "trikc",
+      "type": "theater",
+      "verb": "READING",
+      "sep": "pixel",
+      "palette": "nes_gray",
+      "icons": [],
+      "frame": "NINTENDO POWER VOL.1 JUL/AUG 1988 PRO TIP: UP+A ON TITLE SCREEN FREE POSTER",
+      "data_map": null,
+      "desc": "Red/yellow NP branding. Era-appropriate secrets."
+    },
+    {
+      "id": "trikc_game_counselor",
+      "name": "Game Counselor Hotline",
+      "pack": "trikc",
+      "type": "data",
+      "verb": "HOLDING",
+      "sep": "pixel",
+      "palette": "nes_gray",
+      "icons": [
+        "phone"
+      ],
+      "frame": "NINTENDO GAME COUNSELOR HOLD: {ctx} MIN 'TRIED BLOWING ON IT?' CALL: ${cost}/MIN",
+      "data_map": {
+        "ctx": "hold_minutes",
+        "cost": "call_cost"
+      },
+      "desc": "Hold time = context %. Cost = actual cost."
+    },
+    {
+      "id": "trikc_wizard",
+      "name": "Video Armageddon",
+      "pack": "trikc",
+      "type": "theater",
+      "verb": "COMPETING",
+      "sep": "pixel",
+      "palette": "nes_gray",
+      "icons": [
+        "gamepad",
+        "trophy"
+      ],
+      "frame": "VIDEO ARMAGEDDON PLAYER: JIMMY WOODS GAME: ??? SCORE: 31337 'CALIFORNIA'",
+      "data_map": null,
+      "desc": "The Wizard tournament. SMB3 reveal."
+    },
+    {
+      "id": "trikc_magazine",
+      "name": "Type-In Listing",
+      "pack": "trikc",
+      "type": "theater",
+      "verb": "TYPING",
+      "sep": "pixel",
+      "palette": "green_phosphor",
+      "icons": [],
+      "frame": "10 DATA BE,69,AD,1E,00,20,23,62 1010 DATA A3,0F,8D CHECKSUM: 2247 LINE 38 OF 42",
+      "data_map": null,
+      "desc": "Space Blaster BASIC code from slide 8. Hex DATA statements scrolling."
+    },
+    {
+      "id": "trikc_hud",
+      "name": "TriKC Game HUD",
+      "pack": "trikc",
+      "type": "data",
+      "verb": "PLAYING",
+      "sep": "pixel",
+      "palette": "nes_gray",
+      "icons": [
+        "gamepad"
+      ],
+      "frame": "@CORYKENNEDY 31337 BONUS 0x01 SECKC TIME {ctx}:00",
+      "data_map": {
+        "ctx": "session_minutes"
+      },
+      "desc": "NES HUD from slides 20-21. Session timer."
+    },
+    {
+      "id": "trikc_talkover",
+      "name": "TALK OVER",
+      "pack": "trikc",
+      "type": "theater",
+      "verb": "CONTINUING",
+      "sep": "pixel",
+      "palette": "nes_gray",
+      "icons": [],
+      "frame": "TALK OVER -> INSERT COIN -> CONTINUE? 9...8...7... -> GAME OVER",
+      "data_map": null,
+      "desc": "Arcade continue countdown from slide 20."
+    },
+    {
+      "id": "trikc_rad",
+      "name": "JUDGES YOU LOOK RAD",
+      "pack": "trikc",
+      "type": "theater",
+      "verb": "JUDGING",
+      "sep": "pixel",
+      "palette": "nes_gray",
+      "icons": [],
+      "frame": "JUDGES YOU LOOK RAD TO THE MAX",
+      "data_map": null,
+      "desc": "NES end screen from slide 21. Each word lights up per frame."
+    },
+    {
+      "id": "konami_winner",
+      "name": "Konami Winner",
+      "pack": "core",
+      "type": "theater",
+      "verb": "WINNING",
+      "sep": "pixel",
+      "palette": "neon",
+      "icons": [],
+      "frame": "you win nothing",
+      "data_map": null,
+      "desc": "Hidden scene. Only reachable via Konami code."
+    },
+    {
+      "id": "core_kernel_panic",
+      "name": "Kernel Panic",
+      "pack": "core",
+      "type": "theater",
+      "verb": "PANICKING",
+      "sep": "arrow",
+      "palette": "fire_red",
+      "icons": [],
+      "frame": "*** KERNEL PANIC - not syncing: out of context *** CPU0:1 PID:1337 RIP:0xC0NT3XT TASK:hakcer",
+      "data_map": {},
+      "desc": "Linux-style panic wall scrolling across the line. Triggered when context >= 98%."
+    },
+    {
+      "id": "events_seckc_upcoming",
+      "name": "SecKC Upcoming",
+      "pack": "core",
+      "type": "theater",
+      "verb": "INCOMING",
+      "sep": "hexagon",
+      "palette": "amber_crt",
+      "icons": [
+        "radio_wave"
+      ],
+      "frame": "SECKC // {event_title} // {event_location} // T-{event_days}d",
+      "data_map": {
+        "event_title": "events.seckc.next.title",
+        "event_location": "events.seckc.next.location",
+        "event_days": "events.seckc.next.days_until"
+      },
+      "desc": "Opt-in event scene. Triggered when next SecKC event is within 7 days. Requires --events=seckc."
+    },
+    {
+      "id": "events_seckc_today",
+      "name": "SecKC Tonight",
+      "pack": "core",
+      "type": "theater",
+      "verb": "TONIGHT",
+      "sep": "flame",
+      "palette": "amber_crt",
+      "icons": [
+        "radio_wave"
+      ],
+      "frame": "SECKC TONIGHT // {event_location} // {event_time} // GO GO GO",
+      "data_map": {
+        "event_location": "events.seckc.next.location",
+        "event_time": "events.seckc.next.time_local"
+      },
+      "desc": "Opt-in event scene. Triggered when next SecKC event is today (hours away). Requires --events=seckc."
+    },
+    {
+      "id": "flip_jurassic_park",
+      "name": "Jurassic Park Breakout",
+      "pack": "cartoon_flipbook",
+      "type": "theater",
+      "verb": "RAMPAGE",
+      "palette": "matrix",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:dragon}  _/\\_ {icon:tree}  >=(:)=< ~~rawr~~ [|||GATE|||]",
+      "frames": [
+        "{icon:tree} _/\\_  _/\\_ {icon:tree}   >=(:)=< ~~rawr~~      [|||GATE|||] {icon:flag}",
+        "{icon:tree} _/\\_  _/\\_ {icon:tree}    >=(:)=<~~rawr~~      [|||GATE|||] {icon:flag}",
+        "{icon:tree} _/\\_  _/\\_ {icon:tree}     >=(:)=<rawr!!       [|||GATE|||] {icon:flag}",
+        "{icon:tree} _/\\_  _/\\_ {icon:tree}      >=(:)=<RAWR!!      [|||GATE|||] {icon:flag}",
+        "{icon:tree} _/\\_  _/\\_ {icon:tree}       >=(:)=<CHOMP!     [|||GA E|||] {icon:warning}",
+        "{icon:tree} _/\\_  _/\\_ {icon:tree}        >=(:)=<CRUNCH    [|||G  E|||] {icon:warning}",
+        "{icon:tree} _/\\_  _/\\_ {icon:tree}         >=(:)=<RRRRR    [||     ||] {icon:fire}",
+        "{icon:tree} _/\\_  _/\\_ {icon:tree}          {icon:dragon}LOOSE!  [.. .. ..] {icon:skull}"
+      ],
+      "frameTicks": 3,
+      "data_map": null,
+      "desc": "T-rex busts the fence. Trees framing, flag turns to skull. 8 frames."
+    },
+    {
+      "id": "flip_snake_game",
+      "name": "Snake Game",
+      "pack": "cartoon_flipbook",
+      "type": "theater",
+      "verb": "SLITHERING",
+      "palette": "matrix",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:play} [>oooooo        {icon:apple} ] SCORE 120",
+      "frames": [
+        "{icon:play} [>oooooo          {icon:apple} ] SCORE 120",
+        "{icon:play} [ >oooooo         {icon:apple} ] SCORE 120",
+        "{icon:play} [  >oooooo        {icon:apple} ] SCORE 120",
+        "{icon:play} [   >oooooo       {icon:apple} ] SCORE 120",
+        "{icon:play} [    >oooooo      {icon:apple} ] SCORE 120",
+        "{icon:play} [     >oooooo     {icon:apple} ] SCORE 120",
+        "{icon:play} [      >oooooo    {icon:apple} ] SCORE 120",
+        "{icon:play} [       >oooooo   {icon:apple} ] SCORE 120",
+        "{icon:play} [        >oooooo  {icon:apple} ] SCORE 120",
+        "{icon:play} [         >oooooo {icon:apple} ] SCORE 120",
+        "{icon:play} [          >oooooo*] SCORE 130 {icon:star}",
+        "{icon:play} [           >ooooooo] SCORE 130 {icon:star}"
+      ],
+      "frameTicks": 2,
+      "data_map": null,
+      "desc": "Snake.exe creeps toward the apple. 12 frames."
+    },
+    {
+      "id": "flip_pong",
+      "name": "Pong",
+      "pack": "cartoon_flipbook",
+      "type": "theater",
+      "verb": "RALLYING",
+      "palette": "amber_crt",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:tv} |    o          |  1 - 0",
+      "frames": [
+        "{icon:tv} |    o            |  1 - 0  {icon:trophy}",
+        "{icon:tv} |     o           |  1 - 0  {icon:trophy}",
+        "{icon:tv} |      o          |  1 - 0  {icon:trophy}",
+        "{icon:tv} |       o         |  1 - 0  {icon:trophy}",
+        "{icon:tv} |        o        |  1 - 0  {icon:trophy}",
+        "{icon:tv} |         o       |  1 - 0  {icon:trophy}",
+        "{icon:tv} |          o      |  1 - 0  {icon:trophy}",
+        "{icon:tv} |           o     |  1 - 0  {icon:trophy}",
+        "{icon:tv} |            o    |  1 - 0  {icon:trophy}",
+        "{icon:tv} |             o   |  1 - 0  {icon:trophy}",
+        "{icon:tv} |              o  |  1 - 0  {icon:trophy}",
+        "{icon:tv} |               o |  1 - 0  {icon:trophy}",
+        "{icon:tv} |              o  |  1 - 0  {icon:trophy}",
+        "{icon:tv} |             o   |  1 - 0  {icon:trophy}",
+        "{icon:tv} |            o    |  1 - 0  {icon:trophy}",
+        "{icon:tv} |           o     |  1 - 0  {icon:trophy}",
+        "{icon:tv} |          o      |  1 - 0  {icon:trophy}",
+        "{icon:tv} |         o       |  1 - 0  {icon:trophy}",
+        "{icon:tv} |        o        |  1 - 0  {icon:trophy}",
+        "{icon:tv} |       o         |  1 - 0  {icon:trophy}",
+        "{icon:tv} |      o          |  1 - 0  {icon:trophy}",
+        "{icon:tv} |     o           |  1 - 0  {icon:trophy}"
+      ],
+      "frameTicks": 1,
+      "data_map": null,
+      "desc": "Atari Pong ball. 22 frames."
+    },
+    {
+      "id": "flip_rocket_launch",
+      "name": "Rocket Launch",
+      "pack": "cartoon_flipbook",
+      "type": "theater",
+      "verb": "LAUNCHING",
+      "palette": "fire_red",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:rocket} T-5  ^ |_|  GROUND CONTROL",
+      "frames": [
+        "{icon:rocket} T-5    ^    |_|    GROUND CONTROL READY    {icon:radio_wave}",
+        "{icon:rocket} T-4    ^    |_|    FUELING {icon:bolt}{icon:bolt}{icon:bolt}     ",
+        "{icon:rocket} T-3    ^    |_|    MAIN ENGINE ARMED   {icon:warning}",
+        "{icon:rocket} T-2    ^    |_|    IGNITION SEQUENCE   {icon:fire}",
+        "{icon:rocket} T-1    ^   (|_|)   MAIN ENGINE START   {icon:fire}{icon:fire}",
+        "{icon:rocket} T-0    ^  ((|_|))  LIFTOFF! {icon:fire}{icon:fire}{icon:fire}",
+        "{icon:cloud}      ^    |_|    climbing... {icon:fire}{icon:fire}",
+        "{icon:cloud}      ^    |_|    ....climbing.... {icon:fire}",
+        "{icon:cloud}     /^\\   ||     .....climbing.... {icon:fire}",
+        "{icon:cloud}    //^\\\\  ||     ......climbing..... {icon:fire}",
+        "{icon:cloud}   ///^\\\\\\ ||     .......climbing..... {icon:fire}",
+        "{icon:star}   ///^\\\\\\ .      ........MAX-Q...... {icon:star}"
+      ],
+      "frameTicks": 4,
+      "data_map": null,
+      "desc": "Countdown to liftoff. 12 frames."
+    },
+    {
+      "id": "flip_pacman",
+      "name": "Pac-Man Chase",
+      "pack": "cartoon_flipbook",
+      "type": "theater",
+      "verb": "CHOMPING",
+      "palette": "neon",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:gamepad} C . . . . M SCORE 300",
+      "frames": [
+        "{icon:gamepad} C . . . . . . . . . . . . . .  {icon:ghost}  300",
+        "{icon:gamepad}  C. . . . . . . . . . . . . .  {icon:ghost}  310",
+        "{icon:gamepad}   C . . . . . . . . . . . . .  {icon:ghost}  320",
+        "{icon:gamepad}    c. . . . . . . . . . . . .  {icon:ghost}  330",
+        "{icon:gamepad}    C . . . . . . . . . . . .   {icon:ghost}  340",
+        "{icon:gamepad}     c . . . . . . . . . . . .  {icon:ghost}  350",
+        "{icon:gamepad}      C. . . . . . . . . . . .  {icon:ghost}  360",
+        "{icon:gamepad}       C . . . . . . . . . . .  {icon:ghost}  370",
+        "{icon:gamepad}        c . . . . . . . . . .   {icon:ghost}  380",
+        "{icon:gamepad}         C. . . . . . . . . .   {icon:ghost}  390",
+        "{icon:gamepad}          C . . . . . . . . .   {icon:ghost}  400"
+      ],
+      "frameTicks": 2,
+      "data_map": null,
+      "desc": "Pacman chases Blinky. 11 frames."
+    },
+    {
+      "id": "flip_dino_run",
+      "name": "Chrome Offline Dino",
+      "pack": "cartoon_flipbook",
+      "type": "theater",
+      "verb": "RUNNING",
+      "palette": "green_phosphor",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:dragon} d(O_O)b _ _ ^^^ 00127",
+      "frames": [
+        "{icon:dragon} d(O_O)b   _        {icon:tree}         00127 {icon:paw}",
+        "{icon:dragon} d(O_O)b  _ _       {icon:tree}         00128 {icon:paw}",
+        "{icon:dragon} d(O_O)b _ _ _      {icon:tree}         00129 {icon:paw}",
+        "{icon:dragon}  (O_O)   _ _ _     {icon:tree}         00130 {icon:paw}",
+        "{icon:dragon} d(O_O)b   _ _ _    {icon:tree}         00131 {icon:paw}",
+        "{icon:dragon}  (O_O)     _ _ _   {icon:tree}         00132 {icon:paw}",
+        "{icon:dragon} d(O_O)b     _ _ _  {icon:tree}         00133 {icon:paw}",
+        "{icon:dragon}  (O_O)       _ _ _ {icon:tree}         00134 {icon:paw}",
+        "{icon:dragon} d(O_O)b       _ _ _{icon:tree}         00135 {icon:paw}",
+        "{icon:dragon}  (O_O)         _ _ {icon:tree}         00136 {icon:paw}",
+        "{icon:dragon} d(O_O)b         _ _{icon:tree}         00137 {icon:paw}",
+        "{icon:dragon}  (O_O)           _ {icon:tree}         00138 {icon:paw}"
+      ],
+      "frameTicks": 2,
+      "data_map": null,
+      "desc": "Chrome offline dino sprints past trees. 12 frames."
+    },
+    {
+      "id": "flip_loading_bar",
+      "name": "Loading Bar",
+      "pack": "cartoon_flipbook",
+      "type": "data",
+      "verb": "DECRYPTING",
+      "palette": "matrix",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:lock} [████░░░░] {model} {cost}",
+      "frames": [
+        "{icon:lock} [░░░░░░░░░░░░░░░░░░░░] DECRYPTING {model}  {cost}   0% {icon:spinner}",
+        "{icon:lock} [██░░░░░░░░░░░░░░░░░░] DECRYPTING {model}  {cost}  10% {icon:spinner}",
+        "{icon:lock} [████░░░░░░░░░░░░░░░░] DECRYPTING {model}  {cost}  20% {icon:spinner}",
+        "{icon:lock} [██████░░░░░░░░░░░░░░] DECRYPTING {model}  {cost}  30% {icon:spinner}",
+        "{icon:lock} [████████░░░░░░░░░░░░] DECRYPTING {model}  {cost}  40% {icon:spinner}",
+        "{icon:lock} [██████████░░░░░░░░░░] DECRYPTING {model}  {cost}  50% {icon:spinner}",
+        "{icon:lock} [████████████░░░░░░░░] DECRYPTING {model}  {cost}  60% {icon:spinner}",
+        "{icon:lock} [██████████████░░░░░░] DECRYPTING {model}  {cost}  70% {icon:spinner}",
+        "{icon:lock} [████████████████░░░░] DECRYPTING {model}  {cost}  80% {icon:spinner}",
+        "{icon:lock} [██████████████████░░] DECRYPTING {model}  {cost}  90% {icon:spinner}",
+        "{icon:unlock} [████████████████████] DECRYPTED. {model}  {cost} 100% {icon:bolt}",
+        "{icon:unlock} [████████████████████] ACCESS GRANTED {model} {cost}  {icon:key}"
+      ],
+      "frameTicks": 3,
+      "data_map": {
+        "model": "model",
+        "cost": "cost"
+      },
+      "desc": "Loading bar with live session data. Lock → unlock → key. 12 frames."
+    },
+    {
+      "id": "flip_fish_tank",
+      "name": "ASCII Fish Tank",
+      "pack": "cartoon_flipbook",
+      "type": "theater",
+      "verb": "SWIMMING",
+      "palette": "ice_blue",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:fish} ~~~ <°))))><  ><(((°> ~~~ {icon:fish}",
+      "frames": [
+        "{icon:fish} ~~  <°))))><        ><(((°>      ~~~",
+        "{icon:fish}  ~~~ <°))))><      ><(((°>     ~~~~",
+        "{icon:fish}   ~~  <°))))><    ><(((°>    ~~~  ",
+        "{icon:fish} ~~~ <°))))><     ><(((°>    ~~~~  ",
+        "{icon:fish}  ~~  <°))))><   ><(((°>    ~~~    ",
+        "{icon:fish}   ~~~ <°))))>< ><(((°>    ~~~~    ",
+        "{icon:fish} ~~~ <°))))>< ><(((°>     ~~~~     ",
+        "{icon:fish}  ~~  <°))))><(((°>      ~~~       ",
+        "{icon:fish}   ~~~<°))))(((°>       ~~~~       ",
+        "{icon:fish} ~~~ <°))))°>          ~~~~        ",
+        "{icon:fish}  ~~  <°))))°>        ~~~          ",
+        "{icon:fish}   ~~~ <°))))><      ~~~~          ",
+        "{icon:fish} ~~~   <°))))><     ~~~            ",
+        "{icon:fish}  ~~~   <°))))><   ~~~~            ",
+        "{icon:fish}   ~~~   <°))))>< ~~~              ",
+        "{icon:fish} ~~~~     <°))))><~~~~             ",
+        "{icon:fish}  ~~~~     <°))))><~~              ",
+        "{icon:fish}   ~~~~     <°))))>  ><(((°>   ~~~ ",
+        "{icon:fish} ~~~~        <°))))> ><(((°>  ~~~~ ",
+        "{icon:fish}  ~~~~        <°)))))><(((°> ~~~   "
+      ],
+      "frameTicks": 2,
+      "data_map": null,
+      "desc": "Two fish in an ASCII tank. 20 frames."
+    },
+    {
+      "id": "flip_hacker_cat",
+      "name": "Hacker Cat Typing",
+      "pack": "cartoon_flipbook",
+      "type": "data",
+      "verb": "HACKING",
+      "palette": "green_phosphor",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:terminal} (^._.^) sudo rm -rf / {cost}",
+      "frames": [
+        "{icon:terminal} (^.w.^)ﾉ  tap tap tap...        {model}  {icon:bolt}",
+        "{icon:terminal} (^.o.^)ﾉ  tappity tap           {model}  {icon:bolt}",
+        "{icon:terminal} (^.-.^)ﾉ  TAP TAP               {model}  {icon:bolt}",
+        "{icon:terminal} (^._.^)ﾉ  sudo !! (enter)       {model}  {icon:bolt}",
+        "{icon:terminal} (^O_O^)ﾉ  :: ACCESS GRANTED ::  {model}  {icon:unlock}",
+        "{icon:terminal} (^O_O^)ﾉ  {cost} DRAINED        {model}  {icon:trophy}",
+        "{icon:terminal} (^._.^)ﾉ  ...purrrrrrrrrrrrr... {model}  {icon:heart}",
+        "{icon:terminal} (=^.^=)   naptime               {model}  {icon:moon}"
+      ],
+      "frameTicks": 4,
+      "data_map": {
+        "model": "model",
+        "cost": "cost"
+      },
+      "desc": "Cat typing at terminal, session data streams. 8 frames."
+    },
+    {
+      "id": "flip_coffee_brew",
+      "name": "Coffee Brew",
+      "pack": "cartoon_flipbook",
+      "type": "data",
+      "verb": "BREWING",
+      "palette": "amber_crt",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:coffee} brewing... {ctx}%",
+      "frames": [
+        "{icon:coffee}  (    )    grinding beans.......   {ctx}% ctx",
+        "{icon:coffee}  ( ~  )    heating water .........  {ctx}% ctx",
+        "{icon:coffee}  ( ~~ )    pouring................. {ctx}% ctx",
+        "{icon:coffee}  ( ~~~)    blooming {icon:cloud}....  {ctx}% ctx",
+        "{icon:coffee}  (~~~~)    extracting {icon:cloud}.. {ctx}% ctx",
+        "{icon:coffee}  |~~~~|    ready {icon:fire}{icon:fire} {ctx}% ctx",
+        "{icon:coffee}  |^^^^|    {cost} per cup          {ctx}% ctx"
+      ],
+      "frameTicks": 5,
+      "data_map": {
+        "ctx": "context_pct",
+        "cost": "cost"
+      },
+      "desc": "Morning coffee drip. Live ctx/cost. 7 frames."
+    }
+  ]
+}

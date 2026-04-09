@@ -1,0 +1,1 @@
+{"version":3,"file":"interpret.d.ts","sourceRoot":"","sources":["../../../source/statusline/render/interpret.ts"],"names":[],"mappings":"AAAA;;;GAGG;AACH,OAAO,EAAE,KAAK,EAAE,YAAY,EAAE,aAAa,EAAE,MAAM,aAAa,CAAC;AAQjE,wBAAgB,cAAc,CAC5B,KAAK,EAAE,KAAK,EACZ,GAAG,EAAE,aAAa,EAClB,OAAO,EAAE,YAAY,GACpB,MAAM,CAgER;AAgBD,wBAAgB,YAAY,CAAC,QAAQ,EAAE,MAAM,EAAE,KAAK,EAAE,MAAM,GAAG,MAAM,CA8BpE"}
