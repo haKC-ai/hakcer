@@ -18,7 +18,12 @@ export interface Scene {
   sep?: string;
   palette: string;
   icons?: string[];
+  /** Single static frame. Use `frames` instead for flipbook animation. */
   frame: string;
+  /** Optional flipbook — if present, each tick picks `frames[tick % frames.length]`. */
+  frames?: string[];
+  /** Ticks per frame for flipbook (default 4 = ~2 fps). */
+  frameTicks?: number;
   data_map?: Record<string, string>;
   desc: string;
   effect?: string;
@@ -306,5 +311,6 @@ export interface CliFlags {
   sound: boolean;
   combo: boolean;
   noScreensaver: boolean;
+  screensaver?: boolean;
   konamiOff: boolean;
 }

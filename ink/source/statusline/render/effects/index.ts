@@ -358,6 +358,57 @@ export const solid: EffectFn = (input, ctx) => {
 };
 
 // ──────────────────────────────────────────────────────────────────────────
+// 15. marquee — continuous right-to-left scroll with gradient paint
+//
+// This is the default for non-flipbook scenes. Every character genuinely
+// moves across the window frame by frame. Gap + loop pattern keeps the
+// text rolling without dead air, even if it fits entirely in the width.
+//
+// Inspired by:
+//  - GitHub Copilot CLI banner (pixels→chars, frame-by-frame cell motion)
+//  - Powerlevel10k (instant render, no blocking, Nerd Font aware)
+// ──────────────────────────────────────────────────────────────────────────
+export const marquee: EffectFn = (input, ctx) => {
+  const plain = stripAnsi(input).replace(/[\r\n]/g, " ");
+  // Trim trailing whitespace but keep internal spacing.
+  const trimmed = plain.replace(/\s+$/, "");
+  if (trimmed.length === 0) return "";
+
+  const width = Math.max(20, ctx.width - 2);
+  const gap = "     ";
+  const loop = trimmed + gap;
+  const loopLen = loop.length;
+
+  // 1 char per 2 ticks ≈ 4 chars/sec at 120ms tick. Smooth but readable.
+  const offset = Math.floor(ctx.tick / 2) % loopLen;
+
+  // Build the visible window: width chars starting at offset, wrapping.
+  let window = "";
+  for (let i = 0; i < width; i++) {
+    const ch = loop[(offset + i) % loopLen]!;
+    window += ch;
+  }
+
+  // Paint with a 3-stop gradient that also slides, so motion + color move
+  // together (characters translate; colors flow the same direction).
+  const fgHex = normalizeHex(ctx.palette.fg);
+  const accentHex = normalizeHex(ctx.palette.accent ?? fgHex);
+  const glowHex = normalizeHex(ctx.palette.glow ?? fgHex);
+  const stops = [hexToRgb(fgHex), hexToRgb(accentHex), hexToRgb(glowHex)];
+
+  return paintEach(window, (i, ch) => {
+    if (ch === " ") return " ";
+    const t = ((i / Math.max(1, width - 1)) + ctx.tick / 30) % 1;
+    const seg = t * (stops.length - 1);
+    const lo = Math.floor(seg);
+    const hi = Math.min(stops.length - 1, lo + 1);
+    const frac = seg - lo;
+    const rgb = lerpColor(stops[lo]!, stops[hi]!, frac);
+    return `${rgbToAnsi(rgb)}${ch}\x1b[0m`;
+  });
+};
+
+// ──────────────────────────────────────────────────────────────────────────
 // Registry
 // ──────────────────────────────────────────────────────────────────────────
 
@@ -376,6 +427,7 @@ export const EFFECTS: Record<string, EffectFn> = {
   heartbeat,
   rainbow,
   solid,
+  marquee,
   // aliases that show up in scenes.json
   glitch: glitch_corrupt,
   decrypt: decrypt_reveal,
@@ -388,9 +440,37 @@ export const EFFECTS: Record<string, EffectFn> = {
   gradient: color_wave,
   pulse: heartbeat,
   scan: scanline,
+  scroll: marquee,
+  ticker: marquee,
 };
 
+// Effects where the characters genuinely *move* across the line, frame
+// by frame — as opposed to "flashy text" (static chars with color animation).
+// This lets the interpreter pick a real motion effect by default and only
+// keep the scene/pack effect if it already moves pixels.
+export const MOTION_EFFECTS = new Set<string>([
+  "marquee",
+  "scanline",
+  "typewriter",
+  "knight_rider",
+  "crt_boot",
+  "segment_slide",
+  "phosphor_fade",
+  "decrypt_reveal",
+  "decrypt",
+  "print",
+  "wipe",
+  "slide",
+  "scan",
+  "scroll",
+  "ticker",
+]);
+
+export function isMotionEffect(id: string | undefined): boolean {
+  return typeof id === "string" && MOTION_EFFECTS.has(id);
+}
+
 export function getEffect(id: string | undefined): EffectFn {
-  if (!id) return color_wave;
-  return EFFECTS[id] ?? color_wave;
+  if (!id) return marquee;
+  return EFFECTS[id] ?? marquee;
 }

@@ -113,8 +113,13 @@ export async function main(flags: CliFlags): Promise<void> {
   const width = flags.width ?? detectWidth();
   const fontCaps = detectFontCaps();
 
-  // Screensaver override
-  if (!flags.noScreensaver) {
+  // Screensaver — OPT-IN. In normal Claude Code use the statusline fires
+  // once per turn; idle gaps >5min are routine, so a default-on screensaver
+  // would replace real scenes with "press any key" most of the time.
+  // Enable explicitly with HAKCER_STATUSLINE_SCREENSAVER=1 or --screensaver.
+  const screensaverOptIn =
+    process.env.HAKCER_STATUSLINE_SCREENSAVER === "1" || flags.screensaver === true;
+  if (screensaverOptIn && !flags.noScreensaver) {
     const sv = checkScreensaver(state, now, width, tick);
     if (sv.active && sv.line) {
       process.stdout.write(sv.line);

@@ -3,8 +3,8 @@
     "name": "hakcer-statusline-master",
     "version": "1.0.0",
     "description": "Complete scene library, glyph registry, themes, effects, and special modes for hakcer statusline",
-    "scene_count": 157,
-    "pack_count": 19,
+    "scene_count": 167,
+    "pack_count": 20,
     "theme_count": 28,
     "effect_count": 12
   },
@@ -628,13 +628,13 @@
     }
   },
   "separator_map": {
+    "2600": "flame",
     "core": "arrow",
     "warez": "pixel",
     "phreaking": "hexagon",
     "aol": "rounded",
     "p2p": "diagonal",
     "bbs": "pixel",
-    "2600": "flame",
     "cartoons": "lego",
     "movies": "arrow",
     "toys": "lego",
@@ -788,6 +788,10 @@
     }
   },
   "packs": {
+    "2600": {
+      "flag": "--pack=2600",
+      "desc": "Magazine, meetings, TOTSE, Phrack, manifesto, Free Kevin, L0pht, BO2K, Sub7, DEF CON"
+    },
     "core": {
       "flag": "--pack=core",
       "desc": "Original 11 hakcer statusline scenes"
@@ -811,10 +815,6 @@
     "bbs": {
       "flag": "--pack=bbs",
       "desc": "BBS login, ANSI art, IRC/mIRC"
-    },
-    "2600": {
-      "flag": "--pack=2600",
-      "desc": "Magazine, meetings, TOTSE, Phrack, manifesto, Free Kevin, L0pht, BO2K, Sub7, DEF CON"
     },
     "mud": {
       "flag": "--pack=mud",
@@ -863,6 +863,10 @@
     "all": {
       "flag": "--pack=all",
       "desc": "Everything"
+    },
+    "cartoon_flipbook": {
+      "flag": "--pack cartoon_flipbook",
+      "desc": "One-line flipbook ASCII cartoons. Raw frames, no color effects."
     }
   },
   "scenes": [
@@ -3238,6 +3242,299 @@
         "event_time": "events.seckc.next.time_local"
       },
       "desc": "Opt-in event scene. Triggered when next SecKC event is today (hours away). Requires --events=seckc."
+    },
+    {
+      "id": "flip_jurassic_park",
+      "name": "Jurassic Park Breakout",
+      "pack": "cartoon_flipbook",
+      "type": "theater",
+      "verb": "RAMPAGE",
+      "palette": "matrix",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:dragon}  _/\\_ {icon:tree}  >=(:)=< ~~rawr~~ [|||GATE|||]",
+      "frames": [
+        "{icon:tree} _/\\_  _/\\_ {icon:tree}   >=(:)=< ~~rawr~~      [|||GATE|||] {icon:flag}",
+        "{icon:tree} _/\\_  _/\\_ {icon:tree}    >=(:)=<~~rawr~~      [|||GATE|||] {icon:flag}",
+        "{icon:tree} _/\\_  _/\\_ {icon:tree}     >=(:)=<rawr!!       [|||GATE|||] {icon:flag}",
+        "{icon:tree} _/\\_  _/\\_ {icon:tree}      >=(:)=<RAWR!!      [|||GATE|||] {icon:flag}",
+        "{icon:tree} _/\\_  _/\\_ {icon:tree}       >=(:)=<CHOMP!     [|||GA E|||] {icon:warning}",
+        "{icon:tree} _/\\_  _/\\_ {icon:tree}        >=(:)=<CRUNCH    [|||G  E|||] {icon:warning}",
+        "{icon:tree} _/\\_  _/\\_ {icon:tree}         >=(:)=<RRRRR    [||     ||] {icon:fire}",
+        "{icon:tree} _/\\_  _/\\_ {icon:tree}          {icon:dragon}LOOSE!  [.. .. ..] {icon:skull}"
+      ],
+      "frameTicks": 3,
+      "data_map": null,
+      "desc": "T-rex busts the fence. Trees framing, flag turns to skull. 8 frames."
+    },
+    {
+      "id": "flip_snake_game",
+      "name": "Snake Game",
+      "pack": "cartoon_flipbook",
+      "type": "theater",
+      "verb": "SLITHERING",
+      "palette": "matrix",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:play} [>oooooo        {icon:apple} ] SCORE 120",
+      "frames": [
+        "{icon:play} [>oooooo          {icon:apple} ] SCORE 120",
+        "{icon:play} [ >oooooo         {icon:apple} ] SCORE 120",
+        "{icon:play} [  >oooooo        {icon:apple} ] SCORE 120",
+        "{icon:play} [   >oooooo       {icon:apple} ] SCORE 120",
+        "{icon:play} [    >oooooo      {icon:apple} ] SCORE 120",
+        "{icon:play} [     >oooooo     {icon:apple} ] SCORE 120",
+        "{icon:play} [      >oooooo    {icon:apple} ] SCORE 120",
+        "{icon:play} [       >oooooo   {icon:apple} ] SCORE 120",
+        "{icon:play} [        >oooooo  {icon:apple} ] SCORE 120",
+        "{icon:play} [         >oooooo {icon:apple} ] SCORE 120",
+        "{icon:play} [          >oooooo*] SCORE 130 {icon:star}",
+        "{icon:play} [           >ooooooo] SCORE 130 {icon:star}"
+      ],
+      "frameTicks": 2,
+      "data_map": null,
+      "desc": "Snake.exe creeps toward the apple. 12 frames."
+    },
+    {
+      "id": "flip_pong",
+      "name": "Pong",
+      "pack": "cartoon_flipbook",
+      "type": "theater",
+      "verb": "RALLYING",
+      "palette": "amber_crt",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:tv} |    o          |  1 - 0",
+      "frames": [
+        "{icon:tv} |    o            |  1 - 0  {icon:trophy}",
+        "{icon:tv} |     o           |  1 - 0  {icon:trophy}",
+        "{icon:tv} |      o          |  1 - 0  {icon:trophy}",
+        "{icon:tv} |       o         |  1 - 0  {icon:trophy}",
+        "{icon:tv} |        o        |  1 - 0  {icon:trophy}",
+        "{icon:tv} |         o       |  1 - 0  {icon:trophy}",
+        "{icon:tv} |          o      |  1 - 0  {icon:trophy}",
+        "{icon:tv} |           o     |  1 - 0  {icon:trophy}",
+        "{icon:tv} |            o    |  1 - 0  {icon:trophy}",
+        "{icon:tv} |             o   |  1 - 0  {icon:trophy}",
+        "{icon:tv} |              o  |  1 - 0  {icon:trophy}",
+        "{icon:tv} |               o |  1 - 0  {icon:trophy}",
+        "{icon:tv} |              o  |  1 - 0  {icon:trophy}",
+        "{icon:tv} |             o   |  1 - 0  {icon:trophy}",
+        "{icon:tv} |            o    |  1 - 0  {icon:trophy}",
+        "{icon:tv} |           o     |  1 - 0  {icon:trophy}",
+        "{icon:tv} |          o      |  1 - 0  {icon:trophy}",
+        "{icon:tv} |         o       |  1 - 0  {icon:trophy}",
+        "{icon:tv} |        o        |  1 - 0  {icon:trophy}",
+        "{icon:tv} |       o         |  1 - 0  {icon:trophy}",
+        "{icon:tv} |      o          |  1 - 0  {icon:trophy}",
+        "{icon:tv} |     o           |  1 - 0  {icon:trophy}"
+      ],
+      "frameTicks": 1,
+      "data_map": null,
+      "desc": "Atari Pong ball. 22 frames."
+    },
+    {
+      "id": "flip_rocket_launch",
+      "name": "Rocket Launch",
+      "pack": "cartoon_flipbook",
+      "type": "theater",
+      "verb": "LAUNCHING",
+      "palette": "fire_red",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:rocket} T-5  ^ |_|  GROUND CONTROL",
+      "frames": [
+        "{icon:rocket} T-5    ^    |_|    GROUND CONTROL READY    {icon:radio_wave}",
+        "{icon:rocket} T-4    ^    |_|    FUELING {icon:bolt}{icon:bolt}{icon:bolt}     ",
+        "{icon:rocket} T-3    ^    |_|    MAIN ENGINE ARMED   {icon:warning}",
+        "{icon:rocket} T-2    ^    |_|    IGNITION SEQUENCE   {icon:fire}",
+        "{icon:rocket} T-1    ^   (|_|)   MAIN ENGINE START   {icon:fire}{icon:fire}",
+        "{icon:rocket} T-0    ^  ((|_|))  LIFTOFF! {icon:fire}{icon:fire}{icon:fire}",
+        "{icon:cloud}      ^    |_|    climbing... {icon:fire}{icon:fire}",
+        "{icon:cloud}      ^    |_|    ....climbing.... {icon:fire}",
+        "{icon:cloud}     /^\\   ||     .....climbing.... {icon:fire}",
+        "{icon:cloud}    //^\\\\  ||     ......climbing..... {icon:fire}",
+        "{icon:cloud}   ///^\\\\\\ ||     .......climbing..... {icon:fire}",
+        "{icon:star}   ///^\\\\\\ .      ........MAX-Q...... {icon:star}"
+      ],
+      "frameTicks": 4,
+      "data_map": null,
+      "desc": "Countdown to liftoff. 12 frames."
+    },
+    {
+      "id": "flip_pacman",
+      "name": "Pac-Man Chase",
+      "pack": "cartoon_flipbook",
+      "type": "theater",
+      "verb": "CHOMPING",
+      "palette": "neon",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:gamepad} C . . . . M SCORE 300",
+      "frames": [
+        "{icon:gamepad} C . . . . . . . . . . . . . .  {icon:ghost}  300",
+        "{icon:gamepad}  C. . . . . . . . . . . . . .  {icon:ghost}  310",
+        "{icon:gamepad}   C . . . . . . . . . . . . .  {icon:ghost}  320",
+        "{icon:gamepad}    c. . . . . . . . . . . . .  {icon:ghost}  330",
+        "{icon:gamepad}    C . . . . . . . . . . . .   {icon:ghost}  340",
+        "{icon:gamepad}     c . . . . . . . . . . . .  {icon:ghost}  350",
+        "{icon:gamepad}      C. . . . . . . . . . . .  {icon:ghost}  360",
+        "{icon:gamepad}       C . . . . . . . . . . .  {icon:ghost}  370",
+        "{icon:gamepad}        c . . . . . . . . . .   {icon:ghost}  380",
+        "{icon:gamepad}         C. . . . . . . . . .   {icon:ghost}  390",
+        "{icon:gamepad}          C . . . . . . . . .   {icon:ghost}  400"
+      ],
+      "frameTicks": 2,
+      "data_map": null,
+      "desc": "Pacman chases Blinky. 11 frames."
+    },
+    {
+      "id": "flip_dino_run",
+      "name": "Chrome Offline Dino",
+      "pack": "cartoon_flipbook",
+      "type": "theater",
+      "verb": "RUNNING",
+      "palette": "green_phosphor",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:dragon} d(O_O)b _ _ ^^^ 00127",
+      "frames": [
+        "{icon:dragon} d(O_O)b   _        {icon:tree}         00127 {icon:paw}",
+        "{icon:dragon} d(O_O)b  _ _       {icon:tree}         00128 {icon:paw}",
+        "{icon:dragon} d(O_O)b _ _ _      {icon:tree}         00129 {icon:paw}",
+        "{icon:dragon}  (O_O)   _ _ _     {icon:tree}         00130 {icon:paw}",
+        "{icon:dragon} d(O_O)b   _ _ _    {icon:tree}         00131 {icon:paw}",
+        "{icon:dragon}  (O_O)     _ _ _   {icon:tree}         00132 {icon:paw}",
+        "{icon:dragon} d(O_O)b     _ _ _  {icon:tree}         00133 {icon:paw}",
+        "{icon:dragon}  (O_O)       _ _ _ {icon:tree}         00134 {icon:paw}",
+        "{icon:dragon} d(O_O)b       _ _ _{icon:tree}         00135 {icon:paw}",
+        "{icon:dragon}  (O_O)         _ _ {icon:tree}         00136 {icon:paw}",
+        "{icon:dragon} d(O_O)b         _ _{icon:tree}         00137 {icon:paw}",
+        "{icon:dragon}  (O_O)           _ {icon:tree}         00138 {icon:paw}"
+      ],
+      "frameTicks": 2,
+      "data_map": null,
+      "desc": "Chrome offline dino sprints past trees. 12 frames."
+    },
+    {
+      "id": "flip_loading_bar",
+      "name": "Loading Bar",
+      "pack": "cartoon_flipbook",
+      "type": "data",
+      "verb": "DECRYPTING",
+      "palette": "matrix",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:lock} [████░░░░] {model} {cost}",
+      "frames": [
+        "{icon:lock} [░░░░░░░░░░░░░░░░░░░░] DECRYPTING {model}  {cost}   0% {icon:spinner}",
+        "{icon:lock} [██░░░░░░░░░░░░░░░░░░] DECRYPTING {model}  {cost}  10% {icon:spinner}",
+        "{icon:lock} [████░░░░░░░░░░░░░░░░] DECRYPTING {model}  {cost}  20% {icon:spinner}",
+        "{icon:lock} [██████░░░░░░░░░░░░░░] DECRYPTING {model}  {cost}  30% {icon:spinner}",
+        "{icon:lock} [████████░░░░░░░░░░░░] DECRYPTING {model}  {cost}  40% {icon:spinner}",
+        "{icon:lock} [██████████░░░░░░░░░░] DECRYPTING {model}  {cost}  50% {icon:spinner}",
+        "{icon:lock} [████████████░░░░░░░░] DECRYPTING {model}  {cost}  60% {icon:spinner}",
+        "{icon:lock} [██████████████░░░░░░] DECRYPTING {model}  {cost}  70% {icon:spinner}",
+        "{icon:lock} [████████████████░░░░] DECRYPTING {model}  {cost}  80% {icon:spinner}",
+        "{icon:lock} [██████████████████░░] DECRYPTING {model}  {cost}  90% {icon:spinner}",
+        "{icon:unlock} [████████████████████] DECRYPTED. {model}  {cost} 100% {icon:bolt}",
+        "{icon:unlock} [████████████████████] ACCESS GRANTED {model} {cost}  {icon:key}"
+      ],
+      "frameTicks": 3,
+      "data_map": {
+        "model": "model",
+        "cost": "cost"
+      },
+      "desc": "Loading bar with live session data. Lock → unlock → key. 12 frames."
+    },
+    {
+      "id": "flip_fish_tank",
+      "name": "ASCII Fish Tank",
+      "pack": "cartoon_flipbook",
+      "type": "theater",
+      "verb": "SWIMMING",
+      "palette": "ice_blue",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:fish} ~~~ <°))))><  ><(((°> ~~~ {icon:fish}",
+      "frames": [
+        "{icon:fish} ~~  <°))))><        ><(((°>      ~~~",
+        "{icon:fish}  ~~~ <°))))><      ><(((°>     ~~~~",
+        "{icon:fish}   ~~  <°))))><    ><(((°>    ~~~  ",
+        "{icon:fish} ~~~ <°))))><     ><(((°>    ~~~~  ",
+        "{icon:fish}  ~~  <°))))><   ><(((°>    ~~~    ",
+        "{icon:fish}   ~~~ <°))))>< ><(((°>    ~~~~    ",
+        "{icon:fish} ~~~ <°))))>< ><(((°>     ~~~~     ",
+        "{icon:fish}  ~~  <°))))><(((°>      ~~~       ",
+        "{icon:fish}   ~~~<°))))(((°>       ~~~~       ",
+        "{icon:fish} ~~~ <°))))°>          ~~~~        ",
+        "{icon:fish}  ~~  <°))))°>        ~~~          ",
+        "{icon:fish}   ~~~ <°))))><      ~~~~          ",
+        "{icon:fish} ~~~   <°))))><     ~~~            ",
+        "{icon:fish}  ~~~   <°))))><   ~~~~            ",
+        "{icon:fish}   ~~~   <°))))>< ~~~              ",
+        "{icon:fish} ~~~~     <°))))><~~~~             ",
+        "{icon:fish}  ~~~~     <°))))><~~              ",
+        "{icon:fish}   ~~~~     <°))))>  ><(((°>   ~~~ ",
+        "{icon:fish} ~~~~        <°))))> ><(((°>  ~~~~ ",
+        "{icon:fish}  ~~~~        <°)))))><(((°> ~~~   "
+      ],
+      "frameTicks": 2,
+      "data_map": null,
+      "desc": "Two fish in an ASCII tank. 20 frames."
+    },
+    {
+      "id": "flip_hacker_cat",
+      "name": "Hacker Cat Typing",
+      "pack": "cartoon_flipbook",
+      "type": "data",
+      "verb": "HACKING",
+      "palette": "green_phosphor",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:terminal} (^._.^) sudo rm -rf / {cost}",
+      "frames": [
+        "{icon:terminal} (^.w.^)ﾉ  tap tap tap...        {model}  {icon:bolt}",
+        "{icon:terminal} (^.o.^)ﾉ  tappity tap           {model}  {icon:bolt}",
+        "{icon:terminal} (^.-.^)ﾉ  TAP TAP               {model}  {icon:bolt}",
+        "{icon:terminal} (^._.^)ﾉ  sudo !! (enter)       {model}  {icon:bolt}",
+        "{icon:terminal} (^O_O^)ﾉ  :: ACCESS GRANTED ::  {model}  {icon:unlock}",
+        "{icon:terminal} (^O_O^)ﾉ  {cost} DRAINED        {model}  {icon:trophy}",
+        "{icon:terminal} (^._.^)ﾉ  ...purrrrrrrrrrrrr... {model}  {icon:heart}",
+        "{icon:terminal} (=^.^=)   naptime               {model}  {icon:moon}"
+      ],
+      "frameTicks": 4,
+      "data_map": {
+        "model": "model",
+        "cost": "cost"
+      },
+      "desc": "Cat typing at terminal, session data streams. 8 frames."
+    },
+    {
+      "id": "flip_coffee_brew",
+      "name": "Coffee Brew",
+      "pack": "cartoon_flipbook",
+      "type": "data",
+      "verb": "BREWING",
+      "palette": "amber_crt",
+      "sep": "pixel",
+      "icons": [],
+      "frame": "{icon:coffee} brewing... {ctx}%",
+      "frames": [
+        "{icon:coffee}  (    )    grinding beans.......   {ctx}% ctx",
+        "{icon:coffee}  ( ~  )    heating water .........  {ctx}% ctx",
+        "{icon:coffee}  ( ~~ )    pouring................. {ctx}% ctx",
+        "{icon:coffee}  ( ~~~)    blooming {icon:cloud}....  {ctx}% ctx",
+        "{icon:coffee}  (~~~~)    extracting {icon:cloud}.. {ctx}% ctx",
+        "{icon:coffee}  |~~~~|    ready {icon:fire}{icon:fire} {ctx}% ctx",
+        "{icon:coffee}  |^^^^|    {cost} per cup          {ctx}% ctx"
+      ],
+      "frameTicks": 5,
+      "data_map": {
+        "ctx": "context_pct",
+        "cost": "cost"
+      },
+      "desc": "Morning coffee drip. Live ctx/cost. 7 frames."
     }
   ]
 }

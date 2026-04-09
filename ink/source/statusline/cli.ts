@@ -47,6 +47,7 @@ function parseFlags(argv: string[]): CliFlags {
     else if (a === "--sound") flags.sound = true;
     else if (a === "--combo") flags.combo = true;
     else if (a === "--no-screensaver") flags.noScreensaver = true;
+    else if (a === "--screensaver") flags.screensaver = true;
     else if (a === "--konami-off") flags.konamiOff = true;
     else if (a.startsWith("--pack=")) flags.pack = a.slice(7).split(",");
     else if (a === "--pack") flags.pack = (next() ?? "").split(",");
