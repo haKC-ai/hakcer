@@ -1,0 +1,1 @@
+{"version":3,"file":"separator.d.ts","sourceRoot":"","sources":["../../../source/statusline/render/separator.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH,OAAO,EAAE,QAAQ,EAAE,KAAK,EAAE,YAAY,EAAE,MAAM,aAAa,CAAC;AAwB5D,wBAAgB,gBAAgB,CAAC,KAAK,EAAE,KAAK,EAAE,OAAO,EAAE,YAAY,EAAE,IAAI,EAAE,QAAQ,GAAG,MAAM,CAI5F;AAED,wBAAgB,iBAAiB,CAAC,EAAE,EAAE,MAAM,EAAE,IAAI,EAAE,QAAQ,GAAG,MAAM,CAGpE"}
