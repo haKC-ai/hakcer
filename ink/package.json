@@ -6,12 +6,14 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "hakcer-ink": "dist/cli.js"
+    "hakcer-ink": "dist/cli.js",
+    "hakcer-statusline": "dist/statusline/cli.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && node scripts/copy-data.mjs",
     "dev": "tsc --watch",
     "start": "node dist/cli.js",
+    "statusline": "node dist/statusline/cli.js",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
