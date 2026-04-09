@@ -1,0 +1,14 @@
+# Exclude large/unnecessary files from npm installs
+media/
+docs/
+custom_banners/
+hakcer/
+*.mp4
+*.gif
+*.md.bak
+CLAUDE.md*
+.claude/
+__pycache__/
+*.pyc
+.gitignore
+.git/
