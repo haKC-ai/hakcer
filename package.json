@@ -1,0 +1,45 @@
+{
+  "name": "hakcer",
+  "version": "2.0.0",
+  "description": "Animated ASCII statusline for Claude Code — 167 scenes, marquee motion, Nerd Font glyphs, flipbook cartoons",
+  "type": "module",
+  "main": "ink/dist/index.js",
+  "types": "ink/dist/index.d.ts",
+  "bin": {
+    "hakcer-ink": "ink/dist/cli.js",
+    "hakcer-statusline": "ink/dist/statusline/cli.js"
+  },
+  "scripts": {
+    "build": "cd ink && npm run build",
+    "prepare": "cd ink && npm install --ignore-scripts && npm run build",
+    "postinstall": "node scripts/postinstall.mjs",
+    "preuninstall": "node scripts/uninstall.mjs"
+  },
+  "keywords": [
+    "claude-code",
+    "statusline",
+    "ascii",
+    "animation",
+    "nerd-font",
+    "terminal",
+    "cli"
+  ],
+  "author": "haKCer <cory@haKC.ai>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "ink": "^5.1.0",
+    "ink-select-input": "^6.0.0",
+    "ink-spinner": "^5.0.0",
+    "ink-text-input": "^6.0.0",
+    "meow": "^13.0.0",
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

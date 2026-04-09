@@ -313,4 +313,7 @@ export interface CliFlags {
   noScreensaver: boolean;
   screensaver?: boolean;
   konamiOff: boolean;
+  _enable?: boolean;
+  _disable?: boolean;
+  _uninstall?: boolean;
 }

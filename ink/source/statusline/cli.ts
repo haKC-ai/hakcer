@@ -6,6 +6,7 @@
 import { main } from "./main.js";
 import { installFonts } from "./fonts/install.js";
 import { triggerKonami } from "./modes/konami.js";
+import { enableStatusline, disableStatusline, uninstallStatusline } from "./setup.js";
 import { CliFlags } from "./types.js";
 
 function parseFlags(argv: string[]): CliFlags {
@@ -49,6 +50,9 @@ function parseFlags(argv: string[]): CliFlags {
     else if (a === "--no-screensaver") flags.noScreensaver = true;
     else if (a === "--screensaver") flags.screensaver = true;
     else if (a === "--konami-off") flags.konamiOff = true;
+    else if (a === "--enable") flags._enable = true;
+    else if (a === "--disable") flags._disable = true;
+    else if (a === "--uninstall") flags._uninstall = true;
     else if (a.startsWith("--pack=")) flags.pack = a.slice(7).split(",");
     else if (a === "--pack") flags.pack = (next() ?? "").split(",");
     else if (a.startsWith("--scenes=")) flags.scenes = a.slice(9).split(",");
@@ -74,6 +78,13 @@ function parseFlags(argv: string[]): CliFlags {
 
 function printHelp() {
   console.log(`hakcer-statusline — animated Claude Code statusline
+
+Install:
+  npm install -g github:haKC-ai/hakcer     # auto-configures Claude Code
+  hakcer-statusline --enable                # manual enable (if postinstall skipped)
+  hakcer-statusline --disable               # restore previous statusline
+  hakcer-statusline --uninstall             # disable + print npm uninstall command
+
 Usage:
   hakcer-statusline                     # normal mode (Claude Code calls this)
   hakcer-statusline --preview [scene]   # dev: tight loop
@@ -100,7 +111,13 @@ Behavior:
   --sound               Enable sound mode
   --combo               Enable combo frame blending
   --no-screensaver      Disable idle screensaver
+  --screensaver         Enable idle screensaver (off by default)
   --konami-off          Disable konami easter egg
+
+Environment:
+  HAKCER_STATUSLINE_NERD_FONT=0   Force disable Nerd Font glyphs
+  HAKCER_STATUSLINE_NERD_FONT=1   Force enable Nerd Font glyphs
+  HAKCER_STATUSLINE_SCREENSAVER=1 Enable idle screensaver
 `);
 }
 
@@ -135,6 +152,20 @@ async function run() {
   if (flags.konami) {
     triggerKonami();
     console.log("✓ konami armed — re-run Claude Code within 60s.");
+    process.exit(0);
+  }
+
+  // Setup commands — enable/disable/uninstall
+  if (flags._enable) {
+    enableStatusline();
+    process.exit(0);
+  }
+  if (flags._disable) {
+    disableStatusline();
+    process.exit(0);
+  }
+  if (flags._uninstall) {
+    uninstallStatusline();
     process.exit(0);
   }
 
